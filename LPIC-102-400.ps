@@ -1,0 +1,2739 @@
+%!PS-Adobe-3.0
+%%BoundingBox: 18 36 577 806
+%%Title: Enscript Output
+%%Creator: GNU Enscript 1.6.5.90
+%%CreationDate: Thu Jul 11 17:14:34 2019
+%%Orientation: Portrait
+%%Pages: (atend)
+%%DocumentMedia: A4 595 842 0 () ()
+%%DocumentNeededResources: (atend)
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset Enscript-Prolog 1.6.5 90
+%
+% Procedures.
+%
+
+/_S {	% save current state
+  /_s save def
+} def
+/_R {	% restore from saved state
+  _s restore
+} def
+
+/S {	% showpage protecting gstate
+  gsave
+  showpage
+  grestore
+} bind def
+
+/MF {	% fontname newfontname -> -	make a new encoded font
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  % insert only valid encoding vectors
+  encoding_vector length 256 eq {
+    newfont /Encoding encoding_vector put
+  } if
+
+  newfontname newfont definefont pop
+} def
+
+/MF_PS { % fontname newfontname -> -	make a new font preserving its enc
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  newfontname newfont definefont pop
+} def
+
+/SF { % fontname width height -> -	set a new font
+  /height exch def
+  /width exch def
+
+  findfont
+  [width 0 0 height 0 0] makefont setfont
+} def
+
+/SUF { % fontname width height -> -	set a new user font
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF
+  /F-gs-user-font width height SF
+} def
+
+/SUF_PS { % fontname width height -> -	set a new user font preserving its enc
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF_PS
+  /F-gs-user-font width height SF
+} def
+
+/M {moveto} bind def
+/s {show} bind def
+
+/Box {	% x y w h -> -			define box path
+  /d_h exch def /d_w exch def /d_y exch def /d_x exch def
+  d_x d_y  moveto
+  d_w 0 rlineto
+  0 d_h rlineto
+  d_w neg 0 rlineto
+  closepath
+} def
+
+/bgs {	% x y height blskip gray str -> -	show string with bg color
+  /str exch def
+  /gray exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    gray setgray
+    fill
+  grestore
+  x y M str s
+} def
+
+/bgcs { % x y height blskip red green blue str -> -  show string with bg color
+  /str exch def
+  /blue exch def
+  /green exch def
+  /red exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    red green blue setrgbcolor
+    fill
+  grestore
+  x y M str s
+} def
+
+% Highlight bars.
+/highlight_bars {	% nlines lineheight output_y_margin gray -> -
+  gsave
+    setgray
+    /ymarg exch def
+    /lineheight exch def
+    /nlines exch def
+
+    % This 2 is just a magic number to sync highlight lines to text.
+    0 d_header_y ymarg sub 2 sub translate
+
+    /cw d_output_w cols div def
+    /nrows d_output_h ymarg 2 mul sub lineheight div cvi def
+
+    % for each column
+    0 1 cols 1 sub {
+      cw mul /xp exch def
+
+      % for each rows
+      0 1 nrows 1 sub {
+        /rn exch def
+        rn lineheight mul neg /yp exch def
+        rn nlines idiv 2 mod 0 eq {
+	  % Draw highlight bar.  4 is just a magic indentation.
+	  xp 4 add yp cw 8 sub lineheight neg Box fill
+	} if
+      } for
+    } for
+
+  grestore
+} def
+
+% Line highlight bar.
+/line_highlight {	% x y width height gray -> -
+  gsave
+    /gray exch def
+    Box gray setgray fill
+  grestore
+} def
+
+% Column separator lines.
+/column_lines {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h translate
+    /cw d_output_w cols div def
+    1 1 cols 1 sub {
+      cw mul 0 moveto
+      0 d_output_h rlineto stroke
+    } for
+  grestore
+} def
+
+% Column borders.
+/column_borders {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h moveto
+    0 d_output_h rlineto
+    d_output_w 0 rlineto
+    0 d_output_h neg rlineto
+    closepath stroke
+  grestore
+} def
+
+% Do the actual underlay drawing
+/draw_underlay {
+  ul_style 0 eq {
+    ul_str true charpath stroke
+  } {
+    ul_str show
+  } ifelse
+} def
+
+% Underlay
+/underlay {	% - -> -
+  gsave
+    0 d_page_h translate
+    d_page_h neg d_page_w atan rotate
+
+    ul_gray setgray
+    ul_font setfont
+    /dw d_page_h dup mul d_page_w dup mul add sqrt def
+    ul_str stringwidth pop dw exch sub 2 div ul_h_ptsize -2 div moveto
+    draw_underlay
+  grestore
+} def
+
+/user_underlay {	% - -> -
+  gsave
+    ul_x ul_y translate
+    ul_angle rotate
+    ul_gray setgray
+    ul_font setfont
+    0 0 ul_h_ptsize 2 div sub moveto
+    draw_underlay
+  grestore
+} def
+
+% Page prefeed
+/page_prefeed {		% bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} def
+
+% Wrapped line markers
+/wrapped_line_mark {	% x y charwith charheight type -> -
+  /type exch def
+  /h exch def
+  /w exch def
+  /y exch def
+  /x exch def
+
+  type 2 eq {
+    % Black boxes (like TeX does)
+    gsave
+      0 setlinewidth
+      x w 4 div add y M
+      0 h rlineto w 2 div 0 rlineto 0 h neg rlineto
+      closepath fill
+    grestore
+  } {
+    type 3 eq {
+      % Small arrows
+      gsave
+        .2 setlinewidth
+        x w 2 div add y h 2 div add M
+        w 4 div 0 rlineto
+        x w 4 div add y lineto stroke
+
+        x w 4 div add w 8 div add y h 4 div add M
+        x w 4 div add y lineto
+	w 4 div h 8 div rlineto stroke
+      grestore
+    } {
+      % do nothing
+    } ifelse
+  } ifelse
+} def
+
+% EPSF import.
+
+/BeginEPSF {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack
+  userdict begin
+  /showpage { } def
+  0 setgray 0 setlinecap
+  1 setlinewidth 0 setlinejoin
+  10 setmiterlimit [ ] 0 setdash newpath
+  /languagelevel where {
+    pop languagelevel
+    1 ne {
+      false setstrokeadjust false setoverprint
+    } if
+  } if
+} bind def
+
+/EndEPSF {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+%%EndResource
+%%BeginResource: procset Enscript-Encoding-88591 1.6.5 90
+/encoding_vector [
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclam       	/quotedbl     	/numbersign   	
+/dollar       	/percent      	/ampersand    	/quoteright   	
+/parenleft    	/parenright   	/asterisk     	/plus         	
+/comma        	/hyphen       	/period       	/slash        	
+/zero         	/one          	/two          	/three        	
+/four         	/five         	/six          	/seven        	
+/eight        	/nine         	/colon        	/semicolon    	
+/less         	/equal        	/greater      	/question     	
+/at           	/A            	/B            	/C            	
+/D            	/E            	/F            	/G            	
+/H            	/I            	/J            	/K            	
+/L            	/M            	/N            	/O            	
+/P            	/Q            	/R            	/S            	
+/T            	/U            	/V            	/W            	
+/X            	/Y            	/Z            	/bracketleft  	
+/backslash    	/bracketright 	/asciicircum  	/underscore   	
+/quoteleft    	/a            	/b            	/c            	
+/d            	/e            	/f            	/g            	
+/h            	/i            	/j            	/k            	
+/l            	/m            	/n            	/o            	
+/p            	/q            	/r            	/s            	
+/t            	/u            	/v            	/w            	
+/x            	/y            	/z            	/braceleft    	
+/bar          	/braceright   	/tilde        	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclamdown   	/cent         	/sterling     	
+/currency     	/yen          	/brokenbar    	/section      	
+/dieresis     	/copyright    	/ordfeminine  	/guillemotleft	
+/logicalnot   	/hyphen       	/registered   	/macron       	
+/degree       	/plusminus    	/twosuperior  	/threesuperior	
+/acute        	/mu           	/paragraph    	/bullet       	
+/cedilla      	/onesuperior  	/ordmasculine 	/guillemotright	
+/onequarter   	/onehalf      	/threequarters	/questiondown 	
+/Agrave       	/Aacute       	/Acircumflex  	/Atilde       	
+/Adieresis    	/Aring        	/AE           	/Ccedilla     	
+/Egrave       	/Eacute       	/Ecircumflex  	/Edieresis    	
+/Igrave       	/Iacute       	/Icircumflex  	/Idieresis    	
+/Eth          	/Ntilde       	/Ograve       	/Oacute       	
+/Ocircumflex  	/Otilde       	/Odieresis    	/multiply     	
+/Oslash       	/Ugrave       	/Uacute       	/Ucircumflex  	
+/Udieresis    	/Yacute       	/Thorn        	/germandbls   	
+/agrave       	/aacute       	/acircumflex  	/atilde       	
+/adieresis    	/aring        	/ae           	/ccedilla     	
+/egrave       	/eacute       	/ecircumflex  	/edieresis    	
+/igrave       	/iacute       	/icircumflex  	/idieresis    	
+/eth          	/ntilde       	/ograve       	/oacute       	
+/ocircumflex  	/otilde       	/odieresis    	/divide       	
+/oslash       	/ugrave       	/uacute       	/ucircumflex  	
+/udieresis    	/yacute       	/thorn        	/ydieresis    	
+] def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Courier
+/HFpt_w 10 def
+/HFpt_h 10 def
+/Courier-Bold /HF-gs-font MF
+/HF /HF-gs-font findfont [HFpt_w 0 0 HFpt_h 0 0] makefont def
+/Courier /F-gs-font MF
+/F-gs-font 10 10 SF
+/#copies 1 def
+% Pagedevice definitions:
+gs_languagelevel 1 gt {
+  <<
+    /PageSize [595 842] 
+  >> setpagedevice
+} if
+%%BeginResource: procset Enscript-Header-simple 1.6.5 90
+
+/do_header {	% print default simple header
+  gsave
+    d_header_x d_header_y HFpt_h 3 div add translate
+
+    HF setfont
+    user_header_p {
+      5 0 moveto user_header_left_str show
+
+      d_header_w user_header_center_str stringwidth pop sub 2 div
+      0 moveto user_header_center_str show
+
+      d_header_w user_header_right_str stringwidth pop sub 5 sub
+      0 moveto user_header_right_str show
+    } {
+      5 0 moveto fname show
+      45 0 rmoveto fmodstr show
+      45 0 rmoveto pagenumstr show
+    } ifelse
+
+  grestore
+} def
+%%EndResource
+/d_page_w 559 def
+/d_page_h 770 def
+/d_header_x 0 def
+/d_header_y 755 def
+/d_header_w 559 def
+/d_header_h 15 def
+/d_footer_x 0 def
+/d_footer_y 0 def
+/d_footer_w 559 def
+/d_footer_h 0 def
+/d_output_w 559 def
+/d_output_h 755 def
+/cols 1 def
+%%EndSetup
+%%Page: (1) 1
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 1 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (1) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+([ Question 1 ]) s
+5 731 M
+( When trying to unmount a device it is reported as being busy. Which of the following comma) s
+5 720 M
+(nds could be used to determine which process is causing this?) s
+5 709 M
+(A. debug) s
+5 698 M
+(B. lsof) s
+5 687 M
+(C. nessus) s
+5 676 M
+(D. strace) s
+5 665 M
+(E. traceroute) s
+5 533 M
+( Correct Answer: B ) s
+5 511 M
+([ Question 2 ]) s
+5 500 M
+( Which command is used to set restrictions on the size of a core file that is created for a) s
+5 489 M
+( user when a program crashes?) s
+5 478 M
+(A. core) s
+5 467 M
+(B. edquota) s
+5 456 M
+(C. ulimit) s
+5 445 M
+(D. quota) s
+5 313 M
+( Correct Answer: C ) s
+5 291 M
+([ Question 3 ]) s
+5 280 M
+( Which configuration file would be edited to change the default options for outbound SSH se) s
+5 269 M
+(ssions?) s
+5 258 M
+(A. /etc/ssh/sshd_config) s
+5 247 M
+(B. /etc/ssh/ssh) s
+5 236 M
+(C. /etc/ssh/client) s
+5 225 M
+(D. /etc/ssh/ssh_config) s
+5 214 M
+(E. /etc/ssh/ssh_client) s
+5 82 M
+( Correct Answer: D ) s
+5 60 M
+([ Question 4 ]) s
+5 49 M
+( Which of the following programs uses the hosts.allow file to perform its main task of chec) s
+5 38 M
+(king for access control restrictions to system services?) s
+5 27 M
+(A. tcpd) s
+5 16 M
+(B. inetd) s
+5 5 M
+(C. fingerd) s
+_R
+S
+%%Page: (2) 2
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 2 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (2) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(D. mountd) s
+5 731 M
+(E. xinetd) s
+5 599 M
+( Correct Answer: A ) s
+5 577 M
+([ Question 5 ]) s
+5 566 M
+( SIMULATION) s
+5 555 M
+(The presence of what file will temporarily prevent all users except root from logging into ) s
+5 544 M
+(the system? \(Specify the full name of the file, including path.\) ) s
+5 412 M
+(Correct Answer: /etc/nologin ) s
+5 390 M
+([ Question 6 ]) s
+5 379 M
+( SIMULATION) s
+5 368 M
+(With X11 forwarding in ssh, what environment variable is automatically set in the remote ho) s
+5 357 M
+(st shell that is not set when X11 forwarding is not enabled?) s
+5 346 M
+(\(Specify only the environment variable without any additional commands or values.\) ) s
+5 214 M
+(Correct Answer: DISPLAY -or- $DISPLAY ) s
+5 192 M
+([ Question 7 ]) s
+5 181 M
+( SIMULATION) s
+5 170 M
+(In an xinetd configuration file, which attribute specifies the network address that will be) s
+5 159 M
+( used to provide the service? ) s
+5 27 M
+(Correct Answer: bind -or- interface ) s
+5 5 M
+([ Question 8 ]) s
+_R
+S
+%%Page: (3) 3
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 3 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (3) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+( SIMULATION) s
+5 731 M
+(What argument to the -type option of find will match files that are symbolic links? \(Specif) s
+5 720 M
+(y only the argument and no other options or words.\) ) s
+5 588 M
+(Correct Answer: 1 ) s
+5 566 M
+([ Question 9 ]) s
+5 555 M
+( SIMULATION) s
+5 544 M
+(Which keyword must be listed in the hosts option of the Name Service Switch configuration f) s
+5 533 M
+(ile in order to make host lookups consult the /etc/hosts file? ) s
+5 401 M
+(Correct Answer: files ) s
+5 379 M
+([ Question 10 ]) s
+5 368 M
+( On a regular users workstation the route command takes a long time before printing out the) s
+5 357 M
+( routing table. Which of the following errors does that indicate?) s
+5 346 M
+(A. The local routing information may be corrupted and must be re-validated using a routing ) s
+5 335 M
+(protocol.) s
+5 324 M
+(B. One of the routers in the routing table is not available which causes the automatic rout) s
+5 313 M
+(er failure detection mechanism \(ARF-D\) to wait for a timeout.) s
+5 302 M
+(C. There may accidentally be more than one default router in which case a default router el) s
+5 291 M
+(ection has to be done on the network in order to choose one router as the default.) s
+5 280 M
+(D. DNS resolution may not be working as route by default tries to resolve names of routers ) s
+5 269 M
+(and destinations and may run into a timeout.) s
+5 137 M
+( Correct Answer: D ) s
+5 115 M
+([ Question 11 ]) s
+5 104 M
+( Which of the following keywords can be used in the file /etc/resolv.conf? \(Choose TWO corr) s
+5 93 M
+(ect answers.\)) s
+5 82 M
+(A. substitute) s
+5 71 M
+(B. nameserver) s
+5 60 M
+(C. search) s
+5 49 M
+(D. lookup) s
+5 38 M
+(E. method) s
+_R
+S
+%%Page: (4) 4
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 4 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (4) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 654 M
+( Correct Answer: BC ) s
+5 632 M
+([ Question 12 ]) s
+5 621 M
+( Which of the following is a valid IPv6 address?) s
+5 610 M
+(A. 2001:db8:3241::1) s
+5 599 M
+(B. 2001::db8:4581::1) s
+5 588 M
+(C. 2001:db8:0g41::1) s
+5 577 M
+(D. 2001%db8%9990%%1) s
+5 566 M
+(E. 2001.db8.819f..1) s
+5 434 M
+( Correct Answer: A ) s
+5 412 M
+([ Question 13 ]) s
+5 401 M
+( Which of the following programs can be used to determine the routing path to a given desti) s
+5 390 M
+(nation?) s
+5 379 M
+(A. dig) s
+5 368 M
+(B. netstat) s
+5 357 M
+(C. ping) s
+5 346 M
+(D. route) s
+5 335 M
+(E. traceroute) s
+5 203 M
+( Correct Answer: E ) s
+5 181 M
+([ Question 14 ]) s
+5 170 M
+( Given the following routing table:) s
+5 159 M
+(A. It would be passed to the default router 192.168.178.1 on wlan0.) s
+5 148 M
+(B. It would be directly transmitted on the device eth0.) s
+5 137 M
+(C. It would be passed to the default router 255.255.255.0 on eth0.) s
+5 126 M
+(D. It would be directly transmitted on the device wlan0.) s
+5 115 M
+(E. It would be passed to the router 192.168.1.1 on eth0.) s
+_R
+S
+%%Page: (5) 5
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 5 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (5) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 731 M
+( Correct Answer: E ) s
+5 709 M
+([ Question 15 ]) s
+5 698 M
+( What of the following can be done by the command ifconfig? \(Choose TWO correct answers.\)) s
+5 687 M
+(A. Set a network interface active or inactive.) s
+5 676 M
+(B. Specify the kernel module to be used with a network interface.) s
+5 665 M
+(C. Allow regular users to change the network configuration of a network interface.) s
+5 654 M
+(D. Change the netmask used on a network interface.) s
+5 643 M
+(E. Specify which network services are available on a network interface.) s
+5 511 M
+( Correct Answer: AD ) s
+5 489 M
+([ Question 16 ]) s
+5 478 M
+( Which of the following tools used for DNS debugging, reports not only the response from th) s
+5 467 M
+(e name server but also details about the query?) s
+5 456 M
+(A. dnsq) s
+5 445 M
+(B. dig) s
+5 434 M
+(C. hostname) s
+5 423 M
+(D. dnslookup) s
+5 412 M
+(E. zoneinfo) s
+5 280 M
+( Correct Answer: B ) s
+5 258 M
+([ Question 17 ]) s
+5 247 M
+( Which of the following IPv4 networks are reserved by IANA for private address assignment a) s
+5 236 M
+(nd private routing? \(Choose THREE correct answers.\)) s
+5 225 M
+(A. 127.0.0.0/8) s
+5 214 M
+(B. 10.0.0.0/8) s
+5 203 M
+(C. 169.255.0.0/16) s
+5 192 M
+(D. 172.16.0.0/12) s
+5 181 M
+(E. 192.168.0.0/16) s
+5 49 M
+( Correct Answer: BDE ) s
+5 27 M
+([ Question 18 ]) s
+5 16 M
+( SIMULATION) s
+5 5 M
+(Which port is the default server port for the HTTPS protocol? \(Specify the port number usin) s
+_R
+S
+%%Page: (6) 6
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 6 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (6) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(g digits.\) ) s
+5 610 M
+(Correct Answer: 443 ) s
+5 588 M
+([ Question 19 ]) s
+5 577 M
+( SIMULATION) s
+5 566 M
+(Which command, depending on its options, can display the open network connections, the rout) s
+5 555 M
+(ing tables, as well as network interface statistics. \(Specify ONLY the command without any ) s
+5 544 M
+(path or parameters.\) ) s
+5 412 M
+(Correct Answer: netstat -or- /bin/netstat -or- ss -or- /usr/bin/ss ) s
+5 390 M
+([ Question 20 ]) s
+5 379 M
+( Which of the following statements is valid in the file /etc/nsswitch.conf?) s
+5 368 M
+(A. multi on B. 192.168.168.4 dns-server) s
+5 357 M
+(C. hosts: files dns) s
+5 346 M
+(D. include /etc/nsswitch.d/) s
+5 214 M
+( Correct Answer: C ) s
+5 192 M
+([ Question 21 ]) s
+5 181 M
+( SIMULATION) s
+5 170 M
+(What is the lowest numbered unprivileged TCP port? \(Specify the number in digits only.\) ) s
+5 38 M
+(Correct Answer: 1024 ) s
+5 16 M
+([ Question 22 ]) s
+5 5 M
+( What is true regarding TCP port 23?) s
+_R
+S
+%%Page: (7) 7
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 7 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (7) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(A. Port 23 is the well known port for the telnet service which is a plain text protocol tha) s
+5 731 M
+(t should no longer be used.) s
+5 720 M
+(B. Port 23 is the well known port for the SSH service which provides secure logins.) s
+5 709 M
+(C. Port 23 is the well known port for the rlogin service which is SSL secured by default.) s
+5 698 M
+(D. Port 23 is the well known port for the system login services which are encrypted when th) s
+5 687 M
+(e user runs the starttls command in his login shell.) s
+5 555 M
+( Correct Answer: A ) s
+5 533 M
+([ Question 23 ]) s
+5 522 M
+( SIMULATION) s
+5 511 M
+(How many IP-addresses can be used for unique hosts inside the IPv4 subnet 192.168.2.128/28?) s
+5 500 M
+( \(Specify the number only without any additional information.\) ) s
+5 368 M
+(Correct Answer: 14 ) s
+5 346 M
+([ Question 24 ]) s
+5 335 M
+( Which of the following may occur as a consequence of using the command ifconfig? \(Choose T) s
+5 324 M
+(HREE correct answers.\)) s
+5 313 M
+(A. New name servers may be added to the resolver configuration.) s
+5 302 M
+(B. Network interfaces may become active or inactive.) s
+5 291 M
+(C. The routing table may change.) s
+5 280 M
+(D. IP addresses may change.) s
+5 269 M
+(E. The system\342\\200\\231s host name may change.) s
+5 137 M
+( Correct Answer: BCD ) s
+5 115 M
+([ Question 25 ]) s
+5 104 M
+( Which of the following keywords can be used in the file /etc/nsswitch.conf to specify a so) s
+5 93 M
+(urce for host name lookups? \(Choose TWO correct answers.\)) s
+5 82 M
+(A. resolv) s
+5 71 M
+(B. dns) s
+5 60 M
+(C. remote) s
+5 49 M
+(D. files) s
+5 38 M
+(E. hosts) s
+_R
+S
+%%Page: (8) 8
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 8 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (8) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 654 M
+( Correct Answer: BD ) s
+5 632 M
+([ Question 26 ]) s
+5 621 M
+( Which of the following lines are valid in the file /etc/hosts? \(Choose TWO correct answers) s
+5 610 M
+(.\)) s
+5 599 M
+(A. 2001:db8::15 www.example.com www) s
+5 588 M
+(B. www.example.com www 203.0.13.15) s
+5 577 M
+(C. 203.0.113.15 www.example.com www) s
+5 566 M
+(D. www.example.com,www 203.0.13.15,2001:db8::15) s
+5 555 M
+(E. 2003.0.113.15,2001:db8::15 www.example.com www) s
+5 423 M
+( Correct Answer: AC ) s
+5 401 M
+([ Question 27 ]) s
+5 390 M
+( What is true regarding a default route?) s
+5 379 M
+(A. The default route is always used first. When the default route is not available more spe) s
+5 368 M
+(cific routes are tried.) s
+5 357 M
+(B. When a default route is set, all other routes are disabled until the default route is de) s
+5 346 M
+(leted.) s
+5 335 M
+(C. The default route is only used if there is not a more specific route to a destination ho) s
+5 324 M
+(st or network.) s
+5 313 M
+(D. Without a default route, no network communication even in directly attached networks is ) s
+5 302 M
+(possible.) s
+5 170 M
+( Correct Answer: C ) s
+5 148 M
+([ Question 28 ]) s
+5 137 M
+( SIMULATION) s
+5 126 M
+(Which parameter must be passed to ifconfig to activate a previously inactive network interf) s
+5 115 M
+(ace? \(Specify the parameter only without any command, path or additional options\) ) s
+_R
+S
+%%Page: (9) 9
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 9 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (9) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 731 M
+(Correct Answer: up ) s
+5 709 M
+([ Question 29 ]) s
+5 698 M
+( Which of the following is true about IPv6?) s
+5 687 M
+(A. With IPv6, the TCP port numbers of most services have changed.) s
+5 676 M
+(B. IPv6 no longer supports broadcast addresses.) s
+5 665 M
+(C. IPv4 addresses can be used without any change with IPv6.) s
+5 654 M
+(D. IPv6 no longer supports multicast addresses.) s
+5 643 M
+(E. For IPv6, UDP and TCP have been replaced by the Rapid Transmission Protocol RTP.) s
+5 511 M
+( Correct Answer: B ) s
+5 489 M
+([ Question 30 ]) s
+5 478 M
+( SIMULATION) s
+5 467 M
+(Which command is used to set the hostname of the local system? \(Specify ONLY the command wi) s
+5 456 M
+(thout any path or parameters.\) ) s
+5 324 M
+(Correct Answer: hostname ) s
+5 302 M
+([ Question 31 ]) s
+5 291 M
+( Which of the following details is NOT provided in any output from the netstat utility?) s
+5 280 M
+(A. broadcast services) s
+5 269 M
+(B. interface statistics) s
+5 258 M
+(C. masquerading connections) s
+5 247 M
+(D. network connections) s
+5 236 M
+(E. routing tables) s
+5 104 M
+( Correct Answer: A ) s
+5 82 M
+([ Question 32 ]) s
+5 71 M
+( Which of the following commands can be used to display the local routing table? \(Choose TW) s
+5 60 M
+(O correct answers.\)) s
+5 49 M
+(A. ifconfig) s
+5 38 M
+(B. dig) s
+5 27 M
+(C. netstat) s
+5 16 M
+(D. route) s
+5 5 M
+(E. trackroute) s
+_R
+S
+%%Page: (10) 10
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 10 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (10) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 621 M
+( Correct Answer: CD ) s
+5 599 M
+([ Question 33 ]) s
+5 588 M
+( What is the purpose of the nsswitch.conf file?) s
+5 577 M
+(A. It is used to configure where the C library looks for system information such as host na) s
+5 566 M
+(mes and user passwords.) s
+5 555 M
+(B. It is used to configure network protocol port numbers such as for HTTP or SMTP.) s
+5 544 M
+(C. It is used to configure LDAP authentication services for the local system.) s
+5 533 M
+(D. It is used to configure which network services will be turned on during the next system ) s
+5 522 M
+(boot.) s
+5 390 M
+( Correct Answer: A ) s
+5 368 M
+([ Question 34 ]) s
+5 357 M
+( SIMULATION) s
+5 346 M
+(With IPv6, how many bits have been used for the interface identifier of an unicast address?) s
+5 335 M
+( \(Specify the number using digits only.\) ) s
+5 203 M
+(Correct Answer: 64 ) s
+5 181 M
+([ Question 35 ]) s
+5 170 M
+( Which of the following commands will help identify a broken router between the local and t) s
+5 159 M
+(he remote machine?) s
+5 148 M
+(A. ps) s
+5 137 M
+(B. netstat) s
+5 126 M
+(C. nslookup) s
+5 115 M
+(D. ifconfig) s
+5 104 M
+(E. traceroute) s
+_R
+S
+%%Page: (11) 11
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 11 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (11) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 720 M
+( Correct Answer: E ) s
+5 698 M
+([ Question 36 ]) s
+5 687 M
+( What is the command to delete the default gateway from the system IP routing table? \(Choos) s
+5 676 M
+(e TWO correct answers.\)) s
+5 665 M
+(A. route del default) s
+5 654 M
+(B. ifconfig unset default) s
+5 643 M
+(C. netstat -r default) s
+5 632 M
+(D. ip route del default) s
+5 621 M
+(E. sysctl ipv4.default_gw=0) s
+5 489 M
+( Correct Answer: AD ) s
+5 467 M
+([ Question 37 ]) s
+5 456 M
+( What is true regarding the file ~/.forward?) s
+5 445 M
+(A. As it is owned by the MTA and not writable by the user, it must be edited using the edit) s
+5 434 M
+(aliases command.) s
+5 423 M
+(B. After editing ~/.forward the user must run newaliases to make the mail server aware of t) s
+5 412 M
+(he changes.) s
+5 401 M
+(C. Using ~/.forward, root may configure any email address whereas all other users may confi) s
+5 390 M
+(gure only their own addresses.) s
+5 379 M
+(D. When configured correctly, ~/.forward can be used to forward each incoming mail to more ) s
+5 368 M
+(than one other recipient.) s
+5 236 M
+( Correct Answer: D ) s
+5 214 M
+([ Question 38 ]) s
+5 203 M
+( Which of the following commands is used to rotate, compress, and mail system logs?) s
+5 192 M
+(A. rotatelog) s
+5 181 M
+(B. striplog) s
+5 170 M
+(C. syslogd \342\\200\\223rotate) s
+5 159 M
+(D. logrotate) s
+5 148 M
+(E. logger) s
+5 16 M
+( Correct Answer: D ) s
+_R
+S
+%%Page: (12) 12
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 12 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (12) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+([ Question 39 ]) s
+5 731 M
+( Which of the following is a legacy program provided by CUPS for sending files to the print) s
+5 720 M
+(er queues on the command line?) s
+5 709 M
+(A. lpd) s
+5 698 M
+(B. lpp) s
+5 687 M
+(C. lpq) s
+5 676 M
+(D. lpr) s
+5 544 M
+( Correct Answer: D ) s
+5 522 M
+([ Question 40 ]) s
+5 511 M
+( What entry can be added to the syslog.conf file to have all syslog messages generated by a) s
+5 500 M
+( system displayed on console 12?) s
+5 489 M
+(A. *.* /dev/tty12) s
+5 478 M
+(B. /var/log/messages | /dev/tty12) s
+5 467 M
+(C. | /dev/tty12) s
+5 456 M
+(D. syslog tty12) s
+5 445 M
+(E. mail.* /dev/tty12) s
+5 313 M
+( Correct Answer: A ) s
+5 291 M
+([ Question 41 ]) s
+5 280 M
+( What is true about the ntpdate command?) s
+5 269 M
+(A. It is the primary management command for the NTP time server.) s
+5 258 M
+(B. It updates the local system\342\\200\\231s date \(i.e. day, month and year\) but not the time \() s
+5 247 M
+(i.e. hours, minutes, seconds\).) s
+5 236 M
+(C. It queries one or more NTP time servers and adjusts the system time accordingly.) s
+5 225 M
+(D. It sends the local system time to one or many remote NTP time servers for redistribution) s
+5 214 M
+(.) s
+5 203 M
+(E. It can be used by any user to set the user clock independently of the system clock.) s
+5 71 M
+( Correct Answer: C ) s
+5 49 M
+([ Question 42 ]) s
+5 38 M
+( SIMULATION) s
+5 27 M
+(Please specify the top directory containing the configuration files for the CUPS printing s) s
+5 16 M
+(ystem. \(Specify the full path to the directory.\) ) s
+_R
+S
+%%Page: (13) 13
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 13 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (13) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 632 M
+(Correct Answer: /etc/cups -or- /etc/cups/ ) s
+5 610 M
+([ Question 43 ]) s
+5 599 M
+( SIMULATION) s
+5 588 M
+(Which command, available with all MTAs, is used to list the contents of the MTA\342\\200\\231s m) s
+5 577 M
+(ail queue? \(Specify ONLY the command without any path or parameters.\) ) s
+5 445 M
+(Correct Answer: mailq -or- /usr/bin/mailq -or- sendmail -bp -or- /usr/sbin/sendmail -bp -or) s
+5 434 M
+(- /usr/lib/sendmail -bp -or- sendmail -or- /usr/sbin/sendmail \342\\200\\223 or- /usr/lib/sendma) s
+5 423 M
+(il ) s
+5 401 M
+([ Question 44 ]) s
+5 390 M
+( SIMULATION) s
+5 379 M
+(Which command is used to sync the hardware clock to the system clock? \(Specify ONLY the com) s
+5 368 M
+(mand without any path or parameters.\) ) s
+5 236 M
+(Correct Answer: hwclock -or- /sbin/hwclock -or- /usr/sbin/hwclock ) s
+5 214 M
+([ Question 45 ]) s
+5 203 M
+( Which of the following is observed and corrected by a NTP client?) s
+5 192 M
+(A. The skew in time between the system clock and the hardware clock.) s
+5 181 M
+(B. The skew in time between the system clock and the reference clock.) s
+5 170 M
+(C. Changes in the time zone of the current computer\342\\200\\231s location.) s
+5 159 M
+(D. Adjustments needed to support Daylight Saving Time.) s
+5 27 M
+( Correct Answer: B ) s
+5 5 M
+([ Question 46 ]) s
+_R
+S
+%%Page: (14) 14
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 14 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (14) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+( Which of the following are commonly used Mail Transfer Agent \(MTA\) applications? \(Choose T) s
+5 731 M
+(HREE correct answers.\)) s
+5 720 M
+(A. Postfix) s
+5 709 M
+(B. Procmail) s
+5 698 M
+(C. Sendmail) s
+5 687 M
+(D. Exim) s
+5 676 M
+(E. SMTPd) s
+5 544 M
+( Correct Answer: ACD ) s
+5 522 M
+([ Question 47 ]) s
+5 511 M
+( Why is the correct configuration of a system\342\\200\\231s time zone important?) s
+5 500 M
+(A. Because the conversion of Unix timestamps to local time relies on the time zone configur) s
+5 489 M
+(ation.) s
+5 478 M
+(B. Because the time zone is saved as part of the modification times of files and cannot be ) s
+5 467 M
+(changed after a file is created.) s
+5 456 M
+(C. Because the environment variables LANG and LC_MESSAGES are, by default, set according to) s
+5 445 M
+( the time zone.) s
+5 434 M
+(D. Because NTP chooses servers nearby based on the configured time zone.) s
+5 302 M
+( Correct Answer: A ) s
+5 280 M
+([ Question 48 ]) s
+5 269 M
+( Which of the following parameters are used for journalctl to limit the time frame of the o) s
+5 258 M
+(utput? \(Choose TWO correct answers.\)) s
+5 247 M
+(A. \342\\200\\223from=) s
+5 236 M
+(B. \342\\200\\223since=) s
+5 225 M
+(C. \342\\200\\223until=) s
+5 214 M
+(D. \342\\200\\223upto=) s
+5 203 M
+(E. \342\\200\\223date=) s
+5 71 M
+( Correct Answer: BC ) s
+5 49 M
+([ Question 49 ]) s
+5 38 M
+( SIMULATION) s
+5 27 M
+(After adding a new email alias to the configuration, which command must be run in order to ) s
+5 16 M
+(ensure the MTA knows about it? \(Specify the command without any path but including all requ) s
+5 5 M
+(ired parameters.\) ) s
+_R
+S
+%%Page: (15) 15
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 15 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (15) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 621 M
+(Correct Answer: newaliases -or- sendmail -bi ) s
+5 599 M
+([ Question 50 ]) s
+5 588 M
+( What is true regarding the command sendmail?) s
+5 577 M
+(A. With any MTA, the sendmail command must be run periodically by the cron daemon.) s
+5 566 M
+(B. All MTAs, including Postfix and Exim, provide a sendmail command.) s
+5 555 M
+(C. The sendmail command prints the MTAs queue history of which mails have been sent success) s
+5 544 M
+(fully.) s
+5 533 M
+(D. It is only available when the sendmail MTA is installed.) s
+5 401 M
+( Correct Answer: B ) s
+5 379 M
+([ Question 51 ]) s
+5 368 M
+( Which file inside the CUPS configuration directory contains the definition of the printers) s
+5 357 M
+(?) s
+5 346 M
+(A. cups-devices.conf) s
+5 335 M
+(B. snmp.conf) s
+5 324 M
+(C. printcap.conf) s
+5 313 M
+(D. printers.conf) s
+5 302 M
+(E. cupsd.conf) s
+5 170 M
+( Correct Answer: D ) s
+5 148 M
+([ Question 52 ]) s
+5 137 M
+( What is the purpose of the command mailq?) s
+5 126 M
+(A. It fetches new emails from a remote server using POP3 or IMAP.) s
+5 115 M
+(B. It is a multi-user mailing list manager.) s
+5 104 M
+(C. It is a proprietary tool contained only in the qmail MTA.) s
+5 93 M
+(D. It queries the mail queue of the local MTA.) s
+5 82 M
+(E. It is a command-line based tool for reading and writing emails.) s
+_R
+S
+%%Page: (16) 16
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 16 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (16) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 698 M
+( Correct Answer: D ) s
+5 676 M
+([ Question 53 ]) s
+5 665 M
+( Which of the following are syslog facilities? \(Choose TWO correct answers.\)) s
+5 654 M
+(A. local7) s
+5 643 M
+(B. mail) s
+5 632 M
+(C. advanced) s
+5 621 M
+(D. postmaster) s
+5 610 M
+(E. remote) s
+5 478 M
+( Correct Answer: AB ) s
+5 456 M
+([ Question 54 ]) s
+5 445 M
+( Which of the following tasks can be accomplished using the command date? \(Choose TWO corre) s
+5 434 M
+(ct answers.\)) s
+5 423 M
+(A. Synchronize the hardware and system clocks.) s
+5 412 M
+(B. Output date and time in different formats.) s
+5 401 M
+(C. Set the system clock.) s
+5 390 M
+(D. Set the hardware clock.) s
+5 379 M
+(E. Update the time via NTP.) s
+5 247 M
+( Correct Answer: BC ) s
+5 225 M
+([ Question 55 ]) s
+5 214 M
+( SIMULATION) s
+5 203 M
+(After configuring printing on a Linux server, the administrator sends a test file to one of) s
+5 192 M
+( the printers and it fails to print. What command can be used to display the status of the ) s
+5 181 M
+(printer\342\\200\\231s queue? \(Specify ONLY the command without any path or parameters.\) ) s
+5 49 M
+(Correct Answer: lpq -or- /usr/bin/lpq -or- lpstat -or- /usr/bin/lpstat ) s
+5 27 M
+([ Question 56 ]) s
+5 16 M
+( SIMULATION) s
+5 5 M
+(Which option in the /etc/ntp.conf file specifies an external NTP source to be queried for t) s
+_R
+S
+%%Page: (17) 17
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 17 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (17) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(ime information? \(Specify ONLY the option without any values or parameters.\) ) s
+5 610 M
+(Correct Answer: server ) s
+5 588 M
+([ Question 57 ]) s
+5 577 M
+( Which of the following fields can be found in the /etc/group file? \(Choose THREE correct a) s
+5 566 M
+(nswers.\)) s
+5 555 M
+(A. The list of users that belong to the group.) s
+5 544 M
+(B. The home directory of the group.) s
+5 533 M
+(C. The name of the group.) s
+5 522 M
+(D. The description of the group.) s
+5 511 M
+(E. The password of the group.) s
+5 379 M
+( Correct Answer: ACE ) s
+5 357 M
+([ Question 58 ]) s
+5 346 M
+( What is true regarding the command userdel \342\\200\\223force \342\\200\\223remove bob? \(Choose TWO) s
+5 335 M
+( correct answers.\)) s
+5 324 M
+(A. The user bob is removed from the system\342\\200\\231s user database.) s
+5 313 M
+(B. The user bob\342\\200\\231s home directory is removed.) s
+5 302 M
+(C. The locate database is updated to drop files owned by bob.) s
+5 291 M
+(D. All files owned by bob are remove from all mounted filesystems.) s
+5 280 M
+(E. In case bob was the last member of a group, that group is deleted.) s
+5 148 M
+( Correct Answer: AB ) s
+5 126 M
+([ Question 59 ]) s
+5 115 M
+( What is true about the file /etc/localtime?) s
+5 104 M
+(A. It is a plain text file containing a string such as Europe/Berlin.) s
+5 93 M
+(B. It is created and maintained by the NTP service based on the geolocation of the system\342) s
+5 82 M
+(\\200\\231s IP address.) s
+5 71 M
+(C. It is a symlink to /sys/device/clock/ltime and always contains the current local time.) s
+5 60 M
+(D. It is either a symlink to or a copy of a timezone information file such as /usr/share/zo) s
+5 49 M
+(neinfo/Europe/Berlin.) s
+_R
+S
+%%Page: (18) 18
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 18 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (18) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 665 M
+( Correct Answer: D ) s
+5 643 M
+([ Question 60 ]) s
+5 632 M
+( What is NOT contained in the locale setting of the operating system?) s
+5 621 M
+(A. currency symbol) s
+5 610 M
+(B. language) s
+5 599 M
+(C. timezone) s
+5 588 M
+(D. thousands separator) s
+5 456 M
+( Correct Answer: C ) s
+5 434 M
+([ Question 61 ]) s
+5 423 M
+( SIMULATION) s
+5 412 M
+(Which command is used to add an empty group to the system? \(Specify ONLY the command withou) s
+5 401 M
+(t any path or parameters.\) ) s
+5 269 M
+(Correct Answer: groupadd -or- /usr/sbin/groupadd ) s
+5 247 M
+([ Question 62 ]) s
+5 236 M
+( Which commands can be used to change a user\342\\200\\231s account aging information? \(Choose T) s
+5 225 M
+(HREE correct answers.\)) s
+5 214 M
+(A. usermod) s
+5 203 M
+(B. passwd) s
+5 192 M
+(C. chattr) s
+5 181 M
+(D. chage) s
+5 170 M
+(E. chsh) s
+5 38 M
+( Correct Answer: ABD ) s
+5 16 M
+([ Question 63 ]) s
+5 5 M
+( SIMULATION) s
+_R
+S
+%%Page: (19) 19
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 19 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (19) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(In which file, if present, must all users be listed that are allowed to use the cron schedu) s
+5 731 M
+(ling system? \(Specify the full name of the file, including path.\) ) s
+5 599 M
+(Correct Answer: /etc/cron.allow ) s
+5 577 M
+([ Question 64 ]) s
+5 566 M
+( Which of the following commands should be added to /etc/bash_profile in order to change th) s
+5 555 M
+(e language of messages for an internationalized program to Portuguese \(pt\)?) s
+5 544 M
+(A. export LANGUAGE="pt") s
+5 533 M
+(B. export MESSAGE="pt") s
+5 522 M
+(C. export UI_MESSAGES="pt") s
+5 511 M
+(D. export LC_MESSAGES="pt") s
+5 500 M
+(E. export ALL_MESSAGES="pt") s
+5 368 M
+( Correct Answer: D ) s
+5 346 M
+([ Question 65 ]) s
+5 335 M
+( Which of the following files assigns a user to its primary group?) s
+5 324 M
+(A. /etc/pgroup) s
+5 313 M
+(B. /etc/shadow) s
+5 302 M
+(C. /etc/group) s
+5 291 M
+(D. /etc/passwd) s
+5 280 M
+(E. /etc/gshadow) s
+5 148 M
+( Correct Answer: D ) s
+5 126 M
+([ Question 66 ]) s
+5 115 M
+( Which of the following crontab entries will execute myscript at 30 minutes past every hour) s
+5 104 M
+( on Sundays?) s
+5 93 M
+(A. 0 * * * 30 myscript) s
+5 82 M
+(B. 30 * * * 6 myscript) s
+5 71 M
+(C. 30 0 * * 0 myscript) s
+5 60 M
+(D. 30 0-23 * * 0 myscript) s
+5 49 M
+(E. 0 0-23 * * 30 myscript) s
+_R
+S
+%%Page: (20) 20
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 20 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (20) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 665 M
+( Correct Answer: D ) s
+5 643 M
+([ Question 67 ]) s
+5 632 M
+( To prevent a specific user from scheduling tasks with at, what should the administrator do) s
+5 621 M
+(?) s
+5 610 M
+(A. Add the specific user to /etc/at.allow file.) s
+5 599 M
+(B. Add the specific user to [deny] section in the /etc/atd.conf file.) s
+5 588 M
+(C. Add the specific user to /etc/at.deny file.) s
+5 577 M
+(D. Add the specific user to nojobs group.) s
+5 566 M
+(E. Run the following: atd \342\\200\\223deny [user].) s
+5 434 M
+( Correct Answer: C ) s
+5 412 M
+([ Question 68 ]) s
+5 401 M
+( Each entry in a crontab must end with what character?) s
+5 390 M
+(A. Tab) s
+5 379 M
+(B. Space) s
+5 368 M
+(C. Backslash) s
+5 357 M
+(D. Newline) s
+5 225 M
+( Correct Answer: D ) s
+5 203 M
+([ Question 69 ]) s
+5 192 M
+( SIMULATION) s
+5 181 M
+(Which environment variable should be set in order to change the time zone for the commands ) s
+5 170 M
+(run from within the environment variable\342\\200\\231s scope?) s
+5 159 M
+(\(Specify the variable name only.\) ) s
+5 27 M
+(Correct Answer: TZ ) s
+5 5 M
+([ Question 70 ]) s
+_R
+S
+%%Page: (21) 21
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 21 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (21) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+( Which file contains the date of the last change of a user\342\\200\\231s password?) s
+5 731 M
+(A. /etc/gshadow) s
+5 720 M
+(B. /etc/passwd) s
+5 709 M
+(C. /etc/pwdlog) s
+5 698 M
+(D. /etc/shadow) s
+5 687 M
+(E. /var/log/shadow) s
+5 555 M
+( Correct Answer: D ) s
+5 533 M
+([ Question 71 ]) s
+5 522 M
+( Where are user specific crontabs stored?) s
+5 511 M
+(A. In the database file /etc/crontab.db which is shared by all users.) s
+5 500 M
+(B. As individual per-user files within /var/spool/cron.) s
+5 489 M
+(C. As individual per-user files in /etc/cron.user.d.) s
+5 478 M
+(D. In the .crontab file in the user\342\\200\\231s home directory.) s
+5 467 M
+(E. In the file /var/cron/user-crontab which is shared by all users.) s
+5 335 M
+( Correct Answer: B ) s
+5 313 M
+([ Question 72 ]) s
+5 302 M
+( Which of the following commands can remove a user from a group?) s
+5 291 M
+(A. grouprm) s
+5 280 M
+(B. groupmod) s
+5 269 M
+(C. passwd) s
+5 258 M
+(D. usergroups) s
+5 247 M
+(E. usermod) s
+5 115 M
+( Correct Answer: E ) s
+5 93 M
+([ Question 73 ]) s
+5 82 M
+( In case neither cron.allow nor cron.deny exist in /etc/, which of the following is true?) s
+5 71 M
+(A. Without additional configuration, no users may have user specific crontabs.) s
+5 60 M
+(B. Without additional configuration, all users may have user specific crontabs.) s
+5 49 M
+(C. The cron daemon will refuse to start and report missing files in the system\342\\200\\231s lo) s
+5 38 M
+(gfile.) s
+5 27 M
+(D. When a user creates a user specific crontab the system administrator must approve it exp) s
+5 16 M
+(licitly.) s
+_R
+S
+%%Page: (22) 22
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 22 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (22) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 632 M
+( Correct Answer: A ) s
+5 610 M
+([ Question 74 ]) s
+5 599 M
+( What is the purpose of the iconv command?) s
+5 588 M
+(A. It converts bitmap images from one format to another such as PNG to JPEG.) s
+5 577 M
+(B. It verifies that the root directory tree complies to all conventions from the Filesystem) s
+5 566 M
+( Hierarchy Standard \(FHS\).) s
+5 555 M
+(C. It displays additional meta information from icon files ending in .ico.) s
+5 544 M
+(D. It changes the mode of an inode in the ext4 file system.) s
+5 533 M
+(E. It converts files from one character encoding to another.) s
+5 401 M
+( Correct Answer: E ) s
+5 379 M
+([ Question 75 ]) s
+5 368 M
+( Which command can be used to delete a group from a Linux system?) s
+5 357 M
+(A. groupdel) s
+5 346 M
+(B. groupmod) s
+5 335 M
+(C. groups) s
+5 324 M
+(D. groupedit) s
+5 192 M
+( Correct Answer: A ) s
+5 170 M
+([ Question 76 ]) s
+5 159 M
+( Which of the following fields are available in both the global /etc/crontab file as well a) s
+5 148 M
+(s in user-specific crontab files? \(Select TWO correct answers\)) s
+5 137 M
+(A. Year) s
+5 126 M
+(B. Minute) s
+5 115 M
+(C. Username) s
+5 104 M
+(D. Command) s
+_R
+S
+%%Page: (23) 23
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 23 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (23) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 720 M
+( Correct Answer: BD ) s
+5 698 M
+([ Question 77 ]) s
+5 687 M
+( SIMULATION) s
+5 676 M
+(The system\342\\200\\231s timezone may be set by linking /etc/localtime to an appropriate file i) s
+5 665 M
+(n which directory? \(Provide the full path to the directory, without any country information) s
+5 654 M
+(\) ) s
+5 522 M
+(Correct Answer: /usr/share/zoneinfo/ ) s
+5 500 M
+([ Question 78 ]) s
+5 489 M
+( SIMULATION) s
+5 478 M
+(Which file specifies the user accounts that can NOT submit jobs via at or batch? \(Provide t) s
+5 467 M
+(he full path and filename\) ) s
+5 335 M
+(Correct Answer: /etc/at.deny ) s
+5 313 M
+([ Question 79 ]) s
+5 302 M
+( Which character in the password field of /etc/passwd is used to indicate that the encrypte) s
+5 291 M
+(d password is stored in /etc/shadow?) s
+5 280 M
+(A. *) s
+5 269 M
+(B. \342\\200\\223) s
+5 258 M
+(C. s) s
+5 247 M
+(D. x) s
+5 115 M
+( Correct Answer: D ) s
+5 93 M
+([ Question 80 ]) s
+5 82 M
+( Which of the following steps prevents a user from obtaining an interactive login session?) s
+5 71 M
+(A. Run the command chsh -s /bin/false with the user name.) s
+5 60 M
+(B. Set the UID for the user to 0.) s
+5 49 M
+(C. Remove the user from the group staff.) s
+5 38 M
+(D. Add the user to /etc/noaccess.) s
+5 27 M
+(E. Create a .nologin file in the user\342\\200\\231s home directory.) s
+_R
+S
+%%Page: (24) 24
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 24 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (24) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 643 M
+( Correct Answer: A ) s
+5 621 M
+([ Question 81 ]) s
+5 610 M
+( Which of the following are tasks handled by a display manager like XDM or KDM? \(Choose TWO) s
+5 599 M
+( correct answers.\)) s
+5 588 M
+(A. Start and prepare the desktop environment for the user.) s
+5 577 M
+(B. Configure additional devices like new monitors or projectors when they are attached.) s
+5 566 M
+(C. Handle the login of a user.) s
+5 555 M
+(D. Lock the screen when the user was inactive for a configurable amount of time.) s
+5 544 M
+(E. Create an X11 configuration file for the current graphic devices and monitors.) s
+5 412 M
+( Correct Answer: AC ) s
+5 390 M
+([ Question 82 ]) s
+5 379 M
+( SIMULATION) s
+5 368 M
+(What is the name of the simple graphical login manager that comes with a vanilla X11 instal) s
+5 357 M
+(lation? \(Specify ONLY the command without any path or parameters.\) ) s
+5 225 M
+(Correct Answer: xdm ) s
+5 203 M
+([ Question 83 ]) s
+5 192 M
+( For accessibility assistance, which of the following programs is an on-screen keyboard?) s
+5 181 M
+(A. xkb) s
+5 170 M
+(B. atkb) s
+5 159 M
+(C. GOK) s
+5 148 M
+(D. xOSK) s
+5 16 M
+( Correct Answer: C ) s
+_R
+S
+%%Page: (25) 25
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 25 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (25) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+([ Question 84 ]) s
+5 731 M
+( SIMULATION) s
+5 720 M
+(What is the default name of the configuration file for the Xorg X11 server? \(Specify the fi) s
+5 709 M
+(le name only without any path.\) ) s
+5 577 M
+(Correct Answer: xorg.conf ) s
+5 555 M
+([ Question 85 ]) s
+5 544 M
+( Which of the following commands shows the current color depth of the X Server?) s
+5 533 M
+(A. xcd) s
+5 522 M
+(B. xcdepth) s
+5 511 M
+(C. xwininfo) s
+5 500 M
+(D. xcolordepth) s
+5 489 M
+(E. cat /etc/X11) s
+5 357 M
+( Correct Answer: C ) s
+5 335 M
+([ Question 86 ]) s
+5 324 M
+( What is the purpose of a screen reader?) s
+5 313 M
+(A. It reads text displayed on the screen to blind or visually impaired people.) s
+5 302 M
+(B. It reads the parameters of the attached monitors and creates an appropriate X11 configur) s
+5 291 M
+(ation.) s
+5 280 M
+(C. It displays lines and markers to help people use speed reading techniques.) s
+5 269 M
+(D. It manages and displays files that contain e-books.) s
+5 137 M
+( Correct Answer: A ) s
+5 115 M
+([ Question 87 ]) s
+5 104 M
+( How is a display manager started?) s
+5 93 M
+(A. It is started by a user using the command startx.) s
+5 82 M
+(B. It is started like any other system service by the init system.) s
+5 71 M
+(C. It is started by inetd when a remote hosts connects to the X11 port.) s
+5 60 M
+(D. It is started automatically when a X11 user logs in to the system console.) s
+_R
+S
+%%Page: (26) 26
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 26 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (26) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 676 M
+( Correct Answer: B ) s
+5 654 M
+([ Question 88 ]) s
+5 643 M
+( SIMULATION) s
+5 632 M
+(Which command can be used to investigate the properties for a particular window in X by cli) s
+5 621 M
+(cking that window? \(Specify ONLY the command without any path or parameters.\) ) s
+5 489 M
+(Correct Answer: /usr/bin/xwininfo -or- xwininfo ) s
+5 467 M
+([ Question 89 ]) s
+5 456 M
+( The X11 configuration file xorg.conf is grouped into sections. How is the content of the s) s
+5 445 M
+(ection SectionName associated with that section?) s
+5 434 M
+(A. It is placed in curly brackets as in Section SectionName { \342\\200\246 }.) s
+5 423 M
+(B. It is placed between a line containing Section "SectionName" and a line containing EndSe) s
+5 412 M
+(ction.) s
+5 401 M
+(C. It is placed between the tags <Section name="SectionName"> and </Section>) s
+5 390 M
+(D. It is placed after the row [SectionName].) s
+5 379 M
+(E. It is placed after an initial unindented Section "SectionName" and must be indented by e) s
+5 368 M
+(xactly one tab character.) s
+5 236 M
+( Correct Answer: B ) s
+5 214 M
+([ Question 90 ]) s
+5 203 M
+( Which file used by XDM specifies the default wallpaper?) s
+5 192 M
+(A. /etc/X11/xdm/Xsetup) s
+5 181 M
+(B. /etc/X11/xdm.conf) s
+5 170 M
+(C. /etc/X11/xdm/Defaults) s
+5 159 M
+(D. /etc/X11/defaults.conf) s
+5 27 M
+( Correct Answer: A ) s
+5 5 M
+([ Question 91 ]) s
+_R
+S
+%%Page: (27) 27
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 27 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (27) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+( Which of the following are requirements in order to run a shell script like a regular comm) s
+5 731 M
+(and from anywhere in the filesystem? \(Choose THREE correct answers.\)) s
+5 720 M
+(A. The user issuing the command must be in the group script.) s
+5 709 M
+(B. The script file must be found in the $PATH.) s
+5 698 M
+(C. The script file must have the executable permission bit set.) s
+5 687 M
+(D. The script must begin with a shebang-line \(#!\) that points to the correct interpreter.) s
+5 676 M
+(E. The file system on which the script resides must be mounted with the option scripts.) s
+5 544 M
+( Correct Answer: BCD ) s
+5 522 M
+([ Question 92 ]) s
+5 511 M
+( SIMULATION) s
+5 500 M
+(What command displays all aliases defined in the current shell? \(Specify the command withou) s
+5 489 M
+(t any path information\) ) s
+5 357 M
+(Correct Answer: alias -or- alias -p ) s
+5 335 M
+([ Question 93 ]) s
+5 324 M
+( What is the purpose of the file /etc/profile?) s
+5 313 M
+(A. It contains the welcome message that is displayed after login.) s
+5 302 M
+(B. It contains security profiles defining which users are allowed to log in.) s
+5 291 M
+(C. It contains environment variables that are set when a user logs in.) s
+5 280 M
+(D. It contains default application profiles for users that run an application for the first) s
+5 269 M
+( time.) s
+5 137 M
+( Correct Answer: C ) s
+5 115 M
+([ Question 94 ]) s
+5 104 M
+( Which of the following SQL queries counts the number of occurrences for each value of the ) s
+5 93 M
+(field order_type in the table orders?) s
+5 82 M
+(A. SELECT order_type,COUNT\(*\) FROM orders WHERE order_type=order_type;) s
+5 71 M
+(B. SELECT order_type,COUNT\(*\) FROM orders GROUP BY order_type;) s
+5 60 M
+(C. COUNT\(SELECT order_type FROM orders\);) s
+5 49 M
+(D. SELECT COUNT\(*\) FROM orders ORDER BY order_type;) s
+5 38 M
+(E. SELECT AUTO_COUNT FROM orders COUNT order_type;) s
+_R
+S
+%%Page: (28) 28
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 28 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (28) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 654 M
+( Correct Answer: B ) s
+5 632 M
+([ Question 95 ]) s
+5 621 M
+( Which of the following commands lists all defined variables and functions within Bash?) s
+5 610 M
+(A. env) s
+5 599 M
+(B. set) s
+5 588 M
+(C. env -a) s
+5 577 M
+(D. echo $ENV) s
+5 445 M
+( Correct Answer: B ) s
+5 423 M
+([ Question 96 ]) s
+5 412 M
+( Which of the following words is used to restrict the records that are returned from a SELE) s
+5 401 M
+(CT SQL query based on a supplied criteria for the values in the records?) s
+5 390 M
+(A. CASE) s
+5 379 M
+(B. FROM) s
+5 368 M
+(C. WHERE) s
+5 357 M
+(D. IF) s
+5 225 M
+( Correct Answer: C ) s
+5 203 M
+([ Question 97 ]) s
+5 192 M
+( What output will the following command produce?) s
+5 181 M
+(seq 1 5 20) s
+5 159 M
+(6) s
+5 148 M
+(1) s
+5 137 M
+(1) s
+5 126 M
+(1) s
+5 115 M
+(6) s
+5 93 M
+(5) s
+5 82 M
+(10) s
+5 71 M
+(15) s
+5 27 M
+(10) s
+5 16 M
+(15) s
+5 5 M
+(20) s
+_R
+S
+%%Page: (29) 29
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 29 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (29) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(A. 1) s
+5 731 M
+(B. 1) s
+5 720 M
+(C. 1) s
+5 709 M
+(2) s
+5 698 M
+(3) s
+5 687 M
+(4) s
+5 676 M
+(D. 2) s
+5 665 M
+(3) s
+5 654 M
+(4) s
+5 643 M
+(5) s
+5 632 M
+(E. 5) s
+5 500 M
+( Correct Answer: A ) s
+5 478 M
+([ Question 98 ]) s
+5 467 M
+( When the command echo $$ outputs 12942, what is the meaning of 12942?) s
+5 456 M
+(A. It is the process ID of the echo command.) s
+5 445 M
+(B. It is the process ID of the current shell.) s
+5 434 M
+(C. It is the process ID of the last command executed.) s
+5 423 M
+(D. It is the process ID of the last command which has been placed in the background.) s
+5 291 M
+( Correct Answer: B ) s
+5 269 M
+([ Question 99 ]) s
+5 258 M
+( How can the existing environment variable FOOBAR be suppressed for the execution of the sc) s
+5 247 M
+(ript./myscript only?) s
+5 236 M
+(A. unset -v FOOBAR;./myscript) s
+5 225 M
+(B. set -a FOOBAR="";./myscript) s
+5 214 M
+(C. env -u FOOBAR./myscript) s
+5 203 M
+(D. env -i FOOBAR./myscript) s
+5 71 M
+( Correct Answer: C ) s
+5 49 M
+([ Question 100 ]) s
+5 38 M
+( What is the difference between the commands test -e path and test -f path?) s
+5 27 M
+(A. They are equivalent options with the same behaviour.) s
+5 16 M
+(B. The -f option tests for a regular file. The -e option tests for an empty file.) s
+5 5 M
+(C. Both options check the existence of the path. The -f option also confirms that it is a r) s
+_R
+S
+%%Page: (30) 30
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 30 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (30) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(egular file.) s
+5 731 M
+(D. The -f option tests for a regular file. The -e option tests for an executable file.) s
+5 599 M
+( Correct Answer: C ) s
+5 577 M
+([ Question 101 ]) s
+5 566 M
+( Which of the following files, when existing, affect the behavior of the Bash shell? \(Choos) s
+5 555 M
+(e TWO correct answers.\)) s
+5 544 M
+(A. ~/.bashconf) s
+5 533 M
+(B. ~/.bashrc) s
+5 522 M
+(C. ~/.bashdefaults) s
+5 511 M
+(D. ~/.bash_etc) s
+5 500 M
+(E. ~/.bash_profile) s
+5 368 M
+( Correct Answer: BE ) s
+5 346 M
+([ Question 102 ]) s
+5 335 M
+( Which of the following commands puts the output of the command date into the shell variabl) s
+5 324 M
+(e mydate?) s
+5 313 M
+(A. mydate="$\(date\)") s
+5 302 M
+(B. mydate="exec date") s
+5 291 M
+(C. mydate="$\(\(date\)\)") s
+5 280 M
+(D. mydate="date") s
+5 269 M
+(E. mydate="${date}") s
+5 137 M
+( Correct Answer: A ) s
+5 115 M
+([ Question 103 ]) s
+5 104 M
+( After issuing:) s
+5 93 M
+(function myfunction { echo $1 $2 ; }) s
+5 82 M
+(in Bash, which output does:) s
+5 71 M
+(myfunction A B C) s
+5 60 M
+(Produce?) s
+5 49 M
+(A. A B) s
+5 38 M
+(B. A B C) s
+5 27 M
+(C. A C) s
+5 16 M
+(D. B C) s
+5 5 M
+(E. C B A) s
+_R
+S
+%%Page: (31) 31
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 31 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (31) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 621 M
+( Correct Answer: A ) s
+5 599 M
+([ Question 104 ]) s
+5 588 M
+( SIMULATION) s
+5 577 M
+(By default, the contents of which directory will be copied to a new user\342\\200\\231s home dir) s
+5 566 M
+(ectory when the account is created by passing the -m option to the useradd command? \(Specif) s
+5 555 M
+(y the full path to the directory.\) ) s
+5 423 M
+(Correct Answer: /etc/skel ) s
+5 401 M
+([ Question 105 ]) s
+5 390 M
+( SIMULATION) s
+5 379 M
+(What word is missing from the following SQL statement?) s
+5 368 M
+(__________ count\(*\) from tablename;) s
+5 357 M
+(\(Please specify the missing word using lower-case letters only.\) ) s
+5 225 M
+(Correct Answer: select ) s
+5 203 M
+([ Question 106 ]) s
+5 192 M
+( What output will the command seq 10 produce?) s
+5 181 M
+(A. A continuous stream of numbers increasing in increments of 10 until stopped.) s
+5 170 M
+(B. The numbers 1 through 10 with one number per line.) s
+5 159 M
+(C. The numbers 0 through 9 with one number per line.) s
+5 148 M
+(D. The number 10 to standard output.) s
+5 16 M
+( Correct Answer: B ) s
+_R
+S
+%%Page: (32) 32
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 32 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (32) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+([ Question 107 ]) s
+5 731 M
+( Which command makes the shell variable named VARIABLE visible to subshells?) s
+5 720 M
+(A. export $VARIABLE) s
+5 709 M
+(B. export VARIABLE) s
+5 698 M
+(C. set $VARIABLE) s
+5 687 M
+(D. set VARIABLE) s
+5 676 M
+(E. env VARIABLE) s
+5 544 M
+( Correct Answer: B ) s
+5 522 M
+([ Question 108 ]) s
+5 511 M
+( SIMULATION) s
+5 500 M
+(What word is missing from the following SQL statement? insert into tablename ________\(909, ) s
+5 489 M
+(\342\\200\\230text\342\\200\\231\);) s
+5 478 M
+(\(Please specify the missing word using lower-case letters only.\) ) s
+5 346 M
+(Correct Answer: VALUES -or- values ) s
+5 324 M
+([ Question 109 ]) s
+5 313 M
+( When the command echo $ outputs 1, which of the following statements is true?) s
+5 302 M
+(A. It is the process ID of the echo command.) s
+5 291 M
+(B. It is the process ID of the current shell.) s
+5 280 M
+(C. It is the exit value of the command executed immediately before echo.) s
+5 269 M
+(D. It is the exit value of the echo command.) s
+5 137 M
+( Correct Answer: C ) s
+5 115 M
+([ Question 110 ]) s
+5 104 M
+( What output will the following command sequence produce?) s
+5 93 M
+(echo \342\\200\\2301 2 3 4 5 6\342\\200\\231 | while read a b c; do) s
+5 82 M
+(echo result: $c $b $a;) s
+5 71 M
+(done) s
+5 60 M
+(A. result: 3 4 5 6 2 1) s
+5 49 M
+(B. result: 1 2 3 4 5 6) s
+5 38 M
+(C. result: 6 5 4) s
+5 27 M
+(D. result: 6 5 4 3 2 1) s
+5 16 M
+(E. result: 3 2 1) s
+_R
+S
+%%Page: (33) 33
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 33 def
+/fname (LPIC-102-400.txt) def
+/fdir (.) def
+/ftail (LPIC-102-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:30:01 2019) def
+/pagenumstr (33) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 632 M
+( Correct Answer: A ) s
+_R
+S
+%%Trailer
+%%Pages: 33
+%%DocumentNeededResources: font Courier-Bold Courier 
+%%EOF

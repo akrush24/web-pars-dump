@@ -1,0 +1,3026 @@
+%!PS-Adobe-3.0
+%%BoundingBox: 18 36 577 806
+%%Title: Enscript Output
+%%Creator: GNU Enscript 1.6.5.90
+%%CreationDate: Thu Jul 11 17:14:26 2019
+%%Orientation: Portrait
+%%Pages: (atend)
+%%DocumentMedia: A4 595 842 0 () ()
+%%DocumentNeededResources: (atend)
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset Enscript-Prolog 1.6.5 90
+%
+% Procedures.
+%
+
+/_S {	% save current state
+  /_s save def
+} def
+/_R {	% restore from saved state
+  _s restore
+} def
+
+/S {	% showpage protecting gstate
+  gsave
+  showpage
+  grestore
+} bind def
+
+/MF {	% fontname newfontname -> -	make a new encoded font
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  % insert only valid encoding vectors
+  encoding_vector length 256 eq {
+    newfont /Encoding encoding_vector put
+  } if
+
+  newfontname newfont definefont pop
+} def
+
+/MF_PS { % fontname newfontname -> -	make a new font preserving its enc
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  newfontname newfont definefont pop
+} def
+
+/SF { % fontname width height -> -	set a new font
+  /height exch def
+  /width exch def
+
+  findfont
+  [width 0 0 height 0 0] makefont setfont
+} def
+
+/SUF { % fontname width height -> -	set a new user font
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF
+  /F-gs-user-font width height SF
+} def
+
+/SUF_PS { % fontname width height -> -	set a new user font preserving its enc
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF_PS
+  /F-gs-user-font width height SF
+} def
+
+/M {moveto} bind def
+/s {show} bind def
+
+/Box {	% x y w h -> -			define box path
+  /d_h exch def /d_w exch def /d_y exch def /d_x exch def
+  d_x d_y  moveto
+  d_w 0 rlineto
+  0 d_h rlineto
+  d_w neg 0 rlineto
+  closepath
+} def
+
+/bgs {	% x y height blskip gray str -> -	show string with bg color
+  /str exch def
+  /gray exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    gray setgray
+    fill
+  grestore
+  x y M str s
+} def
+
+/bgcs { % x y height blskip red green blue str -> -  show string with bg color
+  /str exch def
+  /blue exch def
+  /green exch def
+  /red exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    red green blue setrgbcolor
+    fill
+  grestore
+  x y M str s
+} def
+
+% Highlight bars.
+/highlight_bars {	% nlines lineheight output_y_margin gray -> -
+  gsave
+    setgray
+    /ymarg exch def
+    /lineheight exch def
+    /nlines exch def
+
+    % This 2 is just a magic number to sync highlight lines to text.
+    0 d_header_y ymarg sub 2 sub translate
+
+    /cw d_output_w cols div def
+    /nrows d_output_h ymarg 2 mul sub lineheight div cvi def
+
+    % for each column
+    0 1 cols 1 sub {
+      cw mul /xp exch def
+
+      % for each rows
+      0 1 nrows 1 sub {
+        /rn exch def
+        rn lineheight mul neg /yp exch def
+        rn nlines idiv 2 mod 0 eq {
+	  % Draw highlight bar.  4 is just a magic indentation.
+	  xp 4 add yp cw 8 sub lineheight neg Box fill
+	} if
+      } for
+    } for
+
+  grestore
+} def
+
+% Line highlight bar.
+/line_highlight {	% x y width height gray -> -
+  gsave
+    /gray exch def
+    Box gray setgray fill
+  grestore
+} def
+
+% Column separator lines.
+/column_lines {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h translate
+    /cw d_output_w cols div def
+    1 1 cols 1 sub {
+      cw mul 0 moveto
+      0 d_output_h rlineto stroke
+    } for
+  grestore
+} def
+
+% Column borders.
+/column_borders {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h moveto
+    0 d_output_h rlineto
+    d_output_w 0 rlineto
+    0 d_output_h neg rlineto
+    closepath stroke
+  grestore
+} def
+
+% Do the actual underlay drawing
+/draw_underlay {
+  ul_style 0 eq {
+    ul_str true charpath stroke
+  } {
+    ul_str show
+  } ifelse
+} def
+
+% Underlay
+/underlay {	% - -> -
+  gsave
+    0 d_page_h translate
+    d_page_h neg d_page_w atan rotate
+
+    ul_gray setgray
+    ul_font setfont
+    /dw d_page_h dup mul d_page_w dup mul add sqrt def
+    ul_str stringwidth pop dw exch sub 2 div ul_h_ptsize -2 div moveto
+    draw_underlay
+  grestore
+} def
+
+/user_underlay {	% - -> -
+  gsave
+    ul_x ul_y translate
+    ul_angle rotate
+    ul_gray setgray
+    ul_font setfont
+    0 0 ul_h_ptsize 2 div sub moveto
+    draw_underlay
+  grestore
+} def
+
+% Page prefeed
+/page_prefeed {		% bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} def
+
+% Wrapped line markers
+/wrapped_line_mark {	% x y charwith charheight type -> -
+  /type exch def
+  /h exch def
+  /w exch def
+  /y exch def
+  /x exch def
+
+  type 2 eq {
+    % Black boxes (like TeX does)
+    gsave
+      0 setlinewidth
+      x w 4 div add y M
+      0 h rlineto w 2 div 0 rlineto 0 h neg rlineto
+      closepath fill
+    grestore
+  } {
+    type 3 eq {
+      % Small arrows
+      gsave
+        .2 setlinewidth
+        x w 2 div add y h 2 div add M
+        w 4 div 0 rlineto
+        x w 4 div add y lineto stroke
+
+        x w 4 div add w 8 div add y h 4 div add M
+        x w 4 div add y lineto
+	w 4 div h 8 div rlineto stroke
+      grestore
+    } {
+      % do nothing
+    } ifelse
+  } ifelse
+} def
+
+% EPSF import.
+
+/BeginEPSF {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack
+  userdict begin
+  /showpage { } def
+  0 setgray 0 setlinecap
+  1 setlinewidth 0 setlinejoin
+  10 setmiterlimit [ ] 0 setdash newpath
+  /languagelevel where {
+    pop languagelevel
+    1 ne {
+      false setstrokeadjust false setoverprint
+    } if
+  } if
+} bind def
+
+/EndEPSF {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+%%EndResource
+%%BeginResource: procset Enscript-Encoding-88591 1.6.5 90
+/encoding_vector [
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclam       	/quotedbl     	/numbersign   	
+/dollar       	/percent      	/ampersand    	/quoteright   	
+/parenleft    	/parenright   	/asterisk     	/plus         	
+/comma        	/hyphen       	/period       	/slash        	
+/zero         	/one          	/two          	/three        	
+/four         	/five         	/six          	/seven        	
+/eight        	/nine         	/colon        	/semicolon    	
+/less         	/equal        	/greater      	/question     	
+/at           	/A            	/B            	/C            	
+/D            	/E            	/F            	/G            	
+/H            	/I            	/J            	/K            	
+/L            	/M            	/N            	/O            	
+/P            	/Q            	/R            	/S            	
+/T            	/U            	/V            	/W            	
+/X            	/Y            	/Z            	/bracketleft  	
+/backslash    	/bracketright 	/asciicircum  	/underscore   	
+/quoteleft    	/a            	/b            	/c            	
+/d            	/e            	/f            	/g            	
+/h            	/i            	/j            	/k            	
+/l            	/m            	/n            	/o            	
+/p            	/q            	/r            	/s            	
+/t            	/u            	/v            	/w            	
+/x            	/y            	/z            	/braceleft    	
+/bar          	/braceright   	/tilde        	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclamdown   	/cent         	/sterling     	
+/currency     	/yen          	/brokenbar    	/section      	
+/dieresis     	/copyright    	/ordfeminine  	/guillemotleft	
+/logicalnot   	/hyphen       	/registered   	/macron       	
+/degree       	/plusminus    	/twosuperior  	/threesuperior	
+/acute        	/mu           	/paragraph    	/bullet       	
+/cedilla      	/onesuperior  	/ordmasculine 	/guillemotright	
+/onequarter   	/onehalf      	/threequarters	/questiondown 	
+/Agrave       	/Aacute       	/Acircumflex  	/Atilde       	
+/Adieresis    	/Aring        	/AE           	/Ccedilla     	
+/Egrave       	/Eacute       	/Ecircumflex  	/Edieresis    	
+/Igrave       	/Iacute       	/Icircumflex  	/Idieresis    	
+/Eth          	/Ntilde       	/Ograve       	/Oacute       	
+/Ocircumflex  	/Otilde       	/Odieresis    	/multiply     	
+/Oslash       	/Ugrave       	/Uacute       	/Ucircumflex  	
+/Udieresis    	/Yacute       	/Thorn        	/germandbls   	
+/agrave       	/aacute       	/acircumflex  	/atilde       	
+/adieresis    	/aring        	/ae           	/ccedilla     	
+/egrave       	/eacute       	/ecircumflex  	/edieresis    	
+/igrave       	/iacute       	/icircumflex  	/idieresis    	
+/eth          	/ntilde       	/ograve       	/oacute       	
+/ocircumflex  	/otilde       	/odieresis    	/divide       	
+/oslash       	/ugrave       	/uacute       	/ucircumflex  	
+/udieresis    	/yacute       	/thorn        	/ydieresis    	
+] def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Courier
+/HFpt_w 10 def
+/HFpt_h 10 def
+/Courier-Bold /HF-gs-font MF
+/HF /HF-gs-font findfont [HFpt_w 0 0 HFpt_h 0 0] makefont def
+/Courier /F-gs-font MF
+/F-gs-font 10 10 SF
+/#copies 1 def
+% Pagedevice definitions:
+gs_languagelevel 1 gt {
+  <<
+    /PageSize [595 842] 
+  >> setpagedevice
+} if
+%%BeginResource: procset Enscript-Header-simple 1.6.5 90
+
+/do_header {	% print default simple header
+  gsave
+    d_header_x d_header_y HFpt_h 3 div add translate
+
+    HF setfont
+    user_header_p {
+      5 0 moveto user_header_left_str show
+
+      d_header_w user_header_center_str stringwidth pop sub 2 div
+      0 moveto user_header_center_str show
+
+      d_header_w user_header_right_str stringwidth pop sub 5 sub
+      0 moveto user_header_right_str show
+    } {
+      5 0 moveto fname show
+      45 0 rmoveto fmodstr show
+      45 0 rmoveto pagenumstr show
+    } ifelse
+
+  grestore
+} def
+%%EndResource
+/d_page_w 559 def
+/d_page_h 770 def
+/d_header_x 0 def
+/d_header_y 755 def
+/d_header_w 559 def
+/d_header_h 15 def
+/d_footer_x 0 def
+/d_footer_y 0 def
+/d_footer_w 559 def
+/d_footer_h 0 def
+/d_output_w 559 def
+/d_output_h 755 def
+/cols 1 def
+%%EndSetup
+%%Page: (1) 1
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 1 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (1) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+([ Question 1 ]) s
+5 731 M
+( Which of the following commands set the sticky bit for the directory /tmp? \(Choose TWO cor) s
+5 720 M
+(rect answers.\)) s
+5 709 M
+(A. chmod +s /tmp) s
+5 698 M
+(B. chmod +t /tmp) s
+5 687 M
+(C. chmod 1775 /tmp) s
+5 676 M
+(D. chmod 4775 /tmp) s
+5 665 M
+(E. chmod 2775 /tmp) s
+5 533 M
+( Correct Answer: BC ) s
+5 511 M
+([ Question 2 ]) s
+5 500 M
+( Which of the following commands can be used to display the inode number of a given file?) s
+5 489 M
+(A. inode) s
+5 478 M
+(B. ls) s
+5 467 M
+(C. ln) s
+5 456 M
+(D. cp) s
+5 324 M
+( Correct Answer: B ) s
+5 302 M
+([ Question 3 ]) s
+5 291 M
+( Which of the following commands shows the definition of a given shell command?) s
+5 280 M
+(A. where) s
+5 269 M
+(B. stat) s
+5 258 M
+(C. type) s
+5 247 M
+(D. case) s
+5 115 M
+( Correct Answer: C ) s
+5 93 M
+([ Question 4 ]) s
+5 82 M
+( What do the permissions -rwSr-xr-x mean for a binary file when it is executed as a command) s
+5 71 M
+(?) s
+5 60 M
+(A. The command is SetUID and it will be executed with the effective rights of the owner.) s
+5 49 M
+(B. The command will be executed with the effective rights of the group instead of the owner) s
+5 38 M
+(.) s
+5 27 M
+(C. The execute flag is not set for the owner. Therefore the SetUID flag is ignored.) s
+5 16 M
+(D. The command will be executed with the effective rights of the owner and group.) s
+_R
+S
+%%Page: (2) 2
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 2 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (2) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 632 M
+( Correct Answer: C ) s
+5 610 M
+([ Question 5 ]) s
+5 599 M
+( Which of the following pieces of information of an existing file is changed when a hard li) s
+5 588 M
+(nk pointing to that file is created?) s
+5 577 M
+(A. File size) s
+5 566 M
+(B. Modify timestamp) s
+5 555 M
+(C. Link count) s
+5 544 M
+(D. Inode number) s
+5 533 M
+(E. Permissions) s
+5 401 M
+( Correct Answer: C ) s
+5 379 M
+([ Question 6 ]) s
+5 368 M
+( What does the command mount -a do?) s
+5 357 M
+(A. It mounts all available filesystems onto the current directory.) s
+5 346 M
+(B. It shows all mounted filesystems.) s
+5 335 M
+(C. It mounts all user mountable filesystems for the current user.) s
+5 324 M
+(D. It mounts all filesystems listed in /etc/fstab which have the option auto set.) s
+5 313 M
+(E. It mounts all filesystems listed in /etc/fstab which have the option noauto set.) s
+5 181 M
+( Correct Answer: D ) s
+5 159 M
+([ Question 7 ]) s
+5 148 M
+( After running the command umount /mnt, the following error message is displayed:) s
+5 137 M
+(umount: /mnt: device is busy.) s
+5 126 M
+(What is a common reason for this message?) s
+5 115 M
+(A. The kernel has not finished flushing disk writes to the mounted device.) s
+5 104 M
+(B. A user has a file open in the /mnt directory.) s
+5 93 M
+(C. Another file system still contains a symlink to a file inside /mnt.) s
+5 82 M
+(D. The files in /mnt have been scanned and added to the locate database.) s
+5 71 M
+(E. The kernel thinks that a process is about to open a file in /mnt for reading.) s
+_R
+S
+%%Page: (3) 3
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 3 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (3) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 687 M
+( Correct Answer: B ) s
+5 665 M
+([ Question 8 ]) s
+5 654 M
+( SIMULATION) s
+5 643 M
+(Which umask value will result in the default access permissions of 600 \(rw\342\\200\\224\342\\200) s
+5 632 M
+(\\224-\) for files and 700 \(rwx\342\\200\\224\342\\200\\224\) for directories? \(Specify only the numeric) s
+5 621 M
+(al umask value.\) ) s
+5 489 M
+(Correct Answer: 0077 -or- 077 ) s
+5 467 M
+([ Question 9 ]) s
+5 456 M
+( Instead of supplying an explicit device in /etc/fstab for mounting, what other options may) s
+5 445 M
+( be used to identify the intended partition? \(Choose TWO correct answers.\)) s
+5 434 M
+(A. FIND) s
+5 423 M
+(B. ID) s
+5 412 M
+(C. LABEL) s
+5 401 M
+(D. NAME) s
+5 390 M
+(E. UUID) s
+5 258 M
+( Correct Answer: CE ) s
+5 236 M
+([ Question 10 ]) s
+5 225 M
+( What is the purpose of the Filesystem Hierarchy Standard?) s
+5 214 M
+(A. It is a security model used to ensure files are organized according to their permissions) s
+5 203 M
+( and accessibility.) s
+5 192 M
+(B. It provides unified tools to create, maintain and manage multiple filesystems in a commo) s
+5 181 M
+(n way.) s
+5 170 M
+(C. It defines a common internal structure of inodes for all compliant filesystems.) s
+5 159 M
+(D. It is a distribution neutral description of locations of files and directories.) s
+5 27 M
+( Correct Answer: D ) s
+5 5 M
+([ Question 11 ]) s
+_R
+S
+%%Page: (4) 4
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 4 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (4) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+( Which utility would be used to change how often a filesystem check is performed on an ext2) s
+5 731 M
+( filesystem without losing any data stored on that filesystem?) s
+5 720 M
+(A. mod2fs) s
+5 709 M
+(B. fsck) s
+5 698 M
+(C. tune2fs) s
+5 687 M
+(D. mke2fs) s
+5 676 M
+(E. fixe2fs) s
+5 544 M
+( Correct Answer: C ) s
+5 522 M
+([ Question 12 ]) s
+5 511 M
+( Which of the following Linux filesystems preallocates a fixed number of inodes at the file) s
+5 500 M
+(system\342\\200\\231s make/creation time and does NOT generate them as needed? \(Choose TWO corre) s
+5 489 M
+(ct answers.\)) s
+5 478 M
+(A. ext3) s
+5 467 M
+(B. JFS) s
+5 456 M
+(C. ext2) s
+5 445 M
+(D. XFS) s
+5 434 M
+(E. procfs) s
+5 302 M
+( Correct Answer: AC ) s
+5 280 M
+([ Question 13 ]) s
+5 269 M
+( Which of the following commands creates an ext3 filesystem on /dev/sdb1? \(Choose TWO corre) s
+5 258 M
+(ct answers.\)) s
+5 247 M
+(A. /sbin/mke2fs -j /dev/sdb1) s
+5 236 M
+(B. /sbin/mkfs -t ext3 /dev/sdb1) s
+5 225 M
+(C. /sbin/mkfs -c ext3 /dev/sdb1) s
+5 214 M
+(D. /sbin/mke3fs -j /dev/sdb1) s
+5 82 M
+( Correct Answer: AB ) s
+5 60 M
+([ Question 14 ]) s
+5 49 M
+( Which of the following commands will change the quota for a specific user?) s
+5 38 M
+(A. edquota) s
+5 27 M
+(B. repquota) s
+5 16 M
+(C. quota -e) s
+5 5 M
+(D. quota) s
+_R
+S
+%%Page: (5) 5
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 5 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (5) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 621 M
+( Correct Answer: A ) s
+5 599 M
+([ Question 15 ]) s
+5 588 M
+( Creating a hard link to an ordinary file returns an error. What could be the reason for th) s
+5 577 M
+(is?) s
+5 566 M
+(A. The source file is hidden.) s
+5 555 M
+(B. The source file is read-only.) s
+5 544 M
+(C. The source file is a shell script.) s
+5 533 M
+(D. The source file is already a hard link.) s
+5 522 M
+(E. The source and the target are on different filesystems.) s
+5 390 M
+( Correct Answer: E ) s
+5 368 M
+([ Question 16 ]) s
+5 357 M
+( Which of the following file permissions belong to a symbolic link?) s
+5 346 M
+(A. -rwxrwxrwx) s
+5 335 M
+(B. +rwxrwxrwx) s
+5 324 M
+(C. lrwxrwxrwx) s
+5 313 M
+(D. srwxrwxrwx) s
+5 181 M
+( Correct Answer: C ) s
+5 159 M
+([ Question 17 ]) s
+5 148 M
+( How many fields are in a syntactically correct line of /etc/fstab?) s
+5 137 M
+(A. 3) s
+5 126 M
+(B. 4) s
+5 115 M
+(C. 5) s
+5 104 M
+(D. 6) s
+5 93 M
+(E. 7) s
+_R
+S
+%%Page: (6) 6
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 6 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (6) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 709 M
+( Correct Answer: D ) s
+5 687 M
+([ Question 18 ]) s
+5 676 M
+( SIMULATION) s
+5 665 M
+(Which command is used to create and initialize the files used to store quota information? \() s
+5 654 M
+(Specify ONLY the command without any path or parameters.\) ) s
+5 522 M
+(Correct Answer: quotacheck ) s
+5 500 M
+([ Question 19 ]) s
+5 489 M
+( Which of the following commands can be used to locate programs and their corresponding man) s
+5 478 M
+( pages and configuration files?) s
+5 467 M
+(A. dirname) s
+5 456 M
+(B. which C. basename) s
+5 445 M
+(D. query) s
+5 434 M
+(E. whereis) s
+5 302 M
+( Correct Answer: E ) s
+5 280 M
+([ Question 20 ]) s
+5 269 M
+( Which of the following commands changes the number of days before the ext3 filesystem on /) s
+5 258 M
+(dev/sda1 has to run through a full filesystem check while booting?) s
+5 247 M
+(A. tune2fs -d 200 /dev/sda1) s
+5 236 M
+(B. tune2fs -c 200 /dev/sda1) s
+5 225 M
+(C. tune2fs -i 200 /dev/sda1) s
+5 214 M
+(D. tune2fs -n 200 /dev/sda1) s
+5 203 M
+(E. tune2fs \342\\200\\223days 200 /dev/sda1) s
+5 71 M
+( Correct Answer: C ) s
+5 49 M
+([ Question 21 ]) s
+5 38 M
+( Which type of filesystem is created by mkfs when it is executed with the block device name) s
+5 27 M
+( only and without any additional parameters?) s
+5 16 M
+(A. ext2) s
+5 5 M
+(B. ext3) s
+_R
+S
+%%Page: (7) 7
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 7 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (7) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(C. ext4) s
+5 731 M
+(D. XFS) s
+5 720 M
+(E. VFAT) s
+5 588 M
+( Correct Answer: A ) s
+5 566 M
+([ Question 22 ]) s
+5 555 M
+( In order to display all currently mounted filesystems, which of the following commands cou) s
+5 544 M
+(ld be used? \(Choose TWO correct answers.\)) s
+5 533 M
+(A. cat /proc/self/mounts) s
+5 522 M
+(B. free) s
+5 511 M
+(C. mount) s
+5 500 M
+(D. lsmounts) s
+5 489 M
+(E. cat /proc/filesystems) s
+5 357 M
+( Correct Answer: AC ) s
+5 335 M
+([ Question 23 ]) s
+5 324 M
+( Which of the following is the device file name for the second partition on the only SCSI d) s
+5 313 M
+(rive?) s
+5 302 M
+(A. /dev/hda1) s
+5 291 M
+(B. /dev/sda2) s
+5 280 M
+(C. /dev/sd0a2) s
+5 269 M
+(D. /dev/sd1p2) s
+5 137 M
+( Correct Answer: B ) s
+5 115 M
+([ Question 24 ]) s
+5 104 M
+( Which of the following settings for umask ensures that new files have the default permissi) s
+5 93 M
+(ons -rw-r\342\\200\\224\342\\200\\223 ?) s
+5 82 M
+(A. 0017) s
+5 71 M
+(B. 0640) s
+5 60 M
+(C. 0038) s
+5 49 M
+(D. 0027) s
+_R
+S
+%%Page: (8) 8
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 8 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (8) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 665 M
+( Correct Answer: D ) s
+5 643 M
+([ Question 25 ]) s
+5 632 M
+( Which of the following commands can be used to search for the executable file foo when it ) s
+5 621 M
+(has been placed in a directory not included in $PATH?) s
+5 610 M
+(A. apropos) s
+5 599 M
+(B. which C. find) s
+5 588 M
+(D. query) s
+5 577 M
+(E. whereis) s
+5 445 M
+( Correct Answer: C ) s
+5 423 M
+([ Question 26 ]) s
+5 412 M
+( What does the command mount -a do?) s
+5 401 M
+(A. It ensures that all file systems listed with the option noauto in /etc/fstab are mounted) s
+5 390 M
+(.) s
+5 379 M
+(B. It shows all mounted file systems that have been automatically mounted.) s
+5 368 M
+(C. It opens an editor with root privileges and loads /etc/fstab for editing.) s
+5 357 M
+(D. It ensures that all file systems listed with the option auto in /etc/fstab are mounted.) s
+5 346 M
+(E. It ensures that all file systems listed in /etc/fstab are mounted regardless of their op) s
+5 335 M
+(tions.) s
+5 203 M
+( Correct Answer: D ) s
+5 181 M
+([ Question 27 ]) s
+5 170 M
+( After moving data to a new filesystem, how can the former path of the data be kept intact ) s
+5 159 M
+(in order to avoid reconfiguration of existing applications?) s
+5 148 M
+(\(Choose TWO correct answers.\)) s
+5 137 M
+(A. By creating an ACL redirection from the old to the new path of the data.) s
+5 126 M
+(B. By creating a hard link from the old to the new path of the data.) s
+5 115 M
+(C. By creating a symbolic link from the old to the new path of the data.) s
+5 104 M
+(D. By running the command touch on the old path.) s
+5 93 M
+(E. By mounting the new filesystem on the original path of the data.) s
+_R
+S
+%%Page: (9) 9
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 9 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (9) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 709 M
+( Correct Answer: CE ) s
+5 687 M
+([ Question 28 ]) s
+5 676 M
+( Which of the following commands changes the ownership of file.txt to the user dan and the ) s
+5 665 M
+(group staff?) s
+5 654 M
+(A. chown dan/staff file.txt) s
+5 643 M
+(B. chown dan:staff file.txt) s
+5 632 M
+(C. chown -u dan -g staff file.txt) s
+5 621 M
+(D. chown dan -g staff file.txt) s
+5 489 M
+( Correct Answer: B ) s
+5 467 M
+([ Question 29 ]) s
+5 456 M
+( Which of the following commands makes /bin/foo executable by everyone but writable only by) s
+5 445 M
+( its owner?) s
+5 434 M
+(A. chmod u=rwx,go=rx /bin/foo) s
+5 423 M
+(B. chmod o+rwx,a+rx /bin/foo) s
+5 412 M
+(C. chmod 577 /bin/foo) s
+5 401 M
+(D. chmod 775 /bin/foo) s
+5 269 M
+( Correct Answer: A ) s
+5 247 M
+([ Question 30 ]) s
+5 236 M
+( After successfully creating a hard link called bar to the ordinary file foo, foo is delete) s
+5 225 M
+(d from the filesystem. Which of the following describes the resulting situation?) s
+5 214 M
+(A. foo and bar would both be removed.) s
+5 203 M
+(B. foo would be removed while bar would remain accessible.) s
+5 192 M
+(C. foo would be removed. bar would still exist but would be unusable.) s
+5 181 M
+(D. Both foo and bar would remain accessible.) s
+5 170 M
+(E. The user is prompted whether bar should be removed, too.) s
+5 38 M
+( Correct Answer: B ) s
+5 16 M
+([ Question 31 ]) s
+5 5 M
+( Which of the following are valid stream redirection operators within Bash? \(Choose THREE c) s
+_R
+S
+%%Page: (10) 10
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 10 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (10) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(orrect answers.\)) s
+5 731 M
+(A. <) s
+5 720 M
+(B. <<<) s
+5 709 M
+(C. >) s
+5 698 M
+(D. >>>) s
+5 687 M
+(E. %>) s
+5 555 M
+( Correct Answer: ABC ) s
+5 533 M
+([ Question 32 ]) s
+5 522 M
+( Which of the following commands can be used to determine how long the system has been runn) s
+5 511 M
+(ing? \(Choose TWO correct answers.\)) s
+5 500 M
+(A. uptime) s
+5 489 M
+(B. up) s
+5 478 M
+(C. top) s
+5 467 M
+(D. uname -u) s
+5 456 M
+(E. time up) s
+5 324 M
+( Correct Answer: AC ) s
+5 302 M
+([ Question 33 ]) s
+5 291 M
+( When given the following command line. echo "foo bar" | tee bar | cat) s
+5 280 M
+(Which of the following output is created?) s
+5 269 M
+(A. cat) s
+5 258 M
+(B. foo bar) s
+5 247 M
+(C. tee bar) s
+5 236 M
+(D. bar) s
+5 225 M
+(E. foo) s
+5 93 M
+( Correct Answer: B ) s
+5 71 M
+([ Question 34 ]) s
+5 60 M
+( SIMULATION) s
+5 49 M
+(Which command is used in a Linux environment to create a new directory? \(Specify ONLY the c) s
+5 38 M
+(ommand without any path or parameters.\) ) s
+_R
+S
+%%Page: (11) 11
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 11 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (11) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 654 M
+(Correct Answer: mkdir -or- /usr/bin/mkdir ) s
+5 632 M
+([ Question 35 ]) s
+5 621 M
+( Which of the following commands prints all files and directories within the /tmp directory) s
+5 610 M
+( or its subdirectories which are also owned by the user root?) s
+5 599 M
+(\(Choose TWO correct answers.\)) s
+5 588 M
+(A. find /tmp -uid root -print) s
+5 577 M
+(B. find -path /tmp -uid root) s
+5 566 M
+(C. find /tmp -user root -print) s
+5 555 M
+(D. find /tmp -user root) s
+5 544 M
+(E. find -path /tmp -user root print) s
+5 412 M
+( Correct Answer: CD ) s
+5 390 M
+([ Question 36 ]) s
+5 379 M
+( When running the command) s
+5 368 M
+(sed -e "s/a/b/" /tmp/file >/tmp/file) s
+5 357 M
+(While /tmp/file contains data, why is /tmp/file empty afterwards?) s
+5 346 M
+(A. The file order is incorrect. The destination file must be mentioned before the command t) s
+5 335 M
+(o ensure redirection.) s
+5 324 M
+(B. The command sed did not match anything in that file therefore the output is empty.) s
+5 313 M
+(C. When the shell establishes the redirection it overwrites the target file before the redi) s
+5 302 M
+(rected command starts and opens it for reading.) s
+5 291 M
+(D. Redirection for shell commands do not work using the > character. It only works using th) s
+5 280 M
+(e | character instead.) s
+5 148 M
+( Correct Answer: C ) s
+5 126 M
+([ Question 37 ]) s
+5 115 M
+( Which variable defines the directories in which a Bash shell searches for executable comma) s
+5 104 M
+(nds?) s
+5 93 M
+(A. BASHEXEC) s
+5 82 M
+(B. BASHRC) s
+5 71 M
+(C. PATH) s
+5 60 M
+(D. EXECPATH) s
+5 49 M
+(E. PATHRC) s
+_R
+S
+%%Page: (12) 12
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 12 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (12) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 665 M
+( Correct Answer: C ) s
+5 643 M
+([ Question 38 ]) s
+5 632 M
+( Which of the following commands determines the type of a file by using a definition databa) s
+5 621 M
+(se file which contains information about all common file types?) s
+5 610 M
+(A. magic) s
+5 599 M
+(B. type) s
+5 588 M
+(C. file) s
+5 577 M
+(D. pmagic) s
+5 566 M
+(E. hash) s
+5 434 M
+( Correct Answer: C ) s
+5 412 M
+([ Question 39 ]) s
+5 401 M
+( Which of the following signals is sent to a process when the key combination CTRL+C is pre) s
+5 390 M
+(ssed on the keyboard?) s
+5 379 M
+(A. SIGTERM) s
+5 368 M
+(B. SIGINT) s
+5 357 M
+(C. SIGSTOP) s
+5 346 M
+(D. SIGKILL) s
+5 214 M
+( Correct Answer: B ) s
+5 192 M
+([ Question 40 ]) s
+5 181 M
+( What happens after issuing the command vi without any additional parameters?) s
+5 170 M
+(A. vi starts and loads the last file used and moves the cursor to the position where vi was) s
+5 159 M
+( when it last exited.) s
+5 148 M
+(B. vi starts and requires the user to explicitly either create a new or load an existing fi) s
+5 137 M
+(le.) s
+5 126 M
+(C. vi exits with an error message as it cannot be invoked without a file name to operate on) s
+5 115 M
+(.) s
+5 104 M
+(D. vi starts in command mode and opens a new empty file.) s
+5 93 M
+(E. vi starts and opens a new file which is filled with the content of the vi buffer if the ) s
+5 82 M
+(buffer contains text.) s
+_R
+S
+%%Page: (13) 13
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 13 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (13) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 698 M
+( Correct Answer: D ) s
+5 676 M
+([ Question 41 ]) s
+5 665 M
+( Which of the following command sets the Bash variable named TEST with the content FOO?) s
+5 654 M
+(A. set TEST="FOO") s
+5 643 M
+(B. TEST = "FOO") s
+5 632 M
+(C. var TEST="FOO") s
+5 621 M
+(D. TEST="FOO") s
+5 489 M
+( Correct Answer: D ) s
+5 467 M
+([ Question 42 ]) s
+5 456 M
+( Which of the following commands prints a list of usernames \(first column\) and their primar) s
+5 445 M
+(y group \(fourth column\) from the /etc/passwd file?) s
+5 434 M
+(A. fmt -f 1,4 /etc/passwd) s
+5 423 M
+(B. split -c 1,4 /etc/passwd) s
+5 412 M
+(C. cut -d : -f 1,4 /etc/passwd) s
+5 401 M
+(D. paste -f 1,4 /etc/passwd) s
+5 269 M
+( Correct Answer: C ) s
+5 247 M
+([ Question 43 ]) s
+5 236 M
+( Which of the following commands will print the last 10 lines of a text file to the standar) s
+5 225 M
+(d output?) s
+5 214 M
+(A. cat -n 10 filename) s
+5 203 M
+(B. dump -n 10 filename) s
+5 192 M
+(C. head -n 10 filename) s
+5 181 M
+(D. tail -n 10 filename) s
+5 49 M
+( Correct Answer: D ) s
+5 27 M
+([ Question 44 ]) s
+5 16 M
+( Which character, added to the end of a command, runs that command in the background as a c) s
+5 5 M
+(hild process of the current shell?) s
+_R
+S
+%%Page: (14) 14
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 14 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (14) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(A. !) s
+5 731 M
+(B. +) s
+5 720 M
+(C. &) s
+5 709 M
+(D. %) s
+5 698 M
+(E. #) s
+5 566 M
+( Correct Answer: C ) s
+5 544 M
+([ Question 45 ]) s
+5 533 M
+( When starting a program with the nice command without any additional parameters, which nic) s
+5 522 M
+(e level is set for the resulting process?) s
+5 511 M
+(A. -10) s
+5 500 M
+(B. 0) s
+5 489 M
+(C. 10) s
+5 478 M
+(D. 20) s
+5 346 M
+( Correct Answer: C ) s
+5 324 M
+([ Question 46 ]) s
+5 313 M
+( Which of the following commands will reduce all consecutive spaces down to a single space?) s
+5 302 M
+(A. tr \342\\200\\230s\342\\200\\231 \342\\200\\230 \342\\200\\230 < a.txt > b.txt) s
+5 291 M
+(B. tr -c \342\\200\\230 \342\\200\\230 < a.txt > b.txt) s
+5 280 M
+(C. tr -d \342\\200\\230 \342\\200\\230 < a.txt > b.txt) s
+5 269 M
+(D. tr -r \342\\200\\230 \342\\200\\230 \342\\200\\230n\342\\200\\231 < a.txt > b.txt) s
+5 258 M
+(E. tr -s \342\\200\\230 \342\\200\\230 < a.txt > b.txt) s
+5 126 M
+( Correct Answer: E ) s
+5 104 M
+([ Question 47 ]) s
+5 93 M
+( In the vi editor, which of the following commands will copy the current line into the vi b) s
+5 82 M
+(uffer?) s
+5 71 M
+(A. c) s
+5 60 M
+(B. cc) s
+5 49 M
+(C. 1c) s
+5 38 M
+(D. yy) s
+5 27 M
+(E. 1y) s
+_R
+S
+%%Page: (15) 15
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 15 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (15) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 643 M
+( Correct Answer: D ) s
+5 621 M
+([ Question 48 ]) s
+5 610 M
+( Which of the following sequences in the vi editor saves the opened document and exits the ) s
+5 599 M
+(editor? \(Choose TWO correct answers.\)) s
+5 588 M
+(A. esc ZZ) s
+5 577 M
+(B. ctrl :w!) s
+5 566 M
+(C. esc zz) s
+5 555 M
+(D. esc :wq!) s
+5 544 M
+(E. ctrl XX) s
+5 412 M
+( Correct Answer: AD ) s
+5 390 M
+([ Question 49 ]) s
+5 379 M
+( Which of the following shell redirections will write standard output and standard error ou) s
+5 368 M
+(tput to a file named filename?) s
+5 357 M
+(A. 2>&1 >filename) s
+5 346 M
+(B. >filename 2>&1) s
+5 335 M
+(C. 1>&2>filename) s
+5 324 M
+(D. >>filename) s
+5 313 M
+(E. 1&2>filename) s
+5 181 M
+( Correct Answer: B ) s
+5 159 M
+([ Question 50 ]) s
+5 148 M
+( Regarding the command: nice -5 /usr/bin/prog) s
+5 137 M
+(Which of the following statements is correct?) s
+5 126 M
+(A. /usr/bin/prog is executed with a nice level of -5.) s
+5 115 M
+(B. /usr/bin/prog is executed with a nice level of 5.) s
+5 104 M
+(C. /usr/bin/prog is executed with a priority of -5.) s
+5 93 M
+(D. /usr/bin/prog is executed with a priority of 5.) s
+_R
+S
+%%Page: (16) 16
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 16 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (16) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 709 M
+( Correct Answer: B ) s
+5 687 M
+([ Question 51 ]) s
+5 676 M
+( Which shell command is used to continue background execution of a suspended command?) s
+5 665 M
+(A. &) s
+5 654 M
+(B. bg) s
+5 643 M
+(C. cont) s
+5 632 M
+(D. exec) s
+5 621 M
+(E. :&) s
+5 489 M
+( Correct Answer: B ) s
+5 467 M
+([ Question 52 ]) s
+5 456 M
+( Which grep command will print only the lines that do not end with a / in the file foo?) s
+5 445 M
+(A. grep \342\\200\\230/$\342\\200\\231 foo) s
+5 434 M
+(B. grep \342\\200\\230/#\342\\200\\231 foo) s
+5 423 M
+(C. grep -v \342\\200\\230/$\342\\200\\231 foo) s
+5 412 M
+(D. grep -v \342\\200\\230/#\342\\200\\231 foo) s
+5 280 M
+( Correct Answer: C ) s
+5 258 M
+([ Question 53 ]) s
+5 247 M
+( Which of the following commands is used to change options and positional parameters for a ) s
+5 236 M
+(running Bash?) s
+5 225 M
+(A. history) s
+5 214 M
+(B. set) s
+5 203 M
+(C. bashconf) s
+5 192 M
+(D. setsh) s
+5 181 M
+(E. envsetup) s
+5 49 M
+( Correct Answer: B ) s
+5 27 M
+([ Question 54 ]) s
+5 16 M
+( Which of the following commands replaces each occurrence of \342\\200\\230bob\342\\200\\231 in the f) s
+5 5 M
+(ile letter with \342\\200\\230Bob\342\\200\\231 and writes the result to the file newletter?) s
+_R
+S
+%%Page: (17) 17
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 17 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (17) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(A. sed \342\\200\\230/bob/Bob\342\\200\\231 letter > newletter) s
+5 731 M
+(B. sed s/bob/Bob/ letter < newletter) s
+5 720 M
+(C. sed \342\\200\\230s/bob/Bob\342\\200\\231 letter > newletter) s
+5 709 M
+(D. sed \342\\200\\230s/bob/Bob/g\342\\200\\231 letter > newletter) s
+5 698 M
+(E. sed \342\\200\\230s/bob, Bob/\342\\200\\231 letter > newletter) s
+5 566 M
+( Correct Answer: D ) s
+5 544 M
+([ Question 55 ]) s
+5 533 M
+( From a Bash shell, which of the following commands directly executes the instruction from ) s
+5 522 M
+(the file /usr/local/bin/runme.sh without starting a subshell?) s
+5 511 M
+(\(Please select TWO answers.\)) s
+5 500 M
+(A. source /usr/local/bin/runme.sh) s
+5 489 M
+(B. . /usr/local/bin/runme.sh) s
+5 478 M
+(C. /bin/bash /usr/local/bin/runme.sh) s
+5 467 M
+(D. /usr/local/bin/runme.sh) s
+5 456 M
+(E. run /usr/local/bin/runme.sh) s
+5 324 M
+( Correct Answer: AB ) s
+5 302 M
+([ Question 56 ]) s
+5 291 M
+( Which of the following files, located in the user home directory, is used to store the Bas) s
+5 280 M
+(h history?) s
+5 269 M
+(A. .bash_history) s
+5 258 M
+(B. .bash_histfile) s
+5 247 M
+(C. .history) s
+5 236 M
+(D. .bashrc_history) s
+5 225 M
+(E. .history_bash) s
+5 93 M
+( Correct Answer: A ) s
+5 71 M
+([ Question 57 ]) s
+5 60 M
+( SIMULATION) s
+5 49 M
+(Which Bash environment variable defines in which file the user history is stored when exiti) s
+5 38 M
+(ng a Bash process? \(Specify ONLY the variable name.\) ) s
+_R
+S
+%%Page: (18) 18
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 18 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (18) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 654 M
+(Correct Answer: HISTFILE ) s
+5 632 M
+([ Question 58 ]) s
+5 621 M
+( Which of the following commands displays the contents of a gzip compressed tar archive?) s
+5 610 M
+(A. gzip archive.tgz | tar xvf \342\\200\\223) s
+5 599 M
+(B. tar ztf archive.tgz) s
+5 588 M
+(C. gzip -d archive.tgz | tar tvf \342\\200\\223) s
+5 577 M
+(D. tar cf archive.tgz) s
+5 445 M
+( Correct Answer: B ) s
+5 423 M
+([ Question 59 ]) s
+5 412 M
+( In the vi editor, how can commands such as moving the cursor or copying lines into the buf) s
+5 401 M
+(fer be issued multiple times or applied to multiple rows?) s
+5 390 M
+(A. By using the command :repeat followed by the number and the command.) s
+5 379 M
+(B. By specifying the number right in front of a command such as 4l or 2yj.) s
+5 368 M
+(C. By selecting all affected lines using the shift and cursor keys before applying the comm) s
+5 357 M
+(and.) s
+5 346 M
+(D. By issuing a command such as :set repetition=4 which repeats every subsequent command 4 ) s
+5 335 M
+(times.) s
+5 203 M
+( Correct Answer: B ) s
+5 181 M
+([ Question 60 ]) s
+5 170 M
+( What does the ? symbol within regular expressions represent?) s
+5 159 M
+(A. Match the preceding qualifier one or more times.) s
+5 148 M
+(B. Match the preceding qualifier zero or more times.) s
+5 137 M
+(C. Match the preceding qualifier zero or one times.) s
+5 126 M
+(D. Match a literal ? character.) s
+_R
+S
+%%Page: (19) 19
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 19 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (19) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+( Correct Answer: C ) s
+5 720 M
+([ Question 61 ]) s
+5 709 M
+( Which of the following commands moves and resumes in the background the last stopped shell) s
+5 698 M
+( job?) s
+5 687 M
+(A. run) s
+5 676 M
+(B. bg) s
+5 665 M
+(C. fg) s
+5 654 M
+(D. back) s
+5 522 M
+( Correct Answer: B ) s
+5 500 M
+([ Question 62 ]) s
+5 489 M
+( What is the effect of the egrep command when the -v option is used?) s
+5 478 M
+(A. It enables color to highlight matching parts.) s
+5 467 M
+(B. It only outputs non-matching lines.) s
+5 456 M
+(C. It shows the command\342\\200\\231s version information.) s
+5 445 M
+(D. It changes the output order showing the last matching line first.) s
+5 313 M
+( Correct Answer: B ) s
+5 291 M
+([ Question 63 ]) s
+5 280 M
+( What is the difference between the i and a commands of the vi editor?) s
+5 269 M
+(A. i \(interactive\) requires the user to explicitly switch between vi modes whereas a \(autom) s
+5 258 M
+(atic\) switches modes automatically.) s
+5 247 M
+(B. i \(insert\) inserts text before the current cursor position whereas a \(append\) inserts te) s
+5 236 M
+(xt after the cursor.) s
+5 225 M
+(C. i \(independent rows\) starts every new line at the first character whereas a \(aligned row) s
+5 214 M
+(s\) keeps the indentation of the previous line.) s
+5 203 M
+(D. i \(interrupt\) temporarily suspends editing of a file to the background whereas a \(abort\)) s
+5 192 M
+( terminates editing.) s
+5 60 M
+( Correct Answer: B ) s
+5 38 M
+([ Question 64 ]) s
+5 27 M
+( SIMULATION) s
+5 16 M
+(Which command displays a list of all background tasks running in the current shell? \(Specif) s
+5 5 M
+(y ONLY the command without any path or parameters.\) ) s
+_R
+S
+%%Page: (20) 20
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 20 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (20) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 621 M
+(Correct Answer: jobs ) s
+5 599 M
+([ Question 65 ]) s
+5 588 M
+( Which of the following commands will NOT update the modify timestamp on the file /tmp/myfi) s
+5 577 M
+(le.txt?) s
+5 566 M
+(A. file /tmp/myfile.txt) s
+5 555 M
+(B. echo "Hello" >/tmp/myfile.txt) s
+5 544 M
+(C. sed -ie "s/1/2/" /tmp/myfile.txt) s
+5 533 M
+(D. echo -n "Hello" >>/tmp/myfile.txt) s
+5 522 M
+(E. touch /tmp/myfile.txt) s
+5 390 M
+( Correct Answer: A ) s
+5 368 M
+([ Question 66 ]) s
+5 357 M
+( What is the default nice level when a process is started using the nice command?) s
+5 346 M
+(A. -10) s
+5 335 M
+(B. 10) s
+5 324 M
+(C. 20) s
+5 313 M
+(D. 0) s
+5 181 M
+( Correct Answer: B ) s
+5 159 M
+([ Question 67 ]) s
+5 148 M
+( What is the default action of the split command on an input file?) s
+5 137 M
+(A. It will break the file into new files of 1,024 byte pieces each.) s
+5 126 M
+(B. It will break the file into new files of 1,000 line pieces each.) s
+5 115 M
+(C. It will break the file into new files of 1,024 kilobyte pieces each.) s
+5 104 M
+(D. It will break the file into new files that are no more than 5% of the size of the origin) s
+5 93 M
+(al file.) s
+_R
+S
+%%Page: (21) 21
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 21 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (21) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 709 M
+( Correct Answer: B ) s
+5 687 M
+([ Question 68 ]) s
+5 676 M
+( Which of the following characters can be combined with a separator string in order to read) s
+5 665 M
+( from the current input source until the separator string, which is on a separate line and ) s
+5 654 M
+(without any trailing spaces, is reached?) s
+5 643 M
+(A. <<) s
+5 632 M
+(B. <|) s
+5 621 M
+(C. !<) s
+5 610 M
+(D. &<) s
+5 478 M
+( Correct Answer: A ) s
+5 456 M
+([ Question 69 ]) s
+5 445 M
+( A user accidentally created the subdirectory dir in his home directory. Which of the follo) s
+5 434 M
+(wing commands will remove that directory?) s
+5 423 M
+(A. rmdir \342\\200\\230~/dir\342\\200\\231) s
+5 412 M
+(B. rmdir "~/dir") s
+5 401 M
+(C. rmdir ~/\342\\200\\231dir\342\\200\\231) s
+5 390 M
+(D. rmdir ~/dir) s
+5 379 M
+(E. rmdir ~/\\dir) s
+5 247 M
+( Correct Answer: E ) s
+5 225 M
+([ Question 70 ]) s
+5 214 M
+( In compliance with the FHS, in which of the directories are man pages found?) s
+5 203 M
+(A. /usr/share/man) s
+5 192 M
+(B. /opt/man) s
+5 181 M
+(C. /usr/doc/) s
+5 170 M
+(D. /var/pkg/man) s
+5 159 M
+(E. /var/man) s
+5 27 M
+( Correct Answer: A ) s
+5 5 M
+([ Question 71 ]) s
+_R
+S
+%%Page: (22) 22
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 22 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (22) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+( Which of the following commands will send output from the program myapp to both standard o) s
+5 731 M
+(utput \(stdout\) and the file file1.log?) s
+5 720 M
+(A. cat < myapp | cat > file1.log) s
+5 709 M
+(B. myapp 0>&1 | cat > file1.log) s
+5 698 M
+(C. myapp | cat > file1.log) s
+5 687 M
+(D. myapp | tee file1.log) s
+5 676 M
+(E. tee myapp file1.log) s
+5 544 M
+( Correct Answer: D ) s
+5 522 M
+([ Question 72 ]) s
+5 511 M
+( What is the purpose of the Bash built-in export command?) s
+5 500 M
+(A. It allows disks to be mounted remotely.) s
+5 489 M
+(B. It runs a command as a process in a subshell.) s
+5 478 M
+(C. It makes the command history available to subshells.) s
+5 467 M
+(D. It sets up environment variables for applications.) s
+5 456 M
+(E. It shares NFS partitions for use by other systems on the network.) s
+5 324 M
+( Correct Answer: D ) s
+5 302 M
+([ Question 73 ]) s
+5 291 M
+( What is the output of the following command?) s
+5 280 M
+(echo "Hello World" | tr -d aieou) s
+5 269 M
+(A. Hello World) s
+5 258 M
+(B. eoo) s
+5 247 M
+(C. Hll Wrld) s
+5 236 M
+(D. eoo Hll Wrld) s
+5 104 M
+( Correct Answer: C ) s
+5 82 M
+([ Question 74 ]) s
+5 71 M
+( SIMULATION) s
+5 60 M
+(Which signal is missing from the following command that is commonly used to instruct a daem) s
+5 49 M
+(on to reinitialize itself, including reading configuration files? killall -s _______ daemon) s
+5 38 M
+( ) s
+_R
+S
+%%Page: (23) 23
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 23 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (23) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 654 M
+(Correct Answer: HUP -or- SIGHUP -or- 1 ) s
+5 632 M
+([ Question 75 ]) s
+5 621 M
+( What is the maximum niceness value that a regular user can assign to a process with the ni) s
+5 610 M
+(ce command when executing a new process?) s
+5 599 M
+(A. 9) s
+5 588 M
+(B. 19) s
+5 577 M
+(C. 49) s
+5 566 M
+(D. 99) s
+5 434 M
+( Correct Answer: B ) s
+5 412 M
+([ Question 76 ]) s
+5 401 M
+( Immediately after deleting 3 lines of text in vi and moving the cursor to a different line) s
+5 390 M
+(, which single character command will insert the deleted content below the current line?) s
+5 379 M
+(A. i \(lowercase\)) s
+5 368 M
+(B. P \(uppercase\)) s
+5 357 M
+(C. p \(lowercase\)) s
+5 346 M
+(D. U \(uppercase\)) s
+5 335 M
+(E. u \(lowercase\)) s
+5 203 M
+( Correct Answer: C ) s
+5 181 M
+([ Question 77 ]) s
+5 170 M
+( Which of the following statements is correct regarding the command foo 1> bar?) s
+5 159 M
+(A. The stdout from the command foo is appended to the file bar.) s
+5 148 M
+(B. The stdout from the command foo overwrites the file bar.) s
+5 137 M
+(C. The command foo receives its stdin from the file bar.) s
+5 126 M
+(D. The command foo receives its stdin from the stdout of the command bar.) s
+5 115 M
+(E. The stderr from the command foo is saved to the file bar.) s
+_R
+S
+%%Page: (24) 24
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 24 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (24) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 731 M
+( Correct Answer: B ) s
+5 709 M
+([ Question 78 ]) s
+5 698 M
+( Which of the following commands kills the process with the PID 123 but allows the process ) s
+5 687 M
+(to "clean up" before exiting?) s
+5 676 M
+(A. kill -PIPE 123) s
+5 665 M
+(B. kill -KILL 123) s
+5 654 M
+(C. kill -STOP 123) s
+5 643 M
+(D. kill -TERM 123) s
+5 511 M
+( Correct Answer: D ) s
+5 489 M
+([ Question 79 ]) s
+5 478 M
+( In a nested directory structure, which find command line option would be used to restrict ) s
+5 467 M
+(the command to searching down a particular number of subdirectories?) s
+5 456 M
+(A. -dirmax) s
+5 445 M
+(B. -maxdepth) s
+5 434 M
+(C. -maxlevels) s
+5 423 M
+(D. -n) s
+5 412 M
+(E. -s) s
+5 280 M
+( Correct Answer: B ) s
+5 258 M
+([ Question 80 ]) s
+5 247 M
+( What command will generate a list of user names from /etc/passwd along with their login sh) s
+5 236 M
+(ell?) s
+5 225 M
+(A. column -s : 1,7 /etc/passwd) s
+5 214 M
+(B. chop -c 1,7 /etc/passwd) s
+5 203 M
+(C. colrm 1,7 /etc/passwd) s
+5 192 M
+(D. cut -d: -f1,7 /etc/passwd) s
+5 60 M
+( Correct Answer: D ) s
+5 38 M
+([ Question 81 ]) s
+5 27 M
+( In Bash, inserting 1>&2 after a command redirects) s
+5 16 M
+(A. standard error to standard input.) s
+5 5 M
+(B. standard input to standard error.) s
+_R
+S
+%%Page: (25) 25
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 25 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (25) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(C. standard output to standard error.) s
+5 731 M
+(D. standard error to standard output.) s
+5 720 M
+(E. standard output to standard input.) s
+5 588 M
+( Correct Answer: C ) s
+5 566 M
+([ Question 82 ]) s
+5 555 M
+( Which of the following commands overwrites the bootloader located on /dev/sda without over) s
+5 544 M
+(writing the partition table or any data following it?) s
+5 533 M
+(A. dd if=/dev/zero of=/dev/sda bs=512) s
+5 522 M
+(B. dd if=/dev/zero of=/dev/sda bs=512 count=1) s
+5 511 M
+(C. dd if=/dev/zero of=/dev/sda bs=440 count=1) s
+5 500 M
+(D. dd if=/dev/zero of=/dev/sda bs=440) s
+5 368 M
+( Correct Answer: C ) s
+5 346 M
+([ Question 83 ]) s
+5 335 M
+( Which of the following commands can be used to create a USB storage media from a disk imag) s
+5 324 M
+(e?) s
+5 313 M
+(A. gdisk) s
+5 302 M
+(B. dd) s
+5 291 M
+(C. cc) s
+5 280 M
+(D. fdisk) s
+5 269 M
+(E. mount) s
+5 137 M
+( Correct Answer: B ) s
+5 115 M
+([ Question 84 ]) s
+5 104 M
+( SIMULATION) s
+5 93 M
+(Which option to the yum command will update the entire system? \(Specify ONLY the option nam) s
+5 82 M
+(e without any additional parameters.\) ) s
+_R
+S
+%%Page: (26) 26
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 26 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (26) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 698 M
+(Correct Answer: update -or- upgrade ) s
+5 676 M
+([ Question 85 ]) s
+5 665 M
+( SIMULATION) s
+5 654 M
+(Which command will disable swapping on a device? \(Specify ONLY the command without any path) s
+5 643 M
+( or parameters.\) ) s
+5 511 M
+(Correct Answer: swapoff -or- /sbin/swapoff ) s
+5 489 M
+([ Question 86 ]) s
+5 478 M
+( SIMULATION) s
+5 467 M
+(Which Debian package management tool asks the configuration questions for a specific alread) s
+5 456 M
+(y installed package just as if the package were being installed for the first time? \(Specif) s
+5 445 M
+(y ONLY the command without any path or parameters.\) ) s
+5 313 M
+(Correct Answer: dpkg-reconfigure ) s
+5 291 M
+([ Question 87 ]) s
+5 280 M
+( Which file should be edited to select the network locations from which Debian installation) s
+5 269 M
+( package files are loaded?) s
+5 258 M
+(A. /etc/dpkg/dpkg.cfg) s
+5 247 M
+(B. /etc/apt/apt.conf) s
+5 236 M
+(C. /etc/apt/apt.conf.d) s
+5 225 M
+(D. /etc/apt/sources.list) s
+5 214 M
+(E. /etc/dpkg/dselect.cfg) s
+5 82 M
+( Correct Answer: D ) s
+5 60 M
+([ Question 88 ]) s
+5 49 M
+( When removing a package, which of the following dpkg options will completely remove the fi) s
+5 38 M
+(les including configuration files?) s
+5 27 M
+(A. \342\\200\\223clean) s
+5 16 M
+(B. \342\\200\\223delete) s
+5 5 M
+(C. \342\\200\\223purge) s
+_R
+S
+%%Page: (27) 27
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 27 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (27) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(D. remove) s
+5 610 M
+( Correct Answer: C ) s
+5 588 M
+([ Question 89 ]) s
+5 577 M
+( SIMULATION) s
+5 566 M
+(What is the name of the main configuration file for GNU GRUB? \(Specify the file name only w) s
+5 555 M
+(ithout any path.\) ) s
+5 423 M
+(Correct Answer: menu.lst -or- grub.conf -or- grub.cfg ) s
+5 401 M
+([ Question 90 ]) s
+5 390 M
+( SIMULATION) s
+5 379 M
+(In which directory must definition files be placed to add additional repositories to yum? ) s
+5 247 M
+(Correct Answer: /etc/yum.repos.d -or- /etc/yum.repos.d/ -or- yum.repos.d -or- yum.repos.d/ ) s
+5 225 M
+([ Question 91 ]) s
+5 214 M
+( Which RPM command will output the name of the package which supplied the file /etc/exports) s
+5 203 M
+(?) s
+5 192 M
+(A. rpm -F /etc/exports) s
+5 181 M
+(B. rpm -qf /etc/exports) s
+5 170 M
+(C. rpm -Kl /etc/exports) s
+5 159 M
+(D. rpm -qp /etc/exports) s
+5 148 M
+(E. rpm -qi /etc/exports) s
+5 16 M
+( Correct Answer: B ) s
+_R
+S
+%%Page: (28) 28
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 28 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (28) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+([ Question 92 ]) s
+5 731 M
+( Which of the following environment variables overrides or extends the list of directories ) s
+5 720 M
+(holding shared libraries?) s
+5 709 M
+(A. LD_LOAD_PATH) s
+5 698 M
+(B. LD_LIB_PATH) s
+5 687 M
+(C. LD_LIBRARY_PATH) s
+5 676 M
+(D. LD_SHARE_PATH) s
+5 665 M
+(E. LD_RUN_PATH) s
+5 533 M
+( Correct Answer: C ) s
+5 511 M
+([ Question 93 ]) s
+5 500 M
+( SIMULATION) s
+5 489 M
+(Which world-writable directory should be placed on a separate partition in order to prevent) s
+5 478 M
+( users from being able to fill up the / filesystem? \(Specify the full path to the directory) s
+5 467 M
+(.\) ) s
+5 335 M
+(Correct Answer: /tmp -or- tmp -or- /var/tmp -or- /tmp/ -or- /var/tmp/ ) s
+5 313 M
+([ Question 94 ]) s
+5 302 M
+( Which function key is used to start Safe Mode in Windows NT?) s
+5 291 M
+(A. F10) s
+5 280 M
+(B. F8) s
+5 269 M
+(C. F6) s
+5 258 M
+(D. Windows NT does not support Safe Mode) s
+5 126 M
+( Correct Answer: D ) s
+5 104 M
+([ Question 95 ]) s
+5 93 M
+( Which of the following is correct when talking about mount points?) s
+5 82 M
+(A. Every existing directory can be used as a mount point.) s
+5 71 M
+(B. Only empty directories can be used as a mount point.) s
+5 60 M
+(C. Directories need to have the SetUID flag set to be used as a mount point.) s
+5 49 M
+(D. Files within a directory are deleted when the directory is used as a mount point.) s
+_R
+S
+%%Page: (29) 29
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 29 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (29) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 665 M
+( Correct Answer: A ) s
+5 643 M
+([ Question 96 ]) s
+5 632 M
+( Which of the following commands can be used to download the RPM package kernel without ins) s
+5 621 M
+(talling it?) s
+5 610 M
+(A. yum download \342\\200\\223no-install kernel) s
+5 599 M
+(B. yumdownloader kernel) s
+5 588 M
+(C. rpm \342\\200\\223download \342\\200\\223package kernel) s
+5 577 M
+(D. rpmdownload kernel) s
+5 445 M
+( Correct Answer: B ) s
+5 423 M
+([ Question 97 ]) s
+5 412 M
+( When using rpm \342\\200\\223verify to check files created during the installation of RPM packa) s
+5 401 M
+(ges, which of the following information is taken into consideration?) s
+5 390 M
+(\(Choose THREE correct answers.\)) s
+5 379 M
+(A. Timestamps) s
+5 368 M
+(B. MD5 checksums) s
+5 357 M
+(C. Inodes) s
+5 346 M
+(D. File sizes) s
+5 335 M
+(E. GnuPG signatures) s
+5 203 M
+( Correct Answer: ABD ) s
+5 181 M
+([ Question 98 ]) s
+5 170 M
+( Which of the following commands updates the linker cache of shared libraries?) s
+5 159 M
+(A. mkcache) s
+5 148 M
+(B. soconfig) s
+5 137 M
+(C. mkldconfig) s
+5 126 M
+(D. lddconfig) s
+5 115 M
+(E. ldconfig) s
+_R
+S
+%%Page: (30) 30
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 30 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (30) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 731 M
+( Correct Answer: E ) s
+5 709 M
+([ Question 99 ]) s
+5 698 M
+( Which of the following commands lists all currently installed packages when using RPM pack) s
+5 687 M
+(age management?) s
+5 676 M
+(A. yum \342\\200\\223query \342\\200\\223all) s
+5 665 M
+(B. yum \342\\200\\223list \342\\200\\223installed) s
+5 654 M
+(C. rpm \342\\200\\223query \342\\200\\223all) s
+5 643 M
+(D. rpm \342\\200\\223list installed) s
+5 511 M
+( Correct Answer: C ) s
+5 489 M
+([ Question 100 ]) s
+5 478 M
+( What can the Logical Volume Manager \(LVM\) be used for? \(Choose THREE correct answers.\)) s
+5 467 M
+(A. To create RAID 9 arrays.) s
+5 456 M
+(B. To dynamically change the size of logical volumes.) s
+5 445 M
+(C. To encrypt logical volumes.) s
+5 434 M
+(D. To create snapshots.) s
+5 423 M
+(E. To dynamically create or delete logical volumes.) s
+5 291 M
+( Correct Answer: BDE ) s
+5 269 M
+([ Question 101 ]) s
+5 258 M
+( Which of the following options is used in a GRUB Legacy configuration file to define the a) s
+5 247 M
+(mount of time that the GRUB menu will be shown to the user?) s
+5 236 M
+(A. hidemenu) s
+5 225 M
+(B. splash) s
+5 214 M
+(C. timeout) s
+5 203 M
+(D. showmenu) s
+5 71 M
+( Correct Answer: C ) s
+5 49 M
+([ Question 102 ]) s
+5 38 M
+( Which of the following commands lists the dependencies of a given dpkg package?) s
+5 27 M
+(A. apt-cache depends-on package) s
+5 16 M
+(B. apt-cache dependencies package) s
+5 5 M
+(C. apt-cache depends package) s
+_R
+S
+%%Page: (31) 31
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 31 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (31) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(D. apt-cache requires package) s
+5 610 M
+( Correct Answer: C ) s
+5 588 M
+([ Question 103 ]) s
+5 577 M
+( Which of the following commands is used to update the list of available packages when usin) s
+5 566 M
+(g dpkg based package management?) s
+5 555 M
+(A. apt-get update) s
+5 544 M
+(B. apt-get upgrade) s
+5 533 M
+(C. apt-cache update) s
+5 522 M
+(D. apt-get refresh) s
+5 511 M
+(E. apt-cache upgrade) s
+5 379 M
+( Correct Answer: A ) s
+5 357 M
+([ Question 104 ]) s
+5 346 M
+( After modifying GNU GRUB\342\\200\\231s configuration file, which command must be run for the c) s
+5 335 M
+(hanges to take effect?) s
+5 324 M
+(A. kill -HUP $\(pidof grub\)) s
+5 313 M
+(B. grub-install) s
+5 302 M
+(C. grub) s
+5 291 M
+(D. No action is required) s
+5 159 M
+( Correct Answer: D ) s
+5 137 M
+([ Question 105 ]) s
+5 126 M
+( Which of the following options for the kernel\342\\200\\231s command line changes the systemd b) s
+5 115 M
+(oot target to rescue.target instead of the default target?) s
+5 104 M
+(A. systemd.target=rescue.target) s
+5 93 M
+(B. systemd.runlevel=rescue.target) s
+5 82 M
+(C. systemd.service=rescue.target) s
+5 71 M
+(D. systemd.default=rescue.target) s
+5 60 M
+(E. systemd.unit=rescue.target) s
+_R
+S
+%%Page: (32) 32
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 32 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (32) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 676 M
+( Correct Answer: E ) s
+5 654 M
+([ Question 106 ]) s
+5 643 M
+( Which of the following kernel parameters instructs the kernel to suppress most boot messag) s
+5 632 M
+(es?) s
+5 621 M
+(A. silent) s
+5 610 M
+(B. verbose=0) s
+5 599 M
+(C. nomesg) s
+5 588 M
+(D. quiet) s
+5 456 M
+( Correct Answer: D ) s
+5 434 M
+([ Question 107 ]) s
+5 423 M
+( Which of the following commands will write a message to the terminals of all logged in use) s
+5 412 M
+(rs?) s
+5 401 M
+(A. bcast) s
+5 390 M
+(B. mesg) s
+5 379 M
+(C. print) s
+5 368 M
+(D. wall) s
+5 357 M
+(E. yell) s
+5 225 M
+( Correct Answer: D ) s
+5 203 M
+([ Question 108 ]) s
+5 192 M
+( SIMULATION) s
+5 181 M
+(Which command will display messages from the kernel that were output during the normal boot) s
+5 170 M
+( sequence? ) s
+5 38 M
+(Correct Answer: dmesg -or- /bin/dmesg ) s
+5 16 M
+([ Question 109 ]) s
+5 5 M
+( What is the first program that is usually started, at boot time, by the Linux kernel when ) s
+_R
+S
+%%Page: (33) 33
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 33 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (33) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 742 M
+(using SysV init?) s
+5 731 M
+(A. /lib/init.so) s
+5 720 M
+(B. /sbin/init) s
+5 709 M
+(C. /etc/rc.d/rcinit) s
+5 698 M
+(D. /proc/sys/kernel/init) s
+5 687 M
+(E. /boot/init) s
+5 555 M
+( Correct Answer: B ) s
+5 533 M
+([ Question 110 ]) s
+5 522 M
+( SIMULATION) s
+5 511 M
+(Which file in the /proc filesystem lists parameters passed from the bootloader to the kerne) s
+5 500 M
+(l? \(Specify the file name only without any path.\) ) s
+5 368 M
+(Correct Answer: cmdline -or- /proc/cmdline ) s
+5 346 M
+([ Question 111 ]) s
+5 335 M
+( What information can the lspci command display about the system hardware? \(Choose THREE co) s
+5 324 M
+(rrect answers.\)) s
+5 313 M
+(A. Device IRQ settings) s
+5 302 M
+(B. PCI bus speed) s
+5 291 M
+(C. System battery type) s
+5 280 M
+(D. Device vendor identification) s
+5 269 M
+(E. Ethernet MAC address) s
+5 137 M
+( Correct Answer: ABD ) s
+5 115 M
+([ Question 112 ]) s
+5 104 M
+( Which of the following commands brings a system running SysV init into a state in which it) s
+5 93 M
+( is safe to perform maintenance tasks? \(Choose TWO correct answers.\)) s
+5 82 M
+(A. shutdown -R 1 now) s
+5 71 M
+(B. shutdown -single now) s
+5 60 M
+(C. init 1) s
+5 49 M
+(D. telinit 1) s
+5 38 M
+(E. runlevel 1) s
+_R
+S
+%%Page: (34) 34
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 34 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (34) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 654 M
+( Correct Answer: CD ) s
+5 632 M
+([ Question 113 ]) s
+5 621 M
+( Which of the following information is stored within the BIOS? \(Choose TWO correct answers.) s
+5 610 M
+(\)) s
+5 599 M
+(A. Boot device order) s
+5 588 M
+(B. Linux kernel version) s
+5 577 M
+(C. Timezone) s
+5 566 M
+(D. Hardware configuration) s
+5 555 M
+(E. The system\342\\200\\231s hostname) s
+5 423 M
+( Correct Answer: AD ) s
+5 401 M
+([ Question 114 ]) s
+5 390 M
+( Which of the following commands reboots the system when using SysV init? \(Choose TWO corre) s
+5 379 M
+(ct answers.\)) s
+5 368 M
+(A. shutdown -r now) s
+5 357 M
+(B. shutdown -r "rebooting") s
+5 346 M
+(C. telinit 6) s
+5 335 M
+(D. telinit 0) s
+5 324 M
+(E. shutdown -k now "rebooting") s
+5 192 M
+( Correct Answer: AC ) s
+5 170 M
+([ Question 115 ]) s
+5 159 M
+( Which of the following are init systems used within Linux systems? \(Choose THREE correct a) s
+5 148 M
+(nswers.\)) s
+5 137 M
+(A. startd) s
+5 126 M
+(B. systemd) s
+5 115 M
+(C. Upstart) s
+5 104 M
+(D. SysInit) s
+5 93 M
+(E. SysV init) s
+_R
+S
+%%Page: (35) 35
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 35 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (35) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 709 M
+( Correct Answer: BCE ) s
+5 687 M
+([ Question 116 ]) s
+5 676 M
+( Which run levels should never be declared as the default run level when using SysV init? \() s
+5 665 M
+(Choose TWO correct answers.\)) s
+5 654 M
+(A. 0) s
+5 643 M
+(B. 1) s
+5 632 M
+(C. 3) s
+5 621 M
+(D. 5) s
+5 610 M
+(E. 6) s
+5 478 M
+( Correct Answer: AE ) s
+5 456 M
+([ Question 117 ]) s
+5 445 M
+( Which of the following statements is correct when talking about /proc/?) s
+5 434 M
+(A. All changes to files in /proc/ are stored in /etc/proc.d/ and restored on reboot.) s
+5 423 M
+(B. All files within /proc/ are read-only and their contents cannot be changed.) s
+5 412 M
+(C. All changes to files in /proc/ are immediately recognized by the kernel.) s
+5 401 M
+(D. All files within /proc/ are only readable by the root user.) s
+5 269 M
+( Correct Answer: C ) s
+5 247 M
+([ Question 118 ]) s
+5 236 M
+( What of the following statements are true regarding /dev/ when using udev? \(Choose TWO cor) s
+5 225 M
+(rect answers.\)) s
+5 214 M
+(A. Entries for all possible devices get created on boot even if those devices are not conne) s
+5 203 M
+(cted.) s
+5 192 M
+(B. Additional rules for udev can be created by adding them to /etc/udev/rules.d/.) s
+5 181 M
+(C. When using udev, it is not possible to create block or character devices in /dev/ using ) s
+5 170 M
+(mknod.) s
+5 159 M
+(D. The /dev/ directory is a filesystem of type tmpfs and is mounted by udev during system s) s
+5 148 M
+(tartup.) s
+5 137 M
+(E. The content of /dev/ is stored in /etc/udev/dev and is restored during system startup.) s
+5 5 M
+( Correct Answer: BD ) s
+_R
+S
+%%Page: (36) 36
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 36 def
+/fname (LPIC-101-400.txt) def
+/fdir (.) def
+/ftail (LPIC-101-400.txt) def
+% User defined strings:
+/fmodstr (Thu Jul 11 14:07:55 2019) def
+/pagenumstr (36) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 731 M
+([ Question 119 ]) s
+5 720 M
+( During a system boot cycle, what program is executed after the BIOS completes its tasks?) s
+5 709 M
+(A. The bootloader) s
+5 698 M
+(B. The inetd program) s
+5 687 M
+(C. The init program) s
+5 676 M
+(D. The kernel) s
+5 544 M
+( Correct Answer: A ) s
+5 522 M
+([ Question 120 ]) s
+5 511 M
+( Which SysV init configuration file should be modified to disable the ctrl-alt-delete key c) s
+5 500 M
+(ombination?) s
+5 489 M
+(A. /etc/keys) s
+5 478 M
+(B. /proc/keys) s
+5 467 M
+(C. /etc/inittab) s
+5 456 M
+(D. /proc/inittab) s
+5 445 M
+(E. /etc/reboot) s
+5 313 M
+( Correct Answer: C ) s
+_R
+S
+%%Trailer
+%%Pages: 36
+%%DocumentNeededResources: font Courier-Bold Courier 
+%%EOF
