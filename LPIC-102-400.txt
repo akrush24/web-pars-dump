@@ -1,0 +1,2185 @@
+[ Question 1 ] 
+When trying to unmount a device it is reported as being busy. Which of the following commands could be used to determine which process is causing this?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. debug 
+ Correct Answer: B 
+
+
+[ Question 2 ] 
+Which command is used to set restrictions on the size of a core file that is created for a user when a program crashes?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. core 
+ Correct Answer: C 
+
+
+[ Question 3 ] 
+Which configuration file would be edited to change the default options for outbound SSH sessions?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. /etc/ssh/sshd_config 
+ Correct Answer: D 
+
+
+[ Question 4 ] 
+Which of the following programs uses the hosts.allow file to perform its main task of checking for access control restrictions to system services?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. tcpd 
+ Correct Answer: A 
+
+
+[ Question 5 ] 
+SIMULATION
+The presence of what file will temporarily prevent all users except root from logging into the system? (Specify the full name of the file, including path.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: /etc/nologin 
+ Correct Answer: /etc/nologin 
+
+
+[ Question 6 ] 
+SIMULATION
+With X11 forwarding in ssh, what environment variable is automatically set in the remote host shell that is not set when X11 forwarding is not enabled?
+(Specify only the environment variable without any additional commands or values.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: DISPLAY -or- $DISPLAY 
+ Correct Answer: DISPLAY -or- $DISPLAY 
+
+
+[ Question 7 ] 
+SIMULATION
+In an xinetd configuration file, which attribute specifies the network address that will be used to provide the service?
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: bind -or- interface 
+ Correct Answer: bind -or- interface 
+
+
+[ Question 8 ] 
+SIMULATION
+What argument to the -type option of find will match files that are symbolic links? (Specify only the argument and no other options or words.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: 1 
+ Correct Answer: 1 
+
+
+[ Question 9 ] 
+SIMULATION
+Which keyword must be listed in the hosts option of the Name Service Switch configuration file in order to make host lookups consult the /etc/hosts file?
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: files 
+ Correct Answer: files 
+
+
+[ Question 10 ] 
+On a regular users workstation the route command takes a long time before printing out the routing table. Which of the following errors does that indicate?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. The local routing information may be corrupted and must be re-validated using a routing protocol. 
+ Correct Answer: D 
+
+
+[ Question 11 ] 
+Which of the following keywords can be used in the file /etc/resolv.conf? (Choose TWO correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. substitute 
+ Correct Answer: BC 
+
+
+[ Question 12 ] 
+Which of the following is a valid IPv6 address?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. 2001:db8:3241::1 
+ Correct Answer: A 
+
+
+[ Question 13 ] 
+Which of the following programs can be used to determine the routing path to a given destination?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. dig 
+ Correct Answer: E 
+
+
+[ Question 14 ] 
+Given the following routing table:
+
+How would an outgoing packet to the destination 192.168.2.150 be handled?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. It would be passed to the default router 192.168.178.1 on wlan0. 
+ Correct Answer: E 
+
+
+[ Question 15 ] 
+What of the following can be done by the command ifconfig? (Choose TWO correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. Set a network interface active or inactive. 
+ Correct Answer: AD 
+
+
+[ Question 16 ] 
+Which of the following tools used for DNS debugging, reports not only the response from the name server but also details about the query?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. dnsq 
+ Correct Answer: B 
+
+
+[ Question 17 ] 
+Which of the following IPv4 networks are reserved by IANA for private address assignment and private routing? (Choose THREE correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. 127.0.0.0/8 
+ Correct Answer: BDE 
+
+
+[ Question 18 ] 
+SIMULATION
+Which port is the default server port for the HTTPS protocol? (Specify the port number using digits.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: 443 
+ Correct Answer: 443 
+
+
+[ Question 19 ] 
+SIMULATION
+Which command, depending on its options, can display the open network connections, the routing tables, as well as network interface statistics. (Specify ONLY the command without any path or parameters.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: netstat -or- /bin/netstat -or- ss -or- /usr/bin/ss 
+ Correct Answer: netstat -or- /bin/netstat -or- ss -or- /usr/bin/ss 
+
+
+[ Question 20 ] 
+Which of the following statements is valid in the file /etc/nsswitch.conf?
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. multi on B. 192.168.168.4 dns-server 
+ Correct Answer: C 
+
+
+[ Question 21 ] 
+SIMULATION
+What is the lowest numbered unprivileged TCP port? (Specify the number in digits only.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: 1024 
+ Correct Answer: 1024 
+
+
+[ Question 22 ] 
+What is true regarding TCP port 23?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. Port 23 is the well known port for the telnet service which is a plain text protocol that should no longer be used. 
+ Correct Answer: A 
+
+
+[ Question 23 ] 
+SIMULATION
+How many IP-addresses can be used for unique hosts inside the IPv4 subnet 192.168.2.128/28? (Specify the number only without any additional information.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: 14 
+ Correct Answer: 14 
+
+
+[ Question 24 ] 
+Which of the following may occur as a consequence of using the command ifconfig? (Choose THREE correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. New name servers may be added to the resolver configuration. 
+ Correct Answer: BCD 
+
+
+[ Question 25 ] 
+Which of the following keywords can be used in the file /etc/nsswitch.conf to specify a source for host name lookups? (Choose TWO correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. resolv 
+ Correct Answer: BD 
+
+
+[ Question 26 ] 
+Which of the following lines are valid in the file /etc/hosts? (Choose TWO correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. 2001:db8::15 www.example.com www 
+ Correct Answer: AC 
+
+
+[ Question 27 ] 
+What is true regarding a default route?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. The default route is always used first. When the default route is not available more specific routes are tried. 
+ Correct Answer: C 
+
+
+[ Question 28 ] 
+SIMULATION
+Which parameter must be passed to ifconfig to activate a previously inactive network interface? (Specify the parameter only without any command, path or additional options)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: up 
+ Correct Answer: up 
+
+
+[ Question 29 ] 
+Which of the following is true about IPv6?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. With IPv6, the TCP port numbers of most services have changed. 
+ Correct Answer: B 
+
+
+[ Question 30 ] 
+SIMULATION
+Which command is used to set the hostname of the local system? (Specify ONLY the command without any path or parameters.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: hostname 
+ Correct Answer: hostname 
+
+
+[ Question 31 ] 
+Which of the following details is NOT provided in any output from the netstat utility?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. broadcast services 
+ Correct Answer: A 
+
+
+[ Question 32 ] 
+Which of the following commands can be used to display the local routing table? (Choose TWO correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. ifconfig 
+ Correct Answer: CD 
+
+
+[ Question 33 ] 
+What is the purpose of the nsswitch.conf file?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. It is used to configure where the C library looks for system information such as host names and user passwords. 
+ Correct Answer: A 
+
+
+[ Question 34 ] 
+SIMULATION
+With IPv6, how many bits have been used for the interface identifier of an unicast address? (Specify the number using digits only.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: 64 
+ Correct Answer: 64 
+
+
+[ Question 35 ] 
+Which of the following commands will help identify a broken router between the local and the remote machine?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. ps 
+ Correct Answer: E 
+
+
+[ Question 36 ] 
+What is the command to delete the default gateway from the system IP routing table? (Choose TWO correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. route del default 
+ Correct Answer: AD 
+
+
+[ Question 37 ] 
+What is true regarding the file ~/.forward?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. As it is owned by the MTA and not writable by the user, it must be edited using the editaliases command. 
+ Correct Answer: D 
+
+
+[ Question 38 ] 
+Which of the following commands is used to rotate, compress, and mail system logs?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. rotatelog 
+ Correct Answer: D 
+
+
+[ Question 39 ] 
+Which of the following is a legacy program provided by CUPS for sending files to the printer queues on the command line?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. lpd 
+ Correct Answer: D 
+
+
+[ Question 40 ] 
+What entry can be added to the syslog.conf file to have all syslog messages generated by a system displayed on console 12?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. *.* /dev/tty12 
+ Correct Answer: A 
+
+
+[ Question 41 ] 
+What is true about the ntpdate command?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. It is the primary management command for the NTP time server. 
+ Correct Answer: C 
+
+
+[ Question 42 ] 
+SIMULATION
+Please specify the top directory containing the configuration files for the CUPS printing system. (Specify the full path to the directory.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: /etc/cups -or- /etc/cups/ 
+ Correct Answer: /etc/cups -or- /etc/cups/ 
+
+
+[ Question 43 ] 
+SIMULATION
+Which command, available with all MTAs, is used to list the contents of the MTA’s mail queue? (Specify ONLY the command without any path or parameters.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: mailq -or- /usr/bin/mailq -or- sendmail -bp -or- /usr/sbin/sendmail -bp -or- /usr/lib/sendmail -bp -or- sendmail -or- /usr/sbin/sendmail – or- /usr/lib/sendmail 
+ Correct Answer: mailq -or- /usr/bin/mailq -or- sendmail -bp -or- /usr/sbin/sendmail -bp -or- /usr/lib/sendmail -bp -or- sendmail -or- /usr/sbin/sendmail – or- /usr/lib/sendmail 
+
+
+[ Question 44 ] 
+SIMULATION
+Which command is used to sync the hardware clock to the system clock? (Specify ONLY the command without any path or parameters.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: hwclock -or- /sbin/hwclock -or- /usr/sbin/hwclock 
+ Correct Answer: hwclock -or- /sbin/hwclock -or- /usr/sbin/hwclock 
+
+
+[ Question 45 ] 
+Which of the following is observed and corrected by a NTP client?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. The skew in time between the system clock and the hardware clock. 
+ Correct Answer: B 
+
+
+[ Question 46 ] 
+Which of the following are commonly used Mail Transfer Agent (MTA) applications? (Choose THREE correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. Postfix 
+ Correct Answer: ACD 
+
+
+[ Question 47 ] 
+Why is the correct configuration of a system’s time zone important?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. Because the conversion of Unix timestamps to local time relies on the time zone configuration. 
+ Correct Answer: A 
+
+
+[ Question 48 ] 
+Which of the following parameters are used for journalctl to limit the time frame of the output? (Choose TWO correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. –from= 
+ Correct Answer: BC 
+
+
+[ Question 49 ] 
+SIMULATION
+After adding a new email alias to the configuration, which command must be run in order to ensure the MTA knows about it? (Specify the command without any path but including all required parameters.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: newaliases -or- sendmail -bi 
+ Correct Answer: newaliases -or- sendmail -bi 
+
+
+[ Question 50 ] 
+What is true regarding the command sendmail?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. With any MTA, the sendmail command must be run periodically by the cron daemon. 
+ Correct Answer: B 
+
+
+[ Question 51 ] 
+Which file inside the CUPS configuration directory contains the definition of the printers?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. cups-devices.conf 
+ Correct Answer: D 
+
+
+[ Question 52 ] 
+What is the purpose of the command mailq?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. It fetches new emails from a remote server using POP3 or IMAP. 
+ Correct Answer: D 
+
+
+[ Question 53 ] 
+Which of the following are syslog facilities? (Choose TWO correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. local7 
+ Correct Answer: AB 
+
+
+[ Question 54 ] 
+Which of the following tasks can be accomplished using the command date? (Choose TWO correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. Synchronize the hardware and system clocks. 
+ Correct Answer: BC 
+
+
+[ Question 55 ] 
+SIMULATION
+After configuring printing on a Linux server, the administrator sends a test file to one of the printers and it fails to print. What command can be used to display the status of the printer’s queue? (Specify ONLY the command without any path or parameters.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: lpq -or- /usr/bin/lpq -or- lpstat -or- /usr/bin/lpstat 
+ Correct Answer: lpq -or- /usr/bin/lpq -or- lpstat -or- /usr/bin/lpstat 
+
+
+[ Question 56 ] 
+SIMULATION
+Which option in the /etc/ntp.conf file specifies an external NTP source to be queried for time information? (Specify ONLY the option without any values or parameters.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: server 
+ Correct Answer: server 
+
+
+[ Question 57 ] 
+Which of the following fields can be found in the /etc/group file? (Choose THREE correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. The list of users that belong to the group. 
+ Correct Answer: ACE 
+
+
+[ Question 58 ] 
+What is true regarding the command userdel –force –remove bob? (Choose TWO correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. The user bob is removed from the system’s user database. 
+ Correct Answer: AB 
+
+
+[ Question 59 ] 
+What is true about the file /etc/localtime?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. It is a plain text file containing a string such as Europe/Berlin. 
+ Correct Answer: D 
+
+
+[ Question 60 ] 
+What is NOT contained in the locale setting of the operating system?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. currency symbol 
+ Correct Answer: C 
+
+
+[ Question 61 ] 
+SIMULATION
+Which command is used to add an empty group to the system? (Specify ONLY the command without any path or parameters.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: groupadd -or- /usr/sbin/groupadd 
+ Correct Answer: groupadd -or- /usr/sbin/groupadd 
+
+
+[ Question 62 ] 
+Which commands can be used to change a user’s account aging information? (Choose THREE correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. usermod 
+ Correct Answer: ABD 
+
+
+[ Question 63 ] 
+SIMULATION
+In which file, if present, must all users be listed that are allowed to use the cron scheduling system? (Specify the full name of the file, including path.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: /etc/cron.allow 
+ Correct Answer: /etc/cron.allow 
+
+
+[ Question 64 ] 
+Which of the following commands should be added to /etc/bash_profile in order to change the language of messages for an internationalized program to Portuguese (pt)?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. export LANGUAGE="pt" 
+ Correct Answer: D 
+
+
+[ Question 65 ] 
+Which of the following files assigns a user to its primary group?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. /etc/pgroup 
+ Correct Answer: D 
+
+
+[ Question 66 ] 
+Which of the following crontab entries will execute myscript at 30 minutes past every hour on Sundays?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. 0 * * * 30 myscript 
+ Correct Answer: D 
+
+
+[ Question 67 ] 
+To prevent a specific user from scheduling tasks with at, what should the administrator do?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. Add the specific user to /etc/at.allow file. 
+ Correct Answer: C 
+
+
+[ Question 68 ] 
+Each entry in a crontab must end with what character?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. Tab 
+ Correct Answer: D 
+
+
+[ Question 69 ] 
+SIMULATION
+Which environment variable should be set in order to change the time zone for the commands run from within the environment variable’s scope?
+(Specify the variable name only.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: TZ 
+ Correct Answer: TZ 
+
+
+[ Question 70 ] 
+Which file contains the date of the last change of a user’s password?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. /etc/gshadow 
+ Correct Answer: D 
+
+
+[ Question 71 ] 
+Where are user specific crontabs stored?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. In the database file /etc/crontab.db which is shared by all users. 
+ Correct Answer: B 
+
+
+[ Question 72 ] 
+Which of the following commands can remove a user from a group?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. grouprm 
+ Correct Answer: E 
+
+
+[ Question 73 ] 
+In case neither cron.allow nor cron.deny exist in /etc/, which of the following is true?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. Without additional configuration, no users may have user specific crontabs. 
+ Correct Answer: A 
+
+
+[ Question 74 ] 
+What is the purpose of the iconv command?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. It converts bitmap images from one format to another such as PNG to JPEG. 
+ Correct Answer: E 
+
+
+[ Question 75 ] 
+Which command can be used to delete a group from a Linux system?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. groupdel 
+ Correct Answer: A 
+
+
+[ Question 76 ] 
+Which of the following fields are available in both the global /etc/crontab file as well as in user-specific crontab files? (Select TWO correct answers)
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. Year 
+ Correct Answer: BD 
+
+
+[ Question 77 ] 
+SIMULATION
+The system’s timezone may be set by linking /etc/localtime to an appropriate file in which directory? (Provide the full path to the directory, without any country information)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: /usr/share/zoneinfo/ 
+ Correct Answer: /usr/share/zoneinfo/ 
+
+
+[ Question 78 ] 
+SIMULATION
+Which file specifies the user accounts that can NOT submit jobs via at or batch? (Provide the full path and filename)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: /etc/at.deny 
+ Correct Answer: /etc/at.deny 
+
+
+[ Question 79 ] 
+Which character in the password field of /etc/passwd is used to indicate that the encrypted password is stored in /etc/shadow?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. * 
+ Correct Answer: D 
+
+
+[ Question 80 ] 
+Which of the following steps prevents a user from obtaining an interactive login session?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. Run the command chsh -s /bin/false with the user name. 
+ Correct Answer: A 
+
+
+[ Question 81 ] 
+Which of the following are tasks handled by a display manager like XDM or KDM? (Choose TWO correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. Start and prepare the desktop environment for the user. 
+ Correct Answer: AC 
+
+
+[ Question 82 ] 
+SIMULATION
+What is the name of the simple graphical login manager that comes with a vanilla X11 installation? (Specify ONLY the command without any path or parameters.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: xdm 
+ Correct Answer: xdm 
+
+
+[ Question 83 ] 
+For accessibility assistance, which of the following programs is an on-screen keyboard?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. xkb 
+ Correct Answer: C 
+
+
+[ Question 84 ] 
+SIMULATION
+What is the default name of the configuration file for the Xorg X11 server? (Specify the file name only without any path.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: xorg.conf 
+ Correct Answer: xorg.conf 
+
+
+[ Question 85 ] 
+Which of the following commands shows the current color depth of the X Server?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. xcd 
+ Correct Answer: C 
+
+
+[ Question 86 ] 
+What is the purpose of a screen reader?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. It reads text displayed on the screen to blind or visually impaired people. 
+ Correct Answer: A 
+
+
+[ Question 87 ] 
+How is a display manager started?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. It is started by a user using the command startx. 
+ Correct Answer: B 
+
+
+[ Question 88 ] 
+SIMULATION
+Which command can be used to investigate the properties for a particular window in X by clicking that window? (Specify ONLY the command without any path or parameters.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: /usr/bin/xwininfo -or- xwininfo 
+ Correct Answer: /usr/bin/xwininfo -or- xwininfo 
+
+
+[ Question 89 ] 
+The X11 configuration file xorg.conf is grouped into sections. How is the content of the section SectionName associated with that section?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. It is placed in curly brackets as in Section SectionName { … }. 
+ Correct Answer: B 
+
+
+[ Question 90 ] 
+Which file used by XDM specifies the default wallpaper?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. /etc/X11/xdm/Xsetup 
+ Correct Answer: A 
+
+
+[ Question 91 ] 
+Which of the following are requirements in order to run a shell script like a regular command from anywhere in the filesystem? (Choose THREE correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. The user issuing the command must be in the group script. 
+ Correct Answer: BCD 
+
+
+[ Question 92 ] 
+SIMULATION
+What command displays all aliases defined in the current shell? (Specify the command without any path information)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: alias -or- alias -p 
+ Correct Answer: alias -or- alias -p 
+
+
+[ Question 93 ] 
+What is the purpose of the file /etc/profile?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. It contains the welcome message that is displayed after login. 
+ Correct Answer: C 
+
+
+[ Question 94 ] 
+Which of the following SQL queries counts the number of occurrences for each value of the field order_type in the table orders?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. SELECT order_type,COUNT(*) FROM orders WHERE order_type=order_type; 
+ Correct Answer: B 
+
+
+[ Question 95 ] 
+Which of the following commands lists all defined variables and functions within Bash?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. env 
+ Correct Answer: B 
+
+
+[ Question 96 ] 
+Which of the following words is used to restrict the records that are returned from a SELECT SQL query based on a supplied criteria for the values in the records?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. CASE 
+ Correct Answer: C 
+
+
+[ Question 97 ] 
+What output will the following command produce?
+seq 1 5 20
+
+6
+1
+1
+1
+6
+
+5
+10
+15
+
+
+
+10
+15
+20
+
+
+ 
+
+
+
+
+
+
+
+ A. 1 
+ Correct Answer: A 
+
+
+[ Question 98 ] 
+When the command echo $$ outputs 12942, what is the meaning of 12942?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. It is the process ID of the echo command. 
+ Correct Answer: B 
+
+
+[ Question 99 ] 
+How can the existing environment variable FOOBAR be suppressed for the execution of the script./myscript only?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. unset -v FOOBAR;./myscript 
+ Correct Answer: C 
+
+
+[ Question 100 ] 
+What is the difference between the commands test -e path and test -f path?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. They are equivalent options with the same behaviour. 
+ Correct Answer: C 
+
+
+[ Question 101 ] 
+Which of the following files, when existing, affect the behavior of the Bash shell? (Choose TWO correct answers.)
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. ~/.bashconf 
+ Correct Answer: BE 
+
+
+[ Question 102 ] 
+Which of the following commands puts the output of the command date into the shell variable mydate?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. mydate="$(date)" 
+ Correct Answer: A 
+
+
+[ Question 103 ] 
+After issuing:
+function myfunction { echo $1 $2 ; }
+in Bash, which output does:
+myfunction A B C
+Produce?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. A B 
+ Correct Answer: A 
+
+
+[ Question 104 ] 
+SIMULATION
+By default, the contents of which directory will be copied to a new user’s home directory when the account is created by passing the -m option to the useradd command? (Specify the full path to the directory.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: /etc/skel 
+ Correct Answer: /etc/skel 
+
+
+[ Question 105 ] 
+SIMULATION
+What word is missing from the following SQL statement?
+__________ count(*) from tablename;
+(Please specify the missing word using lower-case letters only.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: select 
+ Correct Answer: select 
+
+
+[ Question 106 ] 
+What output will the command seq 10 produce?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. A continuous stream of numbers increasing in increments of 10 until stopped. 
+ Correct Answer: B 
+
+
+[ Question 107 ] 
+Which command makes the shell variable named VARIABLE visible to subshells?
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. export $VARIABLE 
+ Correct Answer: B 
+
+
+[ Question 108 ] 
+SIMULATION
+What word is missing from the following SQL statement? insert into tablename ________(909, ‘text’);
+(Please specify the missing word using lower-case letters only.)
+
+
+ 
+
+
+
+
+
+
+
+ Correct Answer: VALUES -or- values 
+ Correct Answer: VALUES -or- values 
+
+
+[ Question 109 ] 
+When the command echo $ outputs 1, which of the following statements is true?
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. It is the process ID of the echo command. 
+ Correct Answer: C 
+
+
+[ Question 110 ] 
+What output will the following command sequence produce?
+echo ‘1 2 3 4 5 6’ | while read a b c; do
+echo result: $c $b $a;
+done
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A. result: 3 4 5 6 2 1 
+ Correct Answer: A 
+
+
