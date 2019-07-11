@@ -1,5 +1,10 @@
-[ Question 1 ] 
-Which SysV init configuration file should be modified to disable the ctrl-alt-delete key combination?
+[ Question 1 ]
+ Which SysV init configuration file should be modified to disable the ctrl-alt-delete key combination?
+A. /etc/keys
+B. /proc/keys
+C. /etc/inittab
+D. /proc/inittab
+E. /etc/reboot
 
 
 
@@ -7,22 +12,21 @@ Which SysV init configuration file should be modified to disable the ctrl-alt-de
 
 
 
- 
 
 
 
 
-
-
-
- A. /etc/keys 
  Correct Answer: C 
 
-
-[ Question 2 ] 
-When given the following command line.
+[ Question 2 ]
+ When given the following command line.
 echo "foo bar" | tee bar | cat
 Which of the following output is created?
+A. cat
+B. foo bar
+C. tee bar
+D. bar
+E. foo
 
 
 
@@ -30,21 +34,20 @@ Which of the following output is created?
 
 
 
- 
 
 
 
 
-
-
-
- A. cat 
  Correct Answer: B 
 
-
-[ Question 3 ] 
-After running the command umount /mnt, the following error message is displayed: umount: /mnt: device is busy.
+[ Question 3 ]
+ After running the command umount /mnt, the following error message is displayed: umount: /mnt: device is busy.
 What is a common reason for this message?
+A. The kernel has not finished flushing disk writes to the mounted device.
+B. A user has a file open in the /mnt directory.
+C. Another file system still contains a symlink to a file inside /mnt.
+D. The files in /mnt have been scanned and added to the locate database.
+E. The kernel thinks that a process is about to open a file in /mnt for reading.
 
 
 
@@ -52,28 +55,19 @@ What is a common reason for this message?
 
 
 
- 
 
 
 
 
-
-
-
- A. The kernel has not finished flushing disk writes to the mounted device. 
  Correct Answer: B 
 
-
-[ Question 4 ] 
-Which of the following commands updates the linker cache of shared libraries?
-
-
-
-
-
-
-
- 
+[ Question 4 ]
+ Which of the following commands updates the linker cache of shared libraries?
+A. mkcache
+B. soconfig
+C. mkldconfig
+D. Iddconfig
+E. Idconfig
 
 
 
@@ -81,18 +75,16 @@ Which of the following commands updates the linker cache of shared libraries?
 
 
 
- A. mkcache 
+
+
+
+
  Correct Answer: E 
 
-
-[ Question 5 ] 
-SIMULATION
+[ Question 5 ]
+ SIMULATION
 Which command creates a swap space on a block device or a file? (Specify ONLY the command without any path or parameters.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -100,20 +92,23 @@ Your Response: type here
 
 
 
- A. mkswap 
- Correct Answer: A 
-
-
-[ Question 6 ] 
-What is the purpose of the Bash built-in export command?
 
 
 
 
+A. mkswap
+Correct Answer: A 
+
+[ Question 6 ]
+ What is the purpose of the Bash built-in export command?
+A. It allows disks to be mounted remotely.
+B. It runs a command as a process in a subshell.
+C. It makes the command history available to subshells.
+D. It sets up environment variables for applications.
+E. It shares NFS partitions for use by other systems on the network.
 
 
 
- 
 
 
 
@@ -121,19 +116,15 @@ What is the purpose of the Bash built-in export command?
 
 
 
- A. It allows disks to be mounted remotely. 
+
  Correct Answer: D 
 
-
-[ Question 7 ] 
-Which of the following commands converts spaces in a file to tab characters and prints the result to standard output?
-
-
-
-
-
-
- 
+[ Question 7 ]
+ Which of the following commands converts spaces in a file to tab characters and prints the result to standard output?
+A. iconv
+B. expand
+C. unexpand
+D. tab
 
 
 
@@ -141,19 +132,18 @@ Which of the following commands converts spaces in a file to tab characters and 
 
 
 
- A. iconv 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 8 ] 
-Which of the following command lines creates or, in case it already exists, overwrites a file called data with the output of Is?
-
-
-
-
-
-
- 
+[ Question 8 ]
+ Which of the following command lines creates or, in case it already exists, overwrites a file called data with the output of Is?
+A. Is 3> data
+B. Is >& data
+C. Is > data
+D. Is >> data
 
 
 
@@ -161,20 +151,19 @@ Which of the following command lines creates or, in case it already exists, over
 
 
 
- A. Is 3> data 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 9 ] 
-Which of the following commands will write a message to the terminals of all logged in users?
-
-
-
-
-
-
-
- 
+[ Question 9 ]
+ Which of the following commands will write a message to the terminals of all logged in users?
+A. beast
+B. mesg
+C. print
+D. wall
+E. yell
 
 
 
@@ -182,20 +171,19 @@ Which of the following commands will write a message to the terminals of all log
 
 
 
- A. beast 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 10 ] 
-Which of the following commands will reduce all consecutive spaces down to a single space?
-
-
-
-
-
-
-
- 
+[ Question 10 ]
+ Which of the following commands will reduce all consecutive spaces down to a single space?
+A. tr "s”'<a.txt> b.txt
+B. tr-c ” < a.txt> b.txt
+C. tr-d ”< a.txt> b.txt
+D. tr-r”’n'< a.txt > b.txt
+E. tr-s ”<a.txt>b.txt
 
 
 
@@ -203,19 +191,18 @@ Which of the following commands will reduce all consecutive spaces down to a sin
 
 
 
- A. tr "s”'<a.txt> b.txt 
+
+
+
+
  Correct Answer: E 
 
-
-[ Question 11 ] 
-Which of the following statements is correct when talking about /proc/?
-
-
-
-
-
-
- 
+[ Question 11 ]
+ Which of the following statements is correct when talking about /proc/?
+A. All changes to files in /proc/ are stored in /etc/proc.d/ and restored on reboot.
+B. All files within /proc/ are read-only and their contents cannot be changed.
+C. All changes to files in /proc/ are immediately recognized by the kernel.
+D. All files within /proc/ are only readable by the root user.
 
 
 
@@ -223,20 +210,19 @@ Which of the following statements is correct when talking about /proc/?
 
 
 
- A. All changes to files in /proc/ are stored in /etc/proc.d/ and restored on reboot. 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 12 ] 
-Which of the following apt-get commands will install the newest versions of all currently installed packages?
-
-
-
-
-
-
-
- 
+[ Question 12 ]
+ Which of the following apt-get commands will install the newest versions of all currently installed packages?
+A. auto-update
+B. full-upgrade
+C. dist-upgrade
+D. install
+E. update
 
 
 
@@ -244,19 +230,18 @@ Which of the following apt-get commands will install the newest versions of all 
 
 
 
- A. auto-update 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 13 ] 
-Which of the following commands changes the ownership of file.txt to the user dan and the group staff?
-
-
-
-
-
-
- 
+[ Question 13 ]
+ Which of the following commands changes the ownership of file.txt to the user dan and the group staff?
+A. chown dan/staff file.txt
+B. chown da n:staff file.txt
+C. chown -u dan -g staff file.txt
+D. chown dan -g staff file.txt
 
 
 
@@ -264,20 +249,19 @@ Which of the following commands changes the ownership of file.txt to the user da
 
 
 
- A. chown dan/staff file.txt 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 14 ] 
-Which command is used to query information about the available packages on a Debian system?
-
-
-
-
-
-
-
- 
+[ Question 14 ]
+ Which command is used to query information about the available packages on a Debian system?
+A. apt-cache
+B. apt-get
+C. apt-search
+D. dpkg
+E. dpkg-search
 
 
 
@@ -285,20 +269,19 @@ Which command is used to query information about the available packages on a Deb
 
 
 
- A. apt-cache 
+
+
+
+
  Correct Answer: A 
 
-
-[ Question 15 ] 
-Which of the following environment variables overrides or extends the list of directories holding shared libraries?
-
-
-
-
-
-
-
- 
+[ Question 15 ]
+ Which of the following environment variables overrides or extends the list of directories holding shared libraries?
+A. LD_LOAD_PATH
+B. LD_LIB_PATH
+C. LD_LIBRARY_PATH
+D. LD_SHARE_PATH
+E. LD_RUN_PATH
 
 
 
@@ -306,20 +289,19 @@ Which of the following environment variables overrides or extends the list of di
 
 
 
- A. LD_LOAD_PATH 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 16 ] 
-Which character, added to the end of a command, runs that command in the background as a child process of the current shell?
-
-
-
-
-
-
-
- 
+[ Question 16 ]
+ Which character, added to the end of a command, runs that command in the background as a child process of the current shell?
+A. !
+B. +
+C. &
+D. %
+E. #
 
 
 
@@ -327,18 +309,16 @@ Which character, added to the end of a command, runs that command in the backgro
 
 
 
- A. ! 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 17 ] 
-SIMULATION
+[ Question 17 ]
+ SIMULATION
 Which file in the /proc filesystem lists parameters passed from the bootloader to the kernel? (Specify the file name only without any path.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -346,20 +326,23 @@ Your Response: type here
 
 
 
- A. "cmdline" or "/proc/cmdline" 
- Correct Answer: A 
-
-
-[ Question 18 ] 
-Which of the following commands will load a kernel module along with any required dependency modules?
 
 
 
 
+A. "cmdline" or "/proc/cmdline"
+Correct Answer: A 
+
+[ Question 18 ]
+ Which of the following commands will load a kernel module along with any required dependency modules?
+A. depmod
+B. insmod
+C. modprobe
+D. module_install
+E. loadmod
 
 
 
- 
 
 
 
@@ -367,20 +350,16 @@ Which of the following commands will load a kernel module along with any require
 
 
 
- A. depmod 
+
  Correct Answer: C 
 
-
-[ Question 19 ] 
-Which of the following commands replaces each occurrence of bob’ in the file letter with Bob’ and writes the result to the file newletter?
-
-
-
-
-
-
-
- 
+[ Question 19 ]
+ Which of the following commands replaces each occurrence of bob’ in the file letter with Bob’ and writes the result to the file newletter?
+A. sed ‘/bob/Bob’ letter > newletter
+B. sed s/bob/Bob/ letter < newletter
+C. sed ‘s/bob/Bob’ letter > newletter
+D. sed ‘s/bob/Bob/g’ letter > newletter
+E. sed ‘s/bob, Bob/’ letter > newletter
 
 
 
@@ -388,19 +367,18 @@ Which of the following commands replaces each occurrence of bob’ in the file l
 
 
 
- A. sed ‘/bob/Bob’ letter > newletter 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 20 ] 
-Which of the following options must be passed to a filesystem’s entry in /etc/fstab in order to mount the file system without root privileges?
-
-
-
-
-
-
- 
+[ Question 20 ]
+ Which of the following options must be passed to a filesystem’s entry in /etc/fstab in order to mount the file system without root privileges?
+A. auto
+B. norestrict
+C. noauto
+D. user
 
 
 
@@ -408,20 +386,19 @@ Which of the following options must be passed to a filesystem’s entry in /etc/
 
 
 
- A. auto 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 21 ] 
-What happens after issuing the command vi without any additional parameters?
-
-
-
-
-
-
-
- 
+[ Question 21 ]
+ What happens after issuing the command vi without any additional parameters?
+A. vi starts and loads the last file used and moves the cursor to the position where vi was when it last exited.
+B. vi starts and requires the user to explicitly either create a new or load an existing file.
+C. vi exits with an error message as it cannot be invoked without a file name to operate on.
+D. vi starts in command mode and opens a new empty file.
+E. vi starts and opens a new file which is filled with the content of the vi buffer if the buffer contains text.
 
 
 
@@ -429,41 +406,39 @@ What happens after issuing the command vi without any additional parameters?
 
 
 
- A. vi starts and loads the last file used and moves the cursor to the position where vi was when it last exited. 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 22 ] 
-What is the output of the following command?
+[ Question 22 ]
+ What is the output of the following command?
 echo "Hello World" | tr -d aieou
+A. Hello World
+B. eoo
+C. Hll Wrld
+D. eoo Hll Wrld
 
 
 
 
 
 
- 
 
 
 
 
 
-
-
- A. Hello World 
  Correct Answer: C 
 
-
-[ Question 23 ] 
-Which of the following are init systems used within Linux systems? (Choose THREE correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 23 ]
+ Which of the following are init systems used within Linux systems? (Choose THREE correct answers.)
+A. startd
+B. systemd
+C. Upstart
+D. Syslnit
+E. SysV init
 
 
 
@@ -471,19 +446,18 @@ Which of the following are init systems used within Linux systems? (Choose THREE
 
 
 
- A. startd 
+
+
+
+
  Correct Answer: BCE 
 
-
-[ Question 24 ] 
-Which of the following commands will change the quota for a specific user?
-
-
-
-
-
-
- 
+[ Question 24 ]
+ Which of the following commands will change the quota for a specific user?
+A. edquota
+B. repquota
+C. quota-e
+D. quota
 
 
 
@@ -491,19 +465,18 @@ Which of the following commands will change the quota for a specific user?
 
 
 
- A. edquota 
+
+
+
+
  Correct Answer: A 
 
-
-[ Question 25 ] 
-Which of the following file permissions belong to a symbolic link?
-
-
-
-
-
-
- 
+[ Question 25 ]
+ Which of the following file permissions belong to a symbolic link?
+A. -rwxrwxrwx
+B. +rwxrwxrwx
+C. Irwxrwxrwx
+D. srwxrwxrwx
 
 
 
@@ -511,20 +484,19 @@ Which of the following file permissions belong to a symbolic link?
 
 
 
- A. -rwxrwxrwx 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 26 ] 
-Instead of supplying an explicit device in /etc/fstab for mounting, what other options may be used to identify the intended partition? (Choose TWO correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 26 ]
+ Instead of supplying an explicit device in /etc/fstab for mounting, what other options may be used to identify the intended partition? (Choose TWO correct answers.)
+A. FIND
+B. ID
+C. LABEL
+D. NAME
+E. UUID
 
 
 
@@ -532,20 +504,19 @@ Instead of supplying an explicit device in /etc/fstab for mounting, what other o
 
 
 
- A. FIND 
+
+
+
+
  Correct Answer: CE 
 
-
-[ Question 27 ] 
-Which of the following are valid stream redirection operators within Bash? (Choose THREE correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 27 ]
+ Which of the following are valid stream redirection operators within Bash? (Choose THREE correct answers.)
+A. <
+B. <<<
+C. >
+D. >>>
+E. %>
 
 
 
@@ -553,19 +524,18 @@ Which of the following are valid stream redirection operators within Bash? (Choo
 
 
 
- A. < 
+
+
+
+
  Correct Answer: ABC 
 
-
-[ Question 28 ] 
-How can the list of files that would be installed by the RPM package file apache-xml. rpm be previewed?
-
-
-
-
-
-
- 
+[ Question 28 ]
+ How can the list of files that would be installed by the RPM package file apache-xml. rpm be previewed?
+A. rpm -qp apache-xml.rpm
+B. rpm -qv apache-xml.rpm
+C. rpm -ql apache-xml.rpm
+D. rpm -qpl apache-xml.rpm
 
 
 
@@ -573,20 +543,19 @@ How can the list of files that would be installed by the RPM package file apache
 
 
 
- A. rpm -qp apache-xml.rpm 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 29 ] 
-When using rpm -verify to check files created during the installation of RPM packages, which of the following information is taken into consideration? (Choose THREE correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 29 ]
+ When using rpm -verify to check files created during the installation of RPM packages, which of the following information is taken into consideration? (Choose THREE correct answers.)
+A. Timestamps
+B. MD5 checksums
+C. Inodes
+D. File sizes
+E. GnuPG signatures
 
 
 
@@ -594,19 +563,18 @@ When using rpm -verify to check files created during the installation of RPM pac
 
 
 
- A. Timestamps 
+
+
+
+
  Correct Answer: ABD 
 
-
-[ Question 30 ] 
-Which of the following commands shows the definition of a given shell command?
-
-
-
-
-
-
- 
+[ Question 30 ]
+ Which of the following commands shows the definition of a given shell command?
+A. where
+B. stat
+C. type
+D. case
 
 
 
@@ -614,20 +582,19 @@ Which of the following commands shows the definition of a given shell command?
 
 
 
- A. where 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 31 ] 
-Creating a hard link to an ordinary file returns an error. What could be the reason for this?
-
-
-
-
-
-
-
- 
+[ Question 31 ]
+ Creating a hard link to an ordinary file returns an error. What could be the reason for this?
+A. The source file is hidden.
+B. The source file is read-only.
+C. The source file is a shell script.
+D. The source file is already a hard link.
+E. The source and the target are on different filesystems.
 
 
 
@@ -635,20 +602,19 @@ Creating a hard link to an ordinary file returns an error. What could be the rea
 
 
 
- A. The source file is hidden. 
+
+
+
+
  Correct Answer: E 
 
-
-[ Question 32 ] 
-From a Bash shell, which of the following commands directly executes the instruction from the file /usr/local/bin/runme.sh without starting a subshell? (Please select TWO answers.)
-
-
-
-
-
-
-
- 
+[ Question 32 ]
+ From a Bash shell, which of the following commands directly executes the instruction from the file /usr/local/bin/runme.sh without starting a subshell? (Please select TWO answers.)
+A. source /usr/local/bin/runme.sh
+B. . /usr/local/bin/runme.sh
+C. /bin/bash /usr/local/bin/runme.sh
+D. /usr/local/bin/runme.sh
+E. run/usr/local/bin/runme.sh
 
 
 
@@ -656,20 +622,19 @@ From a Bash shell, which of the following commands directly executes the instruc
 
 
 
- A. source /usr/local/bin/runme.sh 
+
+
+
+
  Correct Answer: AB 
 
-
-[ Question 33 ] 
-Which of the following commands determines the type of a file by using a definition database file which contains information about all common file types?
-
-
-
-
-
-
-
- 
+[ Question 33 ]
+ Which of the following commands determines the type of a file by using a definition database file which contains information about all common file types?
+A. magic
+B. type
+C. file
+D. pmagic
+E. hash
 
 
 
@@ -677,20 +642,19 @@ Which of the following commands determines the type of a file by using a definit
 
 
 
- A. magic 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 34 ] 
-Which of the following information is stored within the BIOS? (Choose TWO correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 34 ]
+ Which of the following information is stored within the BIOS? (Choose TWO correct answers.)
+A. Boot device order
+B. Linux kernel version
+C. Timezone
+D. Hardware configuration
+E. The system’s hostname
 
 
 
@@ -698,20 +662,19 @@ Which of the following information is stored within the BIOS? (Choose TWO correc
 
 
 
- A. Boot device order 
+
+
+
+
  Correct Answer: AD 
 
-
-[ Question 35 ] 
-Which of the following commands will change all CR-LF pairs in an imported text file, userlist.txt, to Linux standard LF characters and store it as newlist.txt?
-
-
-
-
-
-
-
- 
+[ Question 35 ]
+ Which of the following commands will change all CR-LF pairs in an imported text file, userlist.txt, to Linux standard LF characters and store it as newlist.txt?
+A. tr ‘rn’ ”< userlist.txt > newlist.txt
+B. tr -c ‘nr’ ” < newlist.txt > userlist.txt
+C. tr -d ‘r’ < userlist.txt > newlist.txt
+D. tr ‘r’ ‘n’ userlist.txt newlist.txt
+E. tr –s ‘AM’ ‘AJ’ userlist.txt newlist.txt
 
 
 
@@ -719,19 +682,18 @@ Which of the following commands will change all CR-LF pairs in an imported text 
 
 
 
- A. tr ‘rn’ ”< userlist.txt > newlist.txt 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 36 ] 
-Which of the following commands displays the contents of a gzip compressed tar archive?
-
-
-
-
-
-
- 
+[ Question 36 ]
+ Which of the following commands displays the contents of a gzip compressed tar archive?
+A. gzip archive.tgz | tar xvf –
+B. tar ztf archive.tgz
+C. gzip -d archive.tgz | tar tvf –
+D. tar cf archive.tgz
 
 
 
@@ -739,19 +701,18 @@ Which of the following commands displays the contents of a gzip compressed tar a
 
 
 
- A. gzip archive.tgz | tar xvf – 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 37 ] 
-In the vi editor, how can commands such as moving the cursor or copying lines into the buffer be issued multiple times or applied to multiple rows?
-
-
-
-
-
-
- 
+[ Question 37 ]
+ In the vi editor, how can commands such as moving the cursor or copying lines into the buffer be issued multiple times or applied to multiple rows?
+A. By using the command :repeat followed by the number and the command.
+B. By specifying the number right in front of a command such as 4l or 2yj.
+C. By selecting all affected lines using the shift and cursor keys before applying the command.
+D. By issuing a command such as :set repetitions which repeats every subsequent command 4 times.
 
 
 
@@ -759,20 +720,19 @@ In the vi editor, how can commands such as moving the cursor or copying lines in
 
 
 
- A. By using the command :repeat followed by the number and the command. 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 38 ] 
-Which of the following commands are common Linux commands for file management? (Choose three correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 38 ]
+ Which of the following commands are common Linux commands for file management? (Choose three correct answers.)
+A. copy
+B. mv
+C. move
+D. cp
+E. mkdir
 
 
 
@@ -780,20 +740,19 @@ Which of the following commands are common Linux commands for file management? (
 
 
 
- A. copy 
+
+
+
+
  Correct Answer: BDE 
 
-
-[ Question 39 ] 
-Which of the following files, located in the user home directory, is used to store the Bash history?
-
-
-
-
-
-
-
- 
+[ Question 39 ]
+ Which of the following files, located in the user home directory, is used to store the Bash history?
+A. .bash_history
+B. .bash_histfile
+C. .history
+D. .bashrc_history
+E. .history_bash
 
 
 
@@ -801,20 +760,19 @@ Which of the following files, located in the user home directory, is used to sto
 
 
 
- A. .bash_history 
+
+
+
+
  Correct Answer: A 
 
-
-[ Question 40 ] 
-Which of the following commands is used to change options and positional parameters for a running Bash?
-
-
-
-
-
-
-
- 
+[ Question 40 ]
+ Which of the following commands is used to change options and positional parameters for a running Bash?
+A. history
+B. set
+C. bashconf
+D. setsh
+E. envsetup
 
 
 
@@ -822,18 +780,16 @@ Which of the following commands is used to change options and positional paramet
 
 
 
- A. history 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 41 ] 
-SIMULATION
+[ Question 41 ]
+ SIMULATION
 Which program updates the database that is used by the locate command?
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -841,20 +797,23 @@ Your Response: type here
 
 
 
- A. updatedb 
- Correct Answer: A 
-
-
-[ Question 42 ] 
-Which of the following commands print the current working directory when using a Bash shell? (Choose two.)
 
 
 
 
+A. updatedb
+Correct Answer: A 
+
+[ Question 42 ]
+ Which of the following commands print the current working directory when using a Bash shell? (Choose two.)
+A. echo "${PWD}"
+B. echo "${WD}"
+C. pwd
+D. printwd
+E. echo "${pwd}"
 
 
 
- 
 
 
 
@@ -862,19 +821,15 @@ Which of the following commands print the current working directory when using a
 
 
 
- A. echo "${PWD}" 
+
  Correct Answer: AC 
 
-
-[ Question 43 ] 
-Which command will uninstall a package but leave its configuration files in case the package is re-installed?
-
-
-
-
-
-
- 
+[ Question 43 ]
+ Which command will uninstall a package but leave its configuration files in case the package is re-installed?
+A. dpkg -s pkgname
+B. dpkg -L pkgname
+C. dpkg -P pkgname
+D. dpkg -r pkgname
 
 
 
@@ -882,20 +837,19 @@ Which command will uninstall a package but leave its configuration files in case
 
 
 
- A. dpkg -s pkgname 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 44 ] 
-Which of the following are filesystems which can be used on Linux root partitions? (Choose two.)
-
-
-
-
-
-
-
- 
+[ Question 44 ]
+ Which of the following are filesystems which can be used on Linux root partitions? (Choose two.)
+A. NTFS
+B. ext3
+C. XFS
+D. VFAT
+E. swap
 
 
 
@@ -903,19 +857,18 @@ Which of the following are filesystems which can be used on Linux root partition
 
 
 
- A. NTFS 
+
+
+
+
  Correct Answer: BE 
 
-
-[ Question 45 ] 
-What does the ? symbol within regular expressions represent?
-
-
-
-
-
-
- 
+[ Question 45 ]
+ What does the ? symbol within regular expressions represent?
+A. Match the preceding qualifier one or more times.
+B. Match the preceding qualifier zero or more times.
+C. Match the preceding qualifier zero or one times.
+D. Match a literal ? character.
 
 
 
@@ -923,20 +876,19 @@ What does the ? symbol within regular expressions represent?
 
 
 
- A. Match the preceding qualifier one or more times. 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 46 ] 
-Which run levels should never be declared as the default run level when using SysV init? (Choose TWO correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 46 ]
+ Which run levels should never be declared as the default run level when using SysV init? (Choose TWO correct answers.)
+A. 0
+B. 1
+C. 3
+D. 5
+E. 6
 
 
 
@@ -944,19 +896,18 @@ Which run levels should never be declared as the default run level when using Sy
 
 
 
- A. 0 
+
+
+
+
  Correct Answer: AE 
 
-
-[ Question 47 ] 
-Which signal is sent by the kill command by default?
-
-
-
-
-
-
- 
+[ Question 47 ]
+ Which signal is sent by the kill command by default?
+A. SIGHUP(1)
+B. SIGQUIT(3)
+C. SIGKILL(9)
+D. SIGTERM(15)
 
 
 
@@ -964,20 +915,19 @@ Which signal is sent by the kill command by default?
 
 
 
- A. SIGHUP(1) 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 48 ] 
-What information can the Ispci command display about the system hardware? (Choose THREE correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 48 ]
+ What information can the Ispci command display about the system hardware? (Choose THREE correct answers.)
+A. Device IRQ settings
+B. PCI bus speed
+C. System battery type
+D. Device vendor identification
+E. Ethernet MAC address
 
 
 
@@ -985,18 +935,16 @@ What information can the Ispci command display about the system hardware? (Choos
 
 
 
- A. Device IRQ settings 
+
+
+
+
  Correct Answer: ABD 
 
-
-[ Question 49 ] 
-SIMULATION
+[ Question 49 ]
+ SIMULATION
 In which directory must definition files be placed to add additional repositories to yum?
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -1004,20 +952,23 @@ Your Response: type here
 
 
 
- A. "/etc/yum.repos.d" or "/etc/yum.repos.d/" or "yum.repos.d" or "yum.repos.d/" 
- Correct Answer: A 
-
-
-[ Question 50 ] 
-In compliance with the FHS, in which of the following directories are documentation files found?
 
 
 
 
+A. "/etc/yum.repos.d" or "/etc/yum.repos.d/" or "yum.repos.d" or "yum.repos.d/"
+Correct Answer: A 
+
+[ Question 50 ]
+ In compliance with the FHS, in which of the following directories are documentation files found?
+A. /usr/share/documentation
+B. /usr/local/share/documentation
+C. /var/share/doc
+D. /usr/share/doc
+E. /etc/share/doc
 
 
 
- 
 
 
 
@@ -1025,20 +976,16 @@ In compliance with the FHS, in which of the following directories are documentat
 
 
 
- A. /usr/share/documentation 
+
  Correct Answer: D 
 
-
-[ Question 51 ] 
-In Bash, inserting 1 >&2 after a command redirects
-
-
-
-
-
-
-
- 
+[ Question 51 ]
+ In Bash, inserting 1 >&2 after a command redirects
+A. standard error to standard input.
+B. standard input to standard error.
+C. standard output to standard error.
+D. standard error to standard output.
+E. standard output to standard input.
 
 
 
@@ -1046,19 +993,18 @@ In Bash, inserting 1 >&2 after a command redirects
 
 
 
- A. standard error to standard input. 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 52 ] 
-What is the default nice level when a process is started using the nice command?
-
-
-
-
-
-
- 
+[ Question 52 ]
+ What is the default nice level when a process is started using the nice command?
+A. -10
+B. 10
+C. 20
+D. 0
 
 
 
@@ -1066,19 +1012,18 @@ What is the default nice level when a process is started using the nice command?
 
 
 
- A. -10 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 53 ] 
-When piping the output of find to the xargs command, what option to find is useful if the filenames have spaces in them?
-
-
-
-
-
-
- 
+[ Question 53 ]
+ When piping the output of find to the xargs command, what option to find is useful if the filenames have spaces in them?
+A. -rep-space
+B. -print0
+C. -nospace
+D. -ignore-space
 
 
 
@@ -1086,19 +1031,18 @@ When piping the output of find to the xargs command, what option to find is usef
 
 
 
- A. -rep-space 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 54 ] 
-Which of the following commands can be used to download the RPM package kernel without installing it?
-
-
-
-
-
-
- 
+[ Question 54 ]
+ Which of the following commands can be used to download the RPM package kernel without installing it?
+A. yum download -no-install kernel
+B. yumdownloader kernel
+C. rpm -download -package kernel
+D. rpmdownload kernel
 
 
 
@@ -1106,18 +1050,16 @@ Which of the following commands can be used to download the RPM package kernel w
 
 
 
- A. yum download -no-install kernel 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 55 ] 
-SIMULATION
+[ Question 55 ]
+ SIMULATION
 Which command is used to start another command with a given nice level? (Specify ONLY the command without any path or parameters.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -1125,20 +1067,23 @@ Your Response: type here
 
 
 
- A. nice 
- Correct Answer: A 
-
-
-[ Question 56 ] 
-When planning a partition scheme, which of the following directories could be considered for separate partitions? (Choose three.)
 
 
 
 
+A. nice
+Correct Answer: A 
+
+[ Question 56 ]
+ When planning a partition scheme, which of the following directories could be considered for separate partitions? (Choose three.)
+A. /etc
+B. /home
+C. /var
+D. /lib
+E. /opt
 
 
 
- 
 
 
 
@@ -1146,19 +1091,15 @@ When planning a partition scheme, which of the following directories could be co
 
 
 
- A. /etc 
+
  Correct Answer: BCE 
 
-
-[ Question 57 ] 
-Which of the following is the device file name for the second partition on the only SCSI drive?
-
-
-
-
-
-
- 
+[ Question 57 ]
+ Which of the following is the device file name for the second partition on the only SCSI drive?
+A. /dev/hda1
+B. /dev/sda2
+C. /dev/sd0a2
+D. /dev/sd1p2
 
 
 
@@ -1166,20 +1107,19 @@ Which of the following is the device file name for the second partition on the o
 
 
 
- A. /dev/hda1 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 58 ] 
-Which of the following commands prints a list of available package updates when using RPM-based package management?
-
-
-
-
-
-
-
- 
+[ Question 58 ]
+ Which of the following commands prints a list of available package updates when using RPM-based package management?
+A. dpkg list
+B. yum list
+C. dpkg check-update
+D. yum check-update
+E. yum list -update
 
 
 
@@ -1187,19 +1127,18 @@ Which of the following commands prints a list of available package updates when 
 
 
 
- A. dpkg list 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 59 ] 
-When starting a program with the nice command without any additional parameters, which nice level is set for the resulting process?
-
-
-
-
-
-
- 
+[ Question 59 ]
+ When starting a program with the nice command without any additional parameters, which nice level is set for the resulting process?
+A. -10
+B. 0
+C. 10
+D. 20
 
 
 
@@ -1207,19 +1146,18 @@ When starting a program with the nice command without any additional parameters,
 
 
 
- A. -10 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 60 ] 
-Which of the following options is used in a GRUB Legacy configuration file to define the amount of time that the GRUB menu will be shown to the user?
-
-
-
-
-
-
- 
+[ Question 60 ]
+ Which of the following options is used in a GRUB Legacy configuration file to define the amount of time that the GRUB menu will be shown to the user?
+A. hidemenu
+B. splash
+C. timeout
+D. showmenu
 
 
 
@@ -1227,19 +1165,18 @@ Which of the following options is used in a GRUB Legacy configuration file to de
 
 
 
- A. hidemenu 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 61 ] 
-Which of the following commands lists all currently installed packages when using RPM package management?
-
-
-
-
-
-
- 
+[ Question 61 ]
+ Which of the following commands lists all currently installed packages when using RPM package management?
+A. yum –query–all
+B. yum–list–installed
+C. rpm –query –all
+D. rpm –list installed
 
 
 
@@ -1247,20 +1184,19 @@ Which of the following commands lists all currently installed packages when usin
 
 
 
- A. yum –query–all 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 62 ] 
-What can the Logical Volume Manager (LVM) be used for? (Choose THREE correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 62 ]
+ What can the Logical Volume Manager (LVM) be used for? (Choose THREE correct answers.)
+A. To create RAID 9 arrays.
+B. To dynamically change the size of logical volumes.
+C. To encrypt logical volumes.
+D. To create snapshots.
+E. To dynamically create or delete logical volumes.
 
 
 
@@ -1268,19 +1204,18 @@ What can the Logical Volume Manager (LVM) be used for? (Choose THREE correct ans
 
 
 
- A. To create RAID 9 arrays. 
+
+
+
+
  Correct Answer: BDE 
 
-
-[ Question 63 ] 
-Which of the following is a limitation of the cut command?
-
-
-
-
-
-
- 
+[ Question 63 ]
+ Which of the following is a limitation of the cut command?
+A. The cut command can only select output by field position.
+B. The cut command cannot reorder fields.
+C. The cut command only works on ASCII text.
+D. The cut command cannot use different input and output delimiters.
 
 
 
@@ -1288,20 +1223,19 @@ Which of the following is a limitation of the cut command?
 
 
 
- A. The cut command can only select output by field position. 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 64 ] 
-A user accidentally created the subdirectory dir in his home directory. Which of the following commands will remove that directory?
-
-
-
-
-
-
-
- 
+[ Question 64 ]
+ A user accidentally created the subdirectory dir in his home directory. Which of the following commands will remove that directory?
+A. rmdir ~/dir’
+B. rmdir "~/dir"
+C. rmdir ~/’dir’
+D. rmdir ~/dir
+E. rmdir ~/\dir
 
 
 
@@ -1309,20 +1243,19 @@ A user accidentally created the subdirectory dir in his home directory. Which of
 
 
 
- A. rmdir ~/dir’ 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 65 ] 
-Which of the following is true for hard linked files? (Choose three.)
-
-
-
-
-
-
-
- 
+[ Question 65 ]
+ Which of the following is true for hard linked files? (Choose three.)
+A. The output of stat will report hard instead of regular file.
+B. The hard linked files have the same permissions and owner.
+C. The hard linked files share the same inode.
+D. The hard linked files are indicated by a -> when listed with Is -1.
+E. The hard linked files must be on the same filesystem.
 
 
 
@@ -1330,19 +1263,18 @@ Which of the following is true for hard linked files? (Choose three.)
 
 
 
- A. The output of stat will report hard instead of regular file. 
+
+
+
+
  Correct Answer: BCE 
 
-
-[ Question 66 ] 
-Which of the following signals is sent to a process when the key combination CTRL+C is pressed on the keyboard?
-
-
-
-
-
-
- 
+[ Question 66 ]
+ Which of the following signals is sent to a process when the key combination CTRL+C is pressed on the keyboard?
+A. SIGTERM
+B. SIGINT
+C. SIGSTOP
+D. SIGKILL
 
 
 
@@ -1350,20 +1282,19 @@ Which of the following signals is sent to a process when the key combination CTR
 
 
 
- A. SIGTERM 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 67 ] 
-Which of the following commands can be used to locate programs and their corresponding man pages and configuration files?
-
-
-
-
-
-
-
- 
+[ Question 67 ]
+ Which of the following commands can be used to locate programs and their corresponding man pages and configuration files?
+A. dirname
+B. which
+C. basename
+D. query
+E. whereis
 
 
 
@@ -1371,18 +1302,16 @@ Which of the following commands can be used to locate programs and their corresp
 
 
 
- A. dirname 
+
+
+
+
  Correct Answer: E 
 
-
-[ Question 68 ] 
-SIMULATION
+[ Question 68 ]
+ SIMULATION
 Which option to the yum command will update the entire system? (Specify ONLY the option name without any additional parameters.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -1390,20 +1319,60 @@ Your Response: type here
 
 
 
- A. "update" or "upgrade" 
+
+
+
+
+A. "update" or "upgrade"
+Correct Answer: A 
+
+[ Question 69 ]
+ Which of the following pieces of information of an existing file is changed when a hard link pointing to that file is created?
+A. File size
+B. Modify timestamp
+C. Link count
+D. Inode number
+E. Permissions
+
+
+
+
+
+
+
+
+
+
+
+ Correct Answer: C 
+
+[ Question 70 ]
+ Which of the following commands is used to update the list of available packages when using dpkg based package management?
+A. apt-get update
+B. apt-get upgrade
+C. apt-cache update
+D. apt-get refresh
+E. apt-cache upgrade
+
+
+
+
+
+
+
+
+
+
+
  Correct Answer: A 
 
-
-[ Question 69 ] 
-Which of the following pieces of information of an existing file is changed when a hard link pointing to that file is created?
-
-
-
-
-
-
-
- 
+[ Question 71 ]
+ What is the process ID number of the init process on a SysV init based system?
+A. -1
+B. 0
+C. 1
+D. It is different with each reboot.
+E. It is set to the current run level.
 
 
 
@@ -1411,20 +1380,18 @@ Which of the following pieces of information of an existing file is changed when
 
 
 
- A. File size 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 70 ] 
-Which of the following commands is used to update the list of available packages when using dpkg based package management?
-
-
-
-
-
-
-
- 
+[ Question 72 ]
+ Which grep command will print only the lines that do not end with a / in the file foo?
+A. grep ‘/$’ foo
+B. grep ‘/#’ foo
+C. grep -v ‘/$’ foo
+D. grep -v ‘/#’ foo
 
 
 
@@ -1432,59 +1399,16 @@ Which of the following commands is used to update the list of available packages
 
 
 
- A. apt-get update 
- Correct Answer: A 
-
-
-[ Question 71 ] 
-What is the process ID number of the init process on a SysV init based system?
 
 
 
 
-
-
-
- 
-
-
-
-
-
-
-
- A. -1 
  Correct Answer: C 
 
-
-[ Question 72 ] 
-Which grep command will print only the lines that do not end with a / in the file foo?
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
- A. grep ‘/$’ foo 
- Correct Answer: C 
-
-
-[ Question 73 ] 
-SIMULATION
+[ Question 73 ]
+ SIMULATION
 Which command will display messages from the kernel that were output during the normal boot sequence?
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -1492,18 +1416,17 @@ Your Response: type here
 
 
 
- A. ‘dmesg’ or ‘/bin/dmesg’ 
- Correct Answer: A 
 
 
-[ Question 74 ] 
-SIMULATION
+
+
+A. ‘dmesg’ or ‘/bin/dmesg’
+Correct Answer: A 
+
+[ Question 74 ]
+ SIMULATION
 Which Debian package management tool asks the configuration questions for a specific already installed package just as if the package were being installed for the first time? (Specify ONLY the command without any path or parameters.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -1511,20 +1434,23 @@ Your Response: type here
 
 
 
- A. dpkg-reconfigure 
- Correct Answer: A 
-
-
-[ Question 75 ] 
-Which of the following commands will print important system information such as the kernel version and machine hardware architecture?
 
 
 
 
+A. dpkg-reconfigure
+Correct Answer: A 
+
+[ Question 75 ]
+ Which of the following commands will print important system information such as the kernel version and machine hardware architecture?
+A. sysinfo
+B. uname
+C. lspci
+D. arch
+E. info
 
 
 
- 
 
 
 
@@ -1532,20 +1458,16 @@ Which of the following commands will print important system information such as 
 
 
 
- A. sysinfo 
+
  Correct Answer: B 
 
-
-[ Question 76 ] 
-Which of the following commands instructs SysVinit to reload its configuration file?
-
-
-
-
-
-
-
- 
+[ Question 76 ]
+ Which of the following commands instructs SysVinit to reload its configuration file?
+A. reinit
+B. init reload
+C. telinit 7
+D. telinit q
+E. init reinit
 
 
 
@@ -1553,18 +1475,16 @@ Which of the following commands instructs SysVinit to reload its configuration f
 
 
 
- A. reinit 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 77 ] 
-SIMULATION
+[ Question 77 ]
+ SIMULATION
 Which umask value will result in the default access permissions of 600 (rw——-) for files and 700 (rwx——) for directories? (Specify only the numerical umask value.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -1572,19 +1492,21 @@ Your Response: type here
 
 
 
- A. "0077" or "077" 
- Correct Answer: A 
-
-
-[ Question 78 ] 
-Which permissions and ownership should the file /etc/passwd have?
 
 
 
 
+A. "0077" or "077"
+Correct Answer: A 
+
+[ Question 78 ]
+ Which permissions and ownership should the file /etc/passwd have?
+A. -rw1 rootroot531 Jun 5 22:45 /etc/passwd
+B. -rw-r–r–1 rootroot531 Jun 5 22:45 /etc/passwd
+C. -rw-r–r–1 11531 Jun 5 22:45 /etc/passwd
+D. -rw1 11531 Jun 5 22:45 /etc/passwd
 
 
- 
 
 
 
@@ -1592,20 +1514,17 @@ Which permissions and ownership should the file /etc/passwd have?
 
 
 
- A. -rw1 rootroot531 Jun 5 22:45 /etc/passwd 
+
+
  Correct Answer: B 
 
-
-[ Question 79 ] 
-What does the command mount -a do?
-
-
-
-
-
-
-
- 
+[ Question 79 ]
+ What does the command mount -a do?
+A. It ensures that all file systems listed with the option noauto in /etc/fstab are mounted.
+B. It shows all mounted file systems that have been automatically mounted.
+C. It opens an editor with root privileges and loads /etc/fstab for editing.
+D. It ensures that all file systems listed with the option auto in /etc/fstab are mounted.
+E. It ensures that all file systems listed in /etc/fstab are mounted regardless of their options.
 
 
 
@@ -1613,18 +1532,16 @@ What does the command mount -a do?
 
 
 
- A. It ensures that all file systems listed with the option noauto in /etc/fstab are mounted. 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 80 ] 
-SIMULATION
+[ Question 80 ]
+ SIMULATION
 Which Bash environment variable defines in which file the user history is stored when exiting a Bash process? (Specify ONLY the variable name.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -1632,18 +1549,17 @@ Your Response: type here
 
 
 
- A. HISTFILE 
- Correct Answer: A 
 
 
-[ Question 81 ] 
-SIMULATION
+
+
+A. HISTFILE
+Correct Answer: A 
+
+[ Question 81 ]
+ SIMULATION
 In the vi editor, what vi command will copy (but not paste) from the current line at the cursor and the following 16 lines (17 lines total)? Specify the correct vi command without spaces.
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -1651,20 +1567,23 @@ Your Response: type here
 
 
 
- A. 17yy 
- Correct Answer: A 
-
-
-[ Question 82 ] 
-How many fields are in a syntactically correct line of /etc/fstab?
 
 
 
 
+A. 17yy
+Correct Answer: A 
+
+[ Question 82 ]
+ How many fields are in a syntactically correct line of /etc/fstab?
+A. 3
+B. 4
+C. 5
+D. 6
+E. 7
 
 
 
- 
 
 
 
@@ -1672,19 +1591,15 @@ How many fields are in a syntactically correct line of /etc/fstab?
 
 
 
- A. 3 
+
  Correct Answer: D 
 
-
-[ Question 83 ] 
-During a system boot cycle, what program is executed after the BIOS completes its tasks?
-
-
-
-
-
-
- 
+[ Question 83 ]
+ During a system boot cycle, what program is executed after the BIOS completes its tasks?
+A. The bootloader
+B. The inetd program
+C. The init program
+D. The kernel
 
 
 
@@ -1692,19 +1607,18 @@ During a system boot cycle, what program is executed after the BIOS completes it
 
 
 
- A. The bootloader 
+
+
+
+
  Correct Answer: A 
 
-
-[ Question 84 ] 
-Which of the following characters can be combined with a separator string in order to read from the current input source until the separator string, which is on a separate line and without any trailing spaces, is reached?
-
-
-
-
-
-
- 
+[ Question 84 ]
+ Which of the following characters can be combined with a separator string in order to read from the current input source until the separator string, which is on a separate line and without any trailing spaces, is reached?
+A. <<
+B. <|
+C. !<
+D. &<
 
 
 
@@ -1712,18 +1626,16 @@ Which of the following characters can be combined with a separator string in ord
 
 
 
- A. << 
+
+
+
+
  Correct Answer: A 
 
-
-[ Question 85 ] 
-SIMULATION
+[ Question 85 ]
+ SIMULATION
 Which command is used in a Linux environment to create a new directory? (Specify ONLY the command without any path or parameters.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -1731,19 +1643,21 @@ Your Response: type here
 
 
 
- A. "mkdir" or "/usr/bin/mkdir" 
- Correct Answer: A 
-
-
-[ Question 86 ] 
-Which of the following statements describes a difference between GNU GRUB Legacy and GRUB 2?
 
 
 
 
+A. "mkdir" or "/usr/bin/mkdir"
+Correct Answer: A 
+
+[ Question 86 ]
+ Which of the following statements describes a difference between GNU GRUB Legacy and GRUB 2?
+A. GRUB 2 no longer requires a configuration file.
+B. Partition numbers start at 0 in GRUB Legacy and 1 in GRUB 2.
+C. grub-mkconfig only works with GRUB Legacy if the – – version 1 option is used.
+D. The configuration file menu.lst (and grub.conf) have been replaced with grub.config.
 
 
- 
 
 
 
@@ -1751,19 +1665,16 @@ Which of the following statements describes a difference between GNU GRUB Legacy
 
 
 
- A. GRUB 2 no longer requires a configuration file. 
+
+
  Correct Answer: B 
 
-
-[ Question 87 ] 
-Which of the following commands moves and resumes in the background the last stopped shell job?
-
-
-
-
-
-
- 
+[ Question 87 ]
+ Which of the following commands moves and resumes in the background the last stopped shell job?
+A. run
+B. bg
+C. fg
+D. back
 
 
 
@@ -1771,20 +1682,19 @@ Which of the following commands moves and resumes in the background the last sto
 
 
 
- A. run 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 88 ] 
-Which variable defines the directories in which a Bash shell searches for executable commands?
-
-
-
-
-
-
-
- 
+[ Question 88 ]
+ Which variable defines the directories in which a Bash shell searches for executable commands?
+A. BASHEXEC
+B. BASHRC
+C. PATH
+D. EXECPATH
+E. PATHRC
 
 
 
@@ -1792,18 +1702,16 @@ Which variable defines the directories in which a Bash shell searches for execut
 
 
 
- A. BASHEXEC 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 89 ] 
-SIMULATION
+[ Question 89 ]
+ SIMULATION
 Which command is used to create and initialize the files used to store quota information? (Specify ONLY the command without any path or parameters.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -1811,19 +1719,39 @@ Your Response: type here
 
 
 
- A. quotacheck 
+
+
+
+
+A. quotacheck
+Correct Answer: A 
+
+[ Question 90 ]
+ How is a symbolic link called ba r. conf pointing to foo. conf created?
+A. In -s foo.conf bar.conf
+B. In foo.conf bar.conf
+C. In -s bar.conf foo.conf
+D. In bar.conf foo.conf
+
+
+
+
+
+
+
+
+
+
+
  Correct Answer: A 
 
-
-[ Question 90 ] 
-How is a symbolic link called ba r. conf pointing to foo. conf created?
-
-
-
-
-
-
- 
+[ Question 91 ]
+ Which of the following commands reboots the system when using SysV init? (Choose TWO correct answers.)
+A. shutdown -r now
+B. shutdown-r "rebooting"
+C. telinit 6
+D. telinit 0
+E. shutdown-k now "rebooting"
 
 
 
@@ -1831,39 +1759,16 @@ How is a symbolic link called ba r. conf pointing to foo. conf created?
 
 
 
- A. In -s foo.conf bar.conf 
- Correct Answer: A 
-
-
-[ Question 91 ] 
-Which of the following commands reboots the system when using SysV init? (Choose TWO correct answers.)
 
 
 
 
-
-
-
- 
-
-
-
-
-
-
-
- A. shutdown -r now 
  Correct Answer: AC 
 
-
-[ Question 92 ] 
-SIMULATION
+[ Question 92 ]
+ SIMULATION
 Which signal is missing from the following command that is commonly used to instruct a daemon to reinitialize itself, including reading configuration files? kill-s_______daemon
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -1871,39 +1776,37 @@ Your Response: type here
 
 
 
- A. "HUP” or "SIGHUP" or "1" 
+
+
+
+
+A. "HUP” or "SIGHUP" or "1"
+Correct Answer: A 
+
+[ Question 93 ]
+ In compliance with the FHS, in which of the directories are man pages found?
+A. /usr/share/man
+B. /opt/man
+C. /usr/doc/
+D. /var/pkg/man
+E. /var/man
+
+
+
+
+
+
+
+
+
+
+
  Correct Answer: A 
 
-
-[ Question 93 ] 
-In compliance with the FHS, in which of the directories are man pages found?
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
- A. /usr/share/man 
- Correct Answer: A 
-
-
-[ Question 94 ] 
-SIMULATION
+[ Question 94 ]
+ SIMULATION
 What command changes the nice level of a running process? (Specify ONLY the command without any path or parameters)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -1911,19 +1814,21 @@ Your Response: type here
 
 
 
- A. renice 
- Correct Answer: A 
-
-
-[ Question 95 ] 
-Which of the following statements is correct for a command line ending with a & character?
 
 
 
 
+A. renice
+Correct Answer: A 
+
+[ Question 95 ]
+ Which of the following statements is correct for a command line ending with a & character?
+A. The command’s output is redirected to /dev/null.
+B. The result of the command defines if the next command will be run.
+C. The command is run in background of the current shell.
+D. The command is run as a direct child of the init process.
 
 
- 
 
 
 
@@ -1931,20 +1836,17 @@ Which of the following statements is correct for a command line ending with a & 
 
 
 
- A. The command’s output is redirected to /dev/null. 
+
+
  Correct Answer: C 
 
-
-[ Question 96 ] 
-Which of the following commands can be used to search for the executable file foo when it has been placed in a directory not included in $PATH?
-
-
-
-
-
-
-
- 
+[ Question 96 ]
+ Which of the following commands can be used to search for the executable file foo when it has been placed in a directory not included in $PATH?
+A. apropos
+B. which
+C. find
+D. query
+E. whereis
 
 
 
@@ -1952,19 +1854,18 @@ Which of the following commands can be used to search for the executable file fo
 
 
 
- A. apropos 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 97 ] 
-Which of the following settings for umask ensures that new files have the default permissions -rw-r– ?
-
-
-
-
-
-
- 
+[ Question 97 ]
+ Which of the following settings for umask ensures that new files have the default permissions -rw-r– ?
+A. 0017
+B. 0640
+C. 0038
+D. 0027
 
 
 
@@ -1972,19 +1873,18 @@ Which of the following settings for umask ensures that new files have the defaul
 
 
 
- A. 0017 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 98 ] 
-What is the default action of the split command on an input file?
-
-
-
-
-
-
- 
+[ Question 98 ]
+ What is the default action of the split command on an input file?
+A. It will break the file into new files of 1,024 byte pieces each.
+B. It will break the file into new files of 1,000 line pieces each.
+C. It will break the file into new files of 1,024 kilobyte pieces each.
+D. It will break the file into new files that are no more than 5% of the size of the original file.
 
 
 
@@ -1992,20 +1892,19 @@ What is the default action of the split command on an input file?
 
 
 
- A. It will break the file into new files of 1,024 byte pieces each. 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 99 ] 
-Which of the following commands prints all files and directories within the /tmp directory or its subdirectories which are also owned by the user root? (Choose TWO correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 99 ]
+ Which of the following commands prints all files and directories within the /tmp directory or its subdirectories which are also owned by the user root? (Choose TWO correct answers.)
+A. find /tmp -uid root -print
+B. find path /tmp -uid root
+C. find /tmp -user root -print
+D. find /tmp -user root
+E. find -path /tmp -user root print
 
 
 
@@ -2013,20 +1912,19 @@ Which of the following commands prints all files and directories within the /tmp
 
 
 
- A. find /tmp -uid root -print 
+
+
+
+
  Correct Answer: CD 
 
-
-[ Question 100 ] 
-In a nested directory structure, which find command line option would be used to restrict the command to searching down a particular number of subdirectories?
-
-
-
-
-
-
-
- 
+[ Question 100 ]
+ In a nested directory structure, which find command line option would be used to restrict the command to searching down a particular number of subdirectories?
+A. -dirmax
+B. -maxdepth
+C. -maxlevels
+D. -n
+E. -s
 
 
 
@@ -2034,18 +1932,16 @@ In a nested directory structure, which find command line option would be used to
 
 
 
- A. -dirmax 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 101 ] 
-SIMULATION
+[ Question 101 ]
+ SIMULATION
 Which command displays a list of all background tasks running in the current shell? (Specify ONLY the command without any path or parameters.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -2053,20 +1949,23 @@ Your Response: type here
 
 
 
- A. jobs 
- Correct Answer: A 
-
-
-[ Question 102 ] 
-What is the first program that is usually started, at boot time, by the Linux kernel when using SysV init?
 
 
 
 
+A. jobs
+Correct Answer: A 
+
+[ Question 102 ]
+ What is the first program that is usually started, at boot time, by the Linux kernel when using SysV init?
+A. /lib/init.so
+B. /sbin/init
+C. /etc/rc.d/rcinit
+D. /proc/sys/kemel/init
+E. /boot/init
 
 
 
- 
 
 
 
@@ -2074,20 +1973,16 @@ What is the first program that is usually started, at boot time, by the Linux ke
 
 
 
- A. /lib/init.so 
+
  Correct Answer: B 
 
-
-[ Question 103 ] 
-In order to display all currently mounted filesystems, which of the following commands could be used? (Choose TWO correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 103 ]
+ In order to display all currently mounted filesystems, which of the following commands could be used? (Choose TWO correct answers.)
+A. cat /proc/self/mounts
+B. free
+C. mount
+D. Ismounts
+E. cat /proc/filesystems
 
 
 
@@ -2095,19 +1990,18 @@ In order to display all currently mounted filesystems, which of the following co
 
 
 
- A. cat /proc/self/mounts 
+
+
+
+
  Correct Answer: AC 
 
-
-[ Question 104 ] 
-Which of the following commands kills the process with the PID 123 but allows the process to "clean up” before exiting?
-
-
-
-
-
-
- 
+[ Question 104 ]
+ Which of the following commands kills the process with the PID 123 but allows the process to "clean up” before exiting?
+A. kill-PIPE 123
+B. kill-KILL 123
+C. kill-STOP 123
+D. kill-TERM 123
 
 
 
@@ -2115,20 +2009,19 @@ Which of the following commands kills the process with the PID 123 but allows th
 
 
 
- A. kill-PIPE 123 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 105 ] 
-Which of the following describes the correct order in which the components of the system boot process are started?
-
-
-
-
-
-
-
- 
+[ Question 105 ]
+ Which of the following describes the correct order in which the components of the system boot process are started?
+A. BIOS, kernel, bootloader, init system
+B. BIOS, bootloader, kernel, init system
+C. Bootloader, BIOS, kernel, init system
+D. BIOS, bootloader, init system, kernel
+E. Bootloader, BIOS, init system, kernel
 
 
 
@@ -2136,20 +2029,19 @@ Which of the following describes the correct order in which the components of th
 
 
 
- A. BIOS, kernel, bootloader, init system 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 106 ] 
-Which type of filesystem is created by mkfs when it is executed with the block device name only and without any additional parameters?
-
-
-
-
-
-
-
- 
+[ Question 106 ]
+ Which type of filesystem is created by mkfs when it is executed with the block device name only and without any additional parameters?
+A. ext2
+B. ext3
+C. ext4
+D. XFS
+E. VFAT
 
 
 
@@ -2157,19 +2049,18 @@ Which type of filesystem is created by mkfs when it is executed with the block d
 
 
 
- A. ext2 
+
+
+
+
  Correct Answer: A 
 
-
-[ Question 107 ] 
-Which of the following commands lists the dependencies of a given dpkg package?
-
-
-
-
-
-
- 
+[ Question 107 ]
+ Which of the following commands lists the dependencies of a given dpkg package?
+A. apt-cache depends-on package
+B. apt-cache dependencies package
+C. apt-cache depends package
+D. apt-cache requires package
 
 
 
@@ -2177,20 +2068,19 @@ Which of the following commands lists the dependencies of a given dpkg package?
 
 
 
- A. apt-cache depends-on package 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 108 ] 
-Which of the following shell commands makes the already defined variable TEST visible to new child processes? (Choose two.) ?
-
-
-
-
-
-
-
- 
+[ Question 108 ]
+ Which of the following shell commands makes the already defined variable TEST visible to new child processes? (Choose two.) ?
+A. visible TEST
+B. declare +x TEST
+C. declare -x TEST
+D. export TEST
+E. export -v TEST
 
 
 
@@ -2198,20 +2088,19 @@ Which of the following shell commands makes the already defined variable TEST vi
 
 
 
- A. visible TEST 
+
+
+
+
  Correct Answer: CD 
 
-
-[ Question 109 ] 
-Which shell command is used to continue background execution of a suspended command?
-
-
-
-
-
-
-
- 
+[ Question 109 ]
+ Which shell command is used to continue background execution of a suspended command?
+A. &
+B. bg
+C. cont
+D. exec
+E. :&
 
 
 
@@ -2219,20 +2108,19 @@ Which shell command is used to continue background execution of a suspended comm
 
 
 
- A. & 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 110 ] 
-Which of the following commands changes all occurrences of the word "bob" in file data to "Bob" and prints the result to standard output?
-
-
-
-
-
-
-
- 
+[ Question 110 ]
+ Which of the following commands changes all occurrences of the word "bob" in file data to "Bob" and prints the result to standard output?
+A. sed’ /bob/Bob’ data
+B. sed’s/bob/Bob/g’ data
+C. sed’s/bob/Bob/’ data
+D. sed’/ bob/Bob/’ data
+E. sed’ s/bob, Bob/’ data
 
 
 
@@ -2240,20 +2128,19 @@ Which of the following commands changes all occurrences of the word "bob" in fil
 
 
 
- A. sed’ /bob/Bob’ data 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 111 ] 
-Which of the following commands will send output from the program myapp to both standard output (stdout) and the file filel .log?
-
-
-
-
-
-
-
- 
+[ Question 111 ]
+ Which of the following commands will send output from the program myapp to both standard output (stdout) and the file filel .log?
+A. cat < myapp | cat > file1.log
+B. myapp 0>&1 | cat > file1.log
+C. myapp | cat > file1.log
+D. myapp | tee file1.log
+E. tee myapp file1.log
 
 
 
@@ -2261,18 +2148,16 @@ Which of the following commands will send output from the program myapp to both 
 
 
 
- A. cat < myapp | cat > file1.log 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 112 ] 
-SIMULATION
+[ Question 112 ]
+ SIMULATION
 Which SysV init configuration file is commonly used to set the default run level? (Specify the full name of the file, including path.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -2280,19 +2165,21 @@ Your Response: type here
 
 
 
- A. inittab 
- Correct Answer: A 
-
-
-[ Question 113 ] 
-Which of the following kernel parameters instructs the kernel to suppress most boot messages?
 
 
 
 
+A. inittab
+Correct Answer: A 
+
+[ Question 113 ]
+ Which of the following kernel parameters instructs the kernel to suppress most boot messages?
+A. silent
+B. verbose=0
+C. nomesg
+D. quiet
 
 
- 
 
 
 
@@ -2300,19 +2187,16 @@ Which of the following kernel parameters instructs the kernel to suppress most b
 
 
 
- A. silent 
+
+
  Correct Answer: D 
 
-
-[ Question 114 ] 
-Which of the following commands creates an ext3 filesystem on /dev/sdb1 ? (Choose TWO correct answers.)
-
-
-
-
-
-
- 
+[ Question 114 ]
+ Which of the following commands creates an ext3 filesystem on /dev/sdb1 ? (Choose TWO correct answers.)
+A. /sbin/mke2fs -j /dev/sdb1
+B. /sbin/mkfs -t ext3 /dev/sdb1
+C. /sbin/mkfs -c ext3 /dev/sdb1
+D. /sbin/mke3fs -j /dev/sdb1
 
 
 
@@ -2320,20 +2204,19 @@ Which of the following commands creates an ext3 filesystem on /dev/sdb1 ? (Choos
 
 
 
- A. /sbin/mke2fs -j /dev/sdb1 
+
+
+
+
  Correct Answer: AB 
 
-
-[ Question 115 ] 
-Which of the following shell redirections will write standard output and standard error output to a file named filename?
-
-
-
-
-
-
-
- 
+[ Question 115 ]
+ Which of the following shell redirections will write standard output and standard error output to a file named filename?
+A. 2>&1 >filename
+B. >filename 2>&1
+C. 1>&2>filename
+D. >>filename
+E. 1&2>filename
 
 
 
@@ -2341,20 +2224,19 @@ Which of the following shell redirections will write standard output and standar
 
 
 
- A. 2>&1 >filename 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 116 ] 
-Which utility would be used to change how often a filesystem check is performed on an ext2 filesystem without losing any data stored on that filesystem?
-
-
-
-
-
-
-
- 
+[ Question 116 ]
+ Which utility would be used to change how often a filesystem check is performed on an ext2 filesystem without losing any data stored on that filesystem?
+A. mod2fs
+B. fsck
+C. tune2fs
+D. mke2fs
+E. fixe2fs
 
 
 
@@ -2362,20 +2244,19 @@ Which utility would be used to change how often a filesystem check is performed 
 
 
 
- A. mod2fs 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 117 ] 
-Which of the following sequences in the vi editor saves the opened document and exits the editor? (Choose TWO correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 117 ]
+ Which of the following sequences in the vi editor saves the opened document and exits the editor? (Choose TWO correct answers.)
+A. esc ZZ
+B. Ctrl :w!
+C. esc zz
+D. esc :wq!
+E. Ctrl XX
 
 
 
@@ -2383,19 +2264,18 @@ Which of the following sequences in the vi editor saves the opened document and 
 
 
 
- A. esc ZZ 
+
+
+
+
  Correct Answer: AD 
 
-
-[ Question 118 ] 
-What does the command grub-install /dev/sda do?
-
-
-
-
-
-
- 
+[ Question 118 ]
+ What does the command grub-install /dev/sda do?
+A. GRUB creates partitions on the device /dev/sda to be used with Linux.
+B. GRUB sets the default BIOS boot device to /dev/sda.
+C. GRUB installs all required files and configures the boot loader on device /dev/sda.
+D. GRUB recompiles the Linux Kernel and installs it on the Master Boot Record of device /dev/sda.
 
 
 
@@ -2403,20 +2283,19 @@ What does the command grub-install /dev/sda do?
 
 
 
- A. GRUB creates partitions on the device /dev/sda to be used with Linux. 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 119 ] 
-Which of the following are modes of the vi editor? (Choose two.)
-
-
-
-
-
-
-
- 
+[ Question 119 ]
+ Which of the following are modes of the vi editor? (Choose two.)
+A. edit mode
+B. insert mode
+C. change mode
+D. review mode
+E. command mode
 
 
 
@@ -2424,18 +2303,16 @@ Which of the following are modes of the vi editor? (Choose two.)
 
 
 
- A. edit mode 
+
+
+
+
  Correct Answer: BE 
 
-
-[ Question 120 ] 
-SIMULATION
+[ Question 120 ]
+ SIMULATION
 Which command reads and displays the current contents of the Kernel Ring Buffer on the command line? (Specify ONLY the command without any path or parameters.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -2443,20 +2320,23 @@ Your Response: type here
 
 
 
- A. dmesg 
- Correct Answer: A 
-
-
-[ Question 121 ] 
-Which of the following statements is correct regarding the command foo 1 > bar?
 
 
 
 
+A. dmesg
+Correct Answer: A 
+
+[ Question 121 ]
+ Which of the following statements is correct regarding the command foo 1 > bar?
+A. The stdout from the command foo is appended to the file bar.
+B. The stdout from the command foo overwrites the file bar.
+C. The command foo receives its stdin from the file bar.
+D. The command foo receives its stdin from the stdout of the command bar.
+E. The stderr from the command foo is saved to the file bar.
 
 
 
- 
 
 
 
@@ -2464,19 +2344,15 @@ Which of the following statements is correct regarding the command foo 1 > bar?
 
 
 
- A. The stdout from the command foo is appended to the file bar. 
+
  Correct Answer: B 
 
-
-[ Question 122 ] 
-Which of the following commands makes /bin/foo executable by everyone but writable only by its owner?
-
-
-
-
-
-
- 
+[ Question 122 ]
+ Which of the following commands makes /bin/foo executable by everyone but writable only by its owner?
+A. chmod u=rwx,go=rx/bin/foo
+B. chmod o+rwx,a+rx /bin/foo
+C. chmod 577 /bin/foo
+D. chmod 775 /bin/foo
 
 
 
@@ -2484,20 +2360,19 @@ Which of the following commands makes /bin/foo executable by everyone but writab
 
 
 
- A. chmod u=rwx,go=rx/bin/foo 
+
+
+
+
  Correct Answer: A 
 
-
-[ Question 123 ] 
-Pressing the Ctrl-C combination on the keyboard while a command is executing in the foreground sends which of the following signal codes?
-
-
-
-
-
-
-
- 
+[ Question 123 ]
+ Pressing the Ctrl-C combination on the keyboard while a command is executing in the foreground sends which of the following signal codes?
+A. 1(SIGHUP)
+B. 2(SIGINT)
+C. 3(SIGQUIT)
+D. 9(SIGKILL)
+E. 15(SIGTERM)
 
 
 
@@ -2505,41 +2380,39 @@ Pressing the Ctrl-C combination on the keyboard while a command is executing in 
 
 
 
- A. 1(SIGHUP) 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 124 ] 
-When running the command
+[ Question 124 ]
+ When running the command
 sed -e "s/a/b/" /tmp/file >/tmp/file
 While /tmp/file contains data, why is /tmp/file empty afterwards?
+A. The file order is incorrect. The destination file must be mentioned before the command to ensure redirection.
+B. The command sed did not match anything in that file therefore the output is empty.
+C. When the shell establishes the redirection it overwrites the target file before the redirected command starts and opens it for reading.
+D. Redirection for shell commands do not work using the > character. It only works using the | character instead.
 
 
 
 
 
 
- 
 
 
 
 
 
-
-
- A. The file order is incorrect. The destination file must be mentioned before the command to ensure redirection. 
  Correct Answer: C 
 
-
-[ Question 125 ] 
-What is the purpose of the Filesystem Hierarchy Standard?
-
-
-
-
-
-
- 
+[ Question 125 ]
+ What is the purpose of the Filesystem Hierarchy Standard?
+A. It is a security model used to ensure files are organized according to their permissions and accessibility.
+B. It provides unified tools to create, maintain and manage multiple filesystems in a common way.
+C. It defines a common internal structure of inodes for all compliant filesystems.
+D. It is a distribution neutral description of locations of files and directories.
 
 
 
@@ -2547,19 +2420,18 @@ What is the purpose of the Filesystem Hierarchy Standard?
 
 
 
- A. It is a security model used to ensure files are organized according to their permissions and accessibility. 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 126 ] 
-What is the effect of the egrep command when the -v option is used?
-
-
-
-
-
-
- 
+[ Question 126 ]
+ What is the effect of the egrep command when the -v option is used?
+A. It enables color to highlight matching parts.
+B. It only outputs non-matching lines.
+C. It shows the command s version information.
+D. It changes the output order showing the last matching line first.
 
 
 
@@ -2567,20 +2439,19 @@ What is the effect of the egrep command when the -v option is used?
 
 
 
- A. It enables color to highlight matching parts. 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 127 ] 
-Which of the following commands updates the already installed RPM package rpmname?
-
-
-
-
-
-
-
- 
+[ Question 127 ]
+ Which of the following commands updates the already installed RPM package rpmname?
+A. rpm –update rpmname
+B. rpm -U rpmname
+C. rpm -q rpmname
+D. rpm –force rpmname
+E. rpm -u rpmname
 
 
 
@@ -2588,20 +2459,19 @@ Which of the following commands updates the already installed RPM package rpmnam
 
 
 
- A. rpm –update rpmname 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 128 ] 
-Which of the following commands is used to modify quota settings? (Choose two.)
-
-
-
-
-
-
-
- 
+[ Question 128 ]
+ Which of the following commands is used to modify quota settings? (Choose two.)
+A. editquota
+B. setquota
+C. edquota
+D. quotaedit
+E. quotaset
 
 
 
@@ -2609,19 +2479,18 @@ Which of the following commands is used to modify quota settings? (Choose two.)
 
 
 
- A. editquota 
+
+
+
+
  Correct Answer: BC 
 
-
-[ Question 129 ] 
-Which chown command will change the ownership to dave and the group to staff on a file named data . txt?
-
-
-
-
-
-
- 
+[ Question 129 ]
+ Which chown command will change the ownership to dave and the group to staff on a file named data . txt?
+A. chown dave/staff data.txt
+B. chown -u dave -g staff data.txt
+C. chown –user dave –group staff data.txt
+D. chown dave:staff data.txt
 
 
 
@@ -2629,20 +2498,19 @@ Which chown command will change the ownership to dave and the group to staff on 
 
 
 
- A. chown dave/staff data.txt 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 130 ] 
-Immediately after deleting 3 lines of text in vi and moving the cursor to a different line, which single character command will insert the deleted content below the current line?
-
-
-
-
-
-
-
- 
+[ Question 130 ]
+ Immediately after deleting 3 lines of text in vi and moving the cursor to a different line, which single character command will insert the deleted content below the current line?
+A. i (lowercase)
+B. P (uppercase)
+C. p (lowercase)
+D. U (uppercase)
+E. u (lowercase)
 
 
 
@@ -2650,13 +2518,20 @@ Immediately after deleting 3 lines of text in vi and moving the cursor to a diff
 
 
 
- A. i (lowercase) 
+
+
+
+
  Correct Answer: C 
 
-
-[ Question 131 ] 
-Which of the following Linux filesystems preallocates a fixed number of inodes at the filesystem’s make/creation time and does NOT generate them as needed?
+[ Question 131 ]
+ Which of the following Linux filesystems preallocates a fixed number of inodes at the filesystem’s make/creation time and does NOT generate them as needed?
 (Choose TWO correct answers.)
+A. ext3
+B. JFS
+C. ext2
+D. XFS
+E. proofs
 
 
 
@@ -2664,28 +2539,19 @@ Which of the following Linux filesystems preallocates a fixed number of inodes a
 
 
 
- 
 
 
 
 
-
-
-
- A. ext3 
  Correct Answer: AC 
 
-
-[ Question 132 ] 
-What does the command mount -a do?
-
-
-
-
-
-
-
- 
+[ Question 132 ]
+ What does the command mount -a do?
+A. It mounts all available filesystems onto the current directory.
+B. It shows all mounted filesystems.
+C. It mounts all user mountable filesystems for the current user.
+D. It mounts all filesystems listed in /etc/fstab which have the option auto set.
+E. It mounts all filesystems listed in /etc/fstab which have the option noauto set.
 
 
 
@@ -2693,19 +2559,18 @@ What does the command mount -a do?
 
 
 
- A. It mounts all available filesystems onto the current directory. 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 133 ] 
-What is the difference between the i and a commands of the vi editor?
-
-
-
-
-
-
- 
+[ Question 133 ]
+ What is the difference between the i and a commands of the vi editor?
+A. i (interactive) requires the user to explicitly switch between vi modes whereas a (automatic) switches modes automatically.
+B. i (insert) inserts text before the current cursor position whereas a (append) inserts text after the cursor.
+C. i (independent rows) starts every new line at the first character whereas a (aligned rows) keeps the indentation of the previous line.
+D. i (interrupt) temporarily suspends editing of a file to the background whereas a (abort) terminates editing.
 
 
 
@@ -2713,20 +2578,19 @@ What is the difference between the i and a commands of the vi editor?
 
 
 
- A. i (interactive) requires the user to explicitly switch between vi modes whereas a (automatic) switches modes automatically. 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 134 ] 
-Which RPM command will output the name of the package which supplied the file /etc/exports?
-
-
-
-
-
-
-
- 
+[ Question 134 ]
+ Which RPM command will output the name of the package which supplied the file /etc/exports?
+A. rpm -F /etc/exports
+B. rpm -qf/etc/exports
+C. rpm -Kl /etc/exports
+D. rpm -qp /etc/exports
+E. rpm -qi /etc/exports
 
 
 
@@ -2734,20 +2598,19 @@ Which RPM command will output the name of the package which supplied the file /e
 
 
 
- A. rpm -F /etc/exports 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 135 ] 
-What is the purpose of the xargs command?
-
-
-
-
-
-
-
- 
+[ Question 135 ]
+ What is the purpose of the xargs command?
+A. It passes arguments to an X server.
+B. It reads standard input (STDIN) and builds up command lines to execute.
+C. It helps shell scripts take variable argument lists.
+D. It asks a question, graphically, and returns the answer to the shell.
+E. It allows users to specify long options for commands that normally only accept short options.
 
 
 
@@ -2755,20 +2618,19 @@ What is the purpose of the xargs command?
 
 
 
- A. It passes arguments to an X server. 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 136 ] 
-Which of the following options for the kernel’s command line changes the systemd boot target to rescue.target instead of the default target?
-
-
-
-
-
-
-
- 
+[ Question 136 ]
+ Which of the following options for the kernel’s command line changes the systemd boot target to rescue.target instead of the default target?
+A. systemd.target=rescue.target
+B. systemd.runlevel=rescue.target
+C. systemd.service=rescue.target
+D. systemd.default=rescue.target
+E. systemd.unit=rescue.target
 
 
 
@@ -2776,19 +2638,18 @@ Which of the following options for the kernel’s command line changes the syste
 
 
 
- A. systemd.target=rescue.target 
+
+
+
+
  Correct Answer: E 
 
-
-[ Question 137 ] 
-Which of the following commands enables the setuid (suid) permission on the executable /bin/foo?
-
-
-
-
-
-
- 
+[ Question 137 ]
+ Which of the following commands enables the setuid (suid) permission on the executable /bin/foo?
+A. chmod 1755 /bin/foo
+B. chmod 4755 /bin/foo
+C. chmod u-s /bin/foo
+D. chmod 755+s /bin/foo
 
 
 
@@ -2796,18 +2657,16 @@ Which of the following commands enables the setuid (suid) permission on the exec
 
 
 
- A. chmod 1755 /bin/foo 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 138 ] 
-SIMULATION
+[ Question 138 ]
+ SIMULATION
 Which file from the /proc file system contains a list of all currently mounted devices? (Specify ONLY the command without any path or parameters.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -2815,19 +2674,38 @@ Your Response: type here
 
 
 
- A. "mounts" 
+
+
+
+
+A. "mounts"
+Correct Answer: A 
+
+[ Question 139 ]
+ When in Normal mode in vi, which character can be used to begin a reverse search of the text?
+A. ?
+B. /
+C. F
+D. r
+
+
+
+
+
+
+
+
+
+
+
  Correct Answer: A 
 
-
-[ Question 139 ] 
-When in Normal mode in vi, which character can be used to begin a reverse search of the text?
-
-
-
-
-
-
- 
+[ Question 140 ]
+ Which of the following commands will display the inode usage of each mounted filesystem?
+A. du -i
+B. df -i
+C. lsfs -i
+D. printfs -i
 
 
 
@@ -2835,40 +2713,19 @@ When in Normal mode in vi, which character can be used to begin a reverse search
 
 
 
- A. ? 
- Correct Answer: A 
-
-
-[ Question 140 ] 
-Which of the following commands will display the inode usage of each mounted filesystem?
 
 
 
 
-
-
- 
-
-
-
-
-
-
-
- A. du -i 
  Correct Answer: B 
 
-
-[ Question 141 ] 
-What of the following statements are true regarding /dev/ when using udev? (Choose TWO correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 141 ]
+ What of the following statements are true regarding /dev/ when using udev? (Choose TWO correct answers.)
+A. Entries for all possible devices get created on boot even if those devices are not connected.
+B. Additional rules for udev can be created by adding them to /etc/udev/rules.d/.
+C. When using udev, it is not possible to create block or character devices in /dev/ using mknod.
+D. The /dev/ directory is a filesystem of type tmpfs and is mounted by udev during system startup.
+E. The content of /dev/ is stored in /etc/udev/dev and is restored during system startup.
 
 
 
@@ -2876,19 +2733,18 @@ What of the following statements are true regarding /dev/ when using udev? (Choo
 
 
 
- A. Entries for all possible devices get created on boot even if those devices are not connected. 
+
+
+
+
  Correct Answer: BD 
 
-
-[ Question 142 ] 
-Which of the following commands can be used to create a new file that is 100kB in size?
-
-
-
-
-
-
- 
+[ Question 142 ]
+ Which of the following commands can be used to create a new file that is 100kB in size?
+A. dd
+B. file
+C. mkfile
+D. touch
 
 
 
@@ -2896,19 +2752,18 @@ Which of the following commands can be used to create a new file that is 100kB i
 
 
 
- A. dd 
+
+
+
+
  Correct Answer: A 
 
-
-[ Question 143 ] 
-What is the maximum niceness value that a regular user can assign to a process with the nice command when executing a new process?
-
-
-
-
-
-
- 
+[ Question 143 ]
+ What is the maximum niceness value that a regular user can assign to a process with the nice command when executing a new process?
+A. 9
+B. 19
+C. 49
+D. 99
 
 
 
@@ -2916,19 +2771,18 @@ What is the maximum niceness value that a regular user can assign to a process w
 
 
 
- A. 9 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 144 ] 
-Which of the following command sets the Bash variable named TEST with the content FOO?
-
-
-
-
-
-
- 
+[ Question 144 ]
+ Which of the following command sets the Bash variable named TEST with the content FOO?
+A. set TEST="FOO"
+B. TEST = TOO"
+C. var TEST="FOO"
+D. TEST="FOO"
 
 
 
@@ -2936,20 +2790,19 @@ Which of the following command sets the Bash variable named TEST with the conten
 
 
 
- A. set TEST="FOO" 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 145 ] 
-After moving data to a new filesystem, how can the former path of the data be kept intact in order to avoid reconfiguration of existing applications? (Choose TWO correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 145 ]
+ After moving data to a new filesystem, how can the former path of the data be kept intact in order to avoid reconfiguration of existing applications? (Choose TWO correct answers.)
+A. By creating an ACL redirection from the old to the new path of the data.
+B. By creating a hard link from the old to the new path of the data.
+C. By creating a symbolic link from the old to the new path of the data.
+D. By running the command touch on the old path.
+E. By mounting the new filesystem on the original path of the data.
 
 
 
@@ -2957,18 +2810,16 @@ After moving data to a new filesystem, how can the former path of the data be ke
 
 
 
- A. By creating an ACL redirection from the old to the new path of the data. 
+
+
+
+
  Correct Answer: CE 
 
-
-[ Question 146 ] 
-SIMULATION
+[ Question 146 ]
+ SIMULATION
 Which command shows all shared libraries required by a binary executable or another shared library? (Specify ONLY the command without any path or parameters.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -2976,18 +2827,17 @@ Your Response: type here
 
 
 
- A. ‘Idd’ 
- Correct Answer: A 
 
 
-[ Question 147 ] 
-SIMULATION
+
+
+A. ‘Idd’
+Correct Answer: A 
+
+[ Question 147 ]
+ SIMULATION
 Which world-writable directory should be placed on a separate partition in order to prevent users from being able to fill up the / filesystem? (Specify the full path to the directory.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -2995,18 +2845,17 @@ Your Response: type here
 
 
 
- A. ‘/tmp’ or ‘tmp’ or ‘/var/tmp’ or ‘/tmp/’ or ‘/var/tmp/’ 
- Correct Answer: A 
 
 
-[ Question 148 ] 
-SIMULATION
+
+
+A. ‘/tmp’ or ‘tmp’ or ‘/var/tmp’ or ‘/tmp/’ or ‘/var/tmp/’
+Correct Answer: A 
+
+[ Question 148 ]
+ SIMULATION
 Which file in /proc describes the IRQs that are used by various kernel drivers? (Specify the file name only without any path.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -3014,18 +2863,17 @@ Your Response: type here
 
 
 
- A. interrupts 
- Correct Answer: A 
 
 
-[ Question 149 ] 
-SIMULATION
+
+
+A. interrupts
+Correct Answer: A 
+
+[ Question 149 ]
+ SIMULATION
 Following the Filesystem Hierarchy Standard (FHS), where should binaries that have been compiled by the system administrator be placed in order to be made available to all users on the system?
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -3033,20 +2881,23 @@ Your Response: type here
 
 
 
- A. ‘/usr/local/bin/’ 
- Correct Answer: A 
-
-
-[ Question 150 ] 
-Which file should be edited to select the network locations from which Debian installation package files are loaded?
 
 
 
 
+A. ‘/usr/local/bin/’
+Correct Answer: A 
+
+[ Question 150 ]
+ Which file should be edited to select the network locations from which Debian installation package files are loaded?
+A. /etc/dpkg/dpkg.cfg
+B. /etc/apt/apt.conf
+C. /etc/apt/apt.conf.d
+D. /etc/apt/sources.list
+E. /etc/dpkg/dselect.cfg
 
 
 
- 
 
 
 
@@ -3054,20 +2905,16 @@ Which file should be edited to select the network locations from which Debian in
 
 
 
- A. /etc/dpkg/dpkg.cfg 
+
  Correct Answer: D 
 
-
-[ Question 151 ] 
-Which of the following commands brings a system running SysV init into a state in which it is safe to perform maintenance tasks? (Choose TWO correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 151 ]
+ Which of the following commands brings a system running SysV init into a state in which it is safe to perform maintenance tasks? (Choose TWO correct answers.)
+A. shutdown -R 1 now
+B. shutdown -single now
+C. init 1
+D. telinit 1
+E. runllevel 1
 
 
 
@@ -3075,20 +2922,19 @@ Which of the following commands brings a system running SysV init into a state i
 
 
 
- A. shutdown -R 1 now 
+
+
+
+
  Correct Answer: CD 
 
-
-[ Question 152 ] 
-Which of the following commands will NOT update the modify timestamp on the file /tmp/myfile.txt?
-
-
-
-
-
-
-
- 
+[ Question 152 ]
+ Which of the following commands will NOT update the modify timestamp on the file /tmp/myfile.txt?
+A. file /tmp/myfile.txt
+B. echo "Hello" >/tmp/myfile.txt
+C. sed -ie "s/1 /2/" /tmp/myfile.txt
+D. echo-n "Hello" »/tmp/myfile.txt
+E. touch /tmp/myfile.txt
 
 
 
@@ -3096,19 +2942,18 @@ Which of the following commands will NOT update the modify timestamp on the file
 
 
 
- A. file /tmp/myfile.txt 
+
+
+
+
  Correct Answer: A 
 
-
-[ Question 153 ] 
-Which of the following commands will print the last 10 lines of a text file to the standard output?
-
-
-
-
-
-
- 
+[ Question 153 ]
+ Which of the following commands will print the last 10 lines of a text file to the standard output?
+A. cat -n 10 filename
+B. dump -n 10 filename
+C. head -n 10 filename
+D. tail -n 10 filename
 
 
 
@@ -3116,19 +2961,18 @@ Which of the following commands will print the last 10 lines of a text file to t
 
 
 
- A. cat -n 10 filename 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 154 ] 
-Which of the following commands can be used to display the inode number of a given file?
-
-
-
-
-
-
- 
+[ Question 154 ]
+ Which of the following commands can be used to display the inode number of a given file?
+A. inode
+B. Is
+C. In
+D. cp
 
 
 
@@ -3136,20 +2980,19 @@ Which of the following commands can be used to display the inode number of a giv
 
 
 
- A. inode 
+
+
+
+
  Correct Answer: B 
 
-
-[ Question 155 ] 
-In Bash, inserting 2>&1 after a command redirects:
-
-
-
-
-
-
-
- 
+[ Question 155 ]
+ In Bash, inserting 2>&1 after a command redirects:
+A. standard error to standard input.
+B. standard input to standard error.
+C. standard output to standard error.
+D. standard error to standard output.
+E. standard output to standard input.
 
 
 
@@ -3157,19 +3000,18 @@ In Bash, inserting 2>&1 after a command redirects:
 
 
 
- A. standard error to standard input. 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 156 ] 
-After modifying GNU GRUB’s configuration file, which command must be run for the changes to take effect?
-
-
-
-
-
-
- 
+[ Question 156 ]
+ After modifying GNU GRUB’s configuration file, which command must be run for the changes to take effect?
+A. kill -HUP $(pidof grub)
+B. grub-install
+C. grub
+D. No action is required
 
 
 
@@ -3177,20 +3019,19 @@ After modifying GNU GRUB’s configuration file, which command must be run for t
 
 
 
- A. kill -HUP $(pidof grub) 
+
+
+
+
  Correct Answer: D 
 
-
-[ Question 157 ] 
-Which of the following examples for Bash file globbing matches a file named root-can-do-this . txt when used in the directory holding that file? (Choose three correct answers.)
-
-
-
-
-
-
-
- 
+[ Question 157 ]
+ Which of the following examples for Bash file globbing matches a file named root-can-do-this . txt when used in the directory holding that file? (Choose three correct answers.)
+A. root*can?do-this.{txt,odt}
+B. r[oOoO]t-can-do*.txt
+C. {root,user,admin}-can-??-this.txt
+D. root*can*do??this.txt
+E. root***{can,may}-do-this.[tT][xX][tT]
 
 
 
@@ -3198,18 +3039,16 @@ Which of the following examples for Bash file globbing matches a file named root
 
 
 
- A. root*can?do-this.{txt,odt} 
+
+
+
+
  Correct Answer: ABC 
 
-
-[ Question 158 ] 
-SIMULATION
+[ Question 158 ]
+ SIMULATION
 Which command will disable swapping on a device? (Specify ONLY the command without any path or parameters.)
-Your Response: type here
-
-
-
- 
+Your Response: type here 
 
 
 
@@ -3217,19 +3056,21 @@ Your Response: type here
 
 
 
- A. ‘swapoff’ or ‘/sbin/swapoff’ 
- Correct Answer: A 
-
-
-[ Question 159 ] 
-When removing a package, which of the following dpkg options will completely remove the files including configuration files?
 
 
 
 
+A. ‘swapoff’ or ‘/sbin/swapoff’
+Correct Answer: A 
+
+[ Question 159 ]
+ When removing a package, which of the following dpkg options will completely remove the files including configuration files?
+A. -clean
+B. -delete
+C. –purge
+D. remove
 
 
- 
 
 
 
@@ -3237,20 +3078,16 @@ When removing a package, which of the following dpkg options will completely rem
 
 
 
- A. -clean 
+
+
  Correct Answer: C 
 
-
-[ Question 160 ] 
-Which of the following commands will produce the following output?
-
-
-
-
-
-
-
- 
+[ Question 160 ]
+ Which of the following commands will produce the following output?
+A. jobs
+B. proclist
+C. netstat
+D. ps
 
 
 
@@ -3258,7 +3095,9 @@ Which of the following commands will produce the following output?
 
 
 
- A. jobs 
+
+
+
+
  Correct Answer: D 
-
 

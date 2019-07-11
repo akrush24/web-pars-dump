@@ -13,7 +13,6 @@ html = BeautifulSoup(data.text, 'html.parser')
 all_links = html.find_all('div', attrs={'class': 'wrap_page'})
 
 allurl = {}
-
 for al in all_links:
     for a in al.find_all('a'):
         allurl[a.text] = a['href']
@@ -27,12 +26,20 @@ for q, url in allurl.items():
 
     content = html.find('div', attrs={'class': 'entry-content'})
     answer =  ( content.find('div', attrs={'class': 'sh-content pressrelease-content sh-hide'} ).find('strong') )
-    var =  ( content.find('strong') )
 
     [s.extract() for s in content('div')] # del all tags <dev .* >.*</dev> in content
-    [s.extract() for s in content('strong')] # del all tags <strong>.*</strong> in content
 
-    if str.find(content.text, "SIMULATION"):
-        print ( "[",q,"]", content.text, "\n\n\n\n\n\n\n\n", var.text, "\n", answer.text, "\n\n" )
+    var = content.find_all('strong')
+
+    [s.extract() for s in content('strong')] # del all tags <strong>.*</strong> in content
+    content = content.find('p')
+    [s.extract() for s in content('br')] # del all tags <strong>.*</strong> in content
+
+    if "SIMULATION" in content.text:
+        print ( "[",q,"]\n", content.text.strip(), "\n\n\n\n\n\n\n\n\n\n\n")
+        for v in var:print ( v.text )
+        print (answer.text, "\n" )
     else:
-        print ( "[",q,"]", content.text, "\n", var.text, "\n\n\n\n\n\n\n\n", answer.text, "\n\n" )
+        print ( "[",q,"]\n", content.text.strip())
+        for v in var:print ( v.text )
+        print ("\n\n\n\n\n\n\n\n\n\n\n", answer.text, "\n" )
