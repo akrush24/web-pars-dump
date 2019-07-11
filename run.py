@@ -12,6 +12,16 @@ data = requests.get(url, headers = headers)
 html = BeautifulSoup(data.text, 'html.parser')
 
 content = html.find('div', attrs={'class': 'entry-content'})
-p = content.find('p')
 
-print (p.text)
+answer =  ( content.find('div', attrs={'class': 'sh-content pressrelease-content sh-hide'} ).find('strong') )
+var =  ( content.find('strong') )
+
+
+[s.extract() for s in content('div')] # del all tags <dev .* >.*</dev> in content
+[s.extract() for s in content('strong')] # del all tags <dev .* >.*</dev> in content
+
+if str.find(content.text, "SIMULATION"):
+    print ( content.text, "\n\n\n\n\n\n\n\n", var.text, "\n", answer.text, "\n\n" )
+else:
+    print ( content.text, "\n", var.text, "\n\n\n\n\n\n\n\n", answer.text, "\n\n" )
+
