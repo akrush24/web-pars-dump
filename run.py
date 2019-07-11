@@ -32,7 +32,6 @@ for q, url in allurl.items():
 
     [s.extract() for s in content('strong')] # del all tags <strong>.*</strong> in content
     content = content.find('p')
-    [s.extract() for s in content('br')] # del all tags <strong>.*</strong> in content
 
     if "SIMULATION" in content.text:
         print ( "[",q,"]\n", content.text.strip(), "\n\n\n\n\n\n\n\n\n\n\n")
