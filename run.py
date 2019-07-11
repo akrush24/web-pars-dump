@@ -17,7 +17,6 @@ for al in all_links:
     for a in al.find_all('a'):
         allurl[a.text] = a['href']
 
-#url = 'https://vceguide.com/which-sysv-init-configuration-file-is-commonly-used-to-set-the-default-run-level/'
 for q, url in allurl.items():
     data = requests.get(url, headers = headers)
 
